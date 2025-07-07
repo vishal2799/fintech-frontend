@@ -32,5 +32,7 @@ export const routes: RouteObject[] = [
     path: "/login",
     element: <LoginPage />
   },
-  { path: '/unauthorized', element: <h2>403: Not Authorized</h2> }
+  { path: '/unauthorized', element: <h2>403: Not Authorized</h2> },
+  { path: '/', element: <h2>Home</h2> }
+
 ]

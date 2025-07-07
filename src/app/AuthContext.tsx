@@ -1,39 +1,48 @@
-import { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type Role = 'SUPER_ADMIN' | 'WL_ADMIN' | 'API_CLIENT' | 'SD' | 'D' | 'R'
-
-interface AuthState {
+type AuthContextType = {
   isAuthenticated: boolean
-  role: Role | null
-  login: (role: Role) => void
+  role: string | null
+  isLoading: boolean
+  login: (role: string) => void
   logout: () => void
 }
 
-const AuthContext = createContext<AuthState | null>(null)
+const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [role, setRole] = useState<Role | null>(null)
-  const [isAuthenticated, setAuthenticated] = useState(false)
+  const [role, setRole] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const login = (newRole: Role) => {
+  useEffect(() => {
+    const savedRole = localStorage.getItem('user-role')
+    if (savedRole) setRole(savedRole)
+    setIsLoading(false)
+  }, [])
+
+  const login = (newRole: string) => {
     setRole(newRole)
-    setAuthenticated(true)
+    localStorage.setItem('user-role', newRole)
   }
 
   const logout = () => {
     setRole(null)
-    setAuthenticated(false)
+    localStorage.removeItem('user-role')
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, role, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated: !!role,
+        role,
+        isLoading,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
 }
 
-export const useAuth = () => {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth must be used inside AuthProvider')
-  return ctx
-}
+export const useAuth = () => useContext(AuthContext)

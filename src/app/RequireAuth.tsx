@@ -3,12 +3,14 @@ import { useAuth } from './AuthContext'
 
 export default function RequireAuth({
   allowedRoles,
-  children
+  children,
 }: {
   allowedRoles: string[]
   children: React.ReactNode
 }) {
-  const { isAuthenticated, role } = useAuth()
+  const { isAuthenticated, role, isLoading } = useAuth()
+
+  if (isLoading) return <div>Loading...</div>
 
   if (!isAuthenticated) return <Navigate to="/login" replace />
   if (!allowedRoles.includes(role || '')) return <Navigate to="/unauthorized" replace />
