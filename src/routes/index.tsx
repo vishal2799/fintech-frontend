@@ -7,6 +7,27 @@ import Tenants from './superadmin/tenants'
 import RequireAuth from '../app/RequireAuth'
 import LoginPage from './Login'
 
+export const SuperAdminRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: (<h1>Super Admin Dashboard</h1>)
+  }
+]
+
+export const WLAdminRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: (<h1>White Label Admin Dashboard</h1>)
+  }
+]
+
+export const RetailerRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: (<h1>Retailer Dashboard</h1>)
+  }
+]
+
 export const routes: RouteObject[] = [
   {
     path: "/superadmin",
