@@ -1,7 +1,6 @@
 import { MantineProvider } from "@mantine/core"
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { RetailerRoutes, routes, SuperAdminRoutes, WLAdminRoutes } from "./routes";
-import { AuthProvider } from "./app/AuthContext";
+import { RetailerRoutes, SuperAdminRoutes, WLAdminRoutes } from "./routes";
 import { getSubdomain } from "./utils/tenant";
 
 
@@ -24,9 +23,7 @@ const App = () => {
 
   return (
     <MantineProvider>
-      {/* <AuthProvider> */}
         <RouterProvider router={router} />
-      {/* </AuthProvider> */}
     </MantineProvider>
   )
 }
