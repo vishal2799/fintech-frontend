@@ -1,25 +1,25 @@
 import { MantineProvider } from "@mantine/core"
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { RetailerRoutes, SuperAdminRoutes, WLAdminRoutes } from "./routes";
-import { getSubdomain } from "./utils/tenant";
+import { superAdminRoutes } from "./routes/superadmin/index";
+// import { getSubdomain } from "./utils/tenant";
 
 
 const App = () => {
-  const subdomain = getSubdomain();
-  let appRoutes;
-  if(subdomain === 'superadmin'){
-    appRoutes = SuperAdminRoutes;
-  } else if(subdomain === 'wl1'){
-    appRoutes = WLAdminRoutes
-  } else if(subdomain === 'retailer'){
-    appRoutes = RetailerRoutes
-  } 
+  // const subdomain = getSubdomain();
+  // let appRoutes;
+  // if(subdomain === 'superadmin'){
+  //   appRoutes = SuperAdminRoutes;
+  // } else if(subdomain === 'wl1'){
+  //   appRoutes = WLAdminRoutes
+  // } else if(subdomain === 'retailer'){
+  //   appRoutes = RetailerRoutes
+  // } 
   
-  if (!appRoutes) {
-    return null;
-  }
+  // if (!appRoutes) {
+  //   return null;
+  // }
 
-  const router = createBrowserRouter(appRoutes);
+  const router = createBrowserRouter(superAdminRoutes);
 
   return (
     <MantineProvider>
