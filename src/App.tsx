@@ -1,8 +1,10 @@
 import { MantineProvider } from "@mantine/core"
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { superAdminRoutes } from "./routes/superadmin/index";
+import { Notifications } from "@mantine/notifications";
 // import { getSubdomain } from "./utils/tenant";
 
+import '@mantine/notifications/styles.css';
 
 const App = () => {
   // const subdomain = getSubdomain();
@@ -23,6 +25,7 @@ const App = () => {
 
   return (
     <MantineProvider>
+            <Notifications />
         <RouterProvider router={router} />
     </MantineProvider>
   )

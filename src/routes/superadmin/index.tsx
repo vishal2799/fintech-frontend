@@ -6,6 +6,7 @@ import Login from "../../pages/Login";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import Unauthorized from "../../pages/Unauthorized";
 import TenantList from "../../pages/super-admin/TenantList";
+import { TenantForm } from "../../pages/super-admin/CreateTenant";
 
 export const superAdminRoutes:RouteObject[] = [
 {path: '/login', element: <Login />},   
@@ -18,6 +19,7 @@ export const superAdminRoutes:RouteObject[] = [
   children: [
     { index: true, element: <Dashboard /> },
     { path: 'tenants', element: <TenantList /> },
+    { path: 'createtenant', element: <TenantForm /> },
     { path: 'users', element: <Users /> },
     // Add more routes as needed
   ],
