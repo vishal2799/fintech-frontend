@@ -7,14 +7,39 @@ import {
 } from '../services/tenantApi';
 // import type {  CreateTenantInput, UpdateTenantInput } from '../types/tenantTypes';
 import { notifications } from '@mantine/notifications';
+import { useSearchParams } from 'react-router';
 
 export const useTenantService = () => {
   const queryClient = useQueryClient();
 
-  const tenantsQuery = useQuery({
-    queryKey: ['tenants'],
-    queryFn: fetchTenants,
+  const [params] = useSearchParams();
+  const page = parseInt(params.get('page') || '1');
+
+  const tenantsQuery =  useQuery({
+    queryKey: ['tenants', page],
+    queryFn: () => fetchTenants({ page }),
+    // keepPreviousData: true,
   });
+
+  // const [params]   = useSearchParams();
+  // const page       = Number(params.get('page') ?? 1);
+  // const perPage    = 10;
+
+  // const tenantsQuery = useQuery({
+  //   queryKey: ['tenants'],
+  //   queryFn: fetchTenants,
+  // });
+
+  // const tenantsQuery = useQuery({
+  //   queryKey: ['tenants', page],
+  //   queryFn: async () => {
+  //     const { data } = await axios.get('/admin/tenants', {
+  //       params: { page, perPage },
+  //     });
+  //     return data.data; // response wrapper
+  //   },
+  //   keepPreviousData: true,
+  // });
 
   const create = useMutation({
     mutationFn: createTenant,
