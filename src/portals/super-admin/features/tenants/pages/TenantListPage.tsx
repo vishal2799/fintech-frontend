@@ -9,9 +9,12 @@ import {
   Pagination,
   Loader,
   Title,
+  Container,
+  Flex,
+  Menu,
 } from '@mantine/core';
 import { useTenants, useDeleteTenant, useUpdateTenantStatus } from '../api/tenants.hooks';
-import { IconPlus, IconSearch, IconTrash, IconEdit } from '@tabler/icons-react';
+import { IconPlus, IconSearch, IconTrash, IconEdit, IconChevronDown, IconCheck } from '@tabler/icons-react';
 import { useNavigate } from 'react-router';
 import { notifications } from '@mantine/notifications';
 
@@ -41,14 +44,24 @@ const filteredTenants = useMemo(() => {
   });
 }, [tenants, search, statusFilter]);
 
-const handleStatus = async (id:string, status:string) => {
+// const handleStatus = async (id:string, status:string) => {
+//   try {
+//         await updateTenantStatus.mutateAsync({ id, status });
+//         notifications.show({ message: 'Tenant updated', color: 'blue' });
+//       } catch (err: any) {
+//         notifications.show({ message: err.message || 'Error', color: 'red' });
+//       }
+// }
+
+const handleStatusChange = async (id: string, status: string) => {
+  if (updateTenantStatus.isPending) return;
   try {
         await updateTenantStatus.mutateAsync({ id, status });
         notifications.show({ message: 'Tenant updated', color: 'blue' });
       } catch (err: any) {
         notifications.show({ message: err.message || 'Error', color: 'red' });
       }
-}
+};
 
 useEffect(() => {
   setPage(1); // reset to first page when filters change
@@ -59,10 +72,82 @@ useEffect(() => {
     return filteredTenants.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredTenants, page]);
 
+  const rows = paginatedTenants.map((element) => (
+    <Table.Tr key={element.name}>
+      <Table.Td>{element.name}</Table.Td>
+      <Table.Td>{element.slug}</Table.Td>
+      <Table.Td className={`text-${getStatusColor(element.status)}`}>{element.status}</Table.Td>
+      <Table.Td><div
+                    className="w-4 h-4 rounded-full border"
+                   style={{ backgroundColor: element.themeColor }}
+                   /></Table.Td>
+      <Table.Td>
+               <Group gap="xs">
+                    <Button
+                       size="xs"
+                       variant="light"
+                      color="blue"
+                      onClick={() =>
+                         navigate(`/super-admin/tenants/${element.id}/edit`)
+                       }
+                       leftSection={<IconEdit size={14} />}
+                     >
+                       Edit
+                     </Button>
+                     <Button
+                       size="xs"
+                       variant="light"
+                       color="red"
+                       onClick={() => deleteTenant.mutate(element.id)}
+                     leftSection={<IconTrash size={14} />}
+                     >
+                       Delete
+                     </Button>
+                     <Menu withinPortal position="bottom-start" shadow="md">
+    <Menu.Target>
+      <Badge
+        variant="light"
+        color={getStatusColor(element.status)}
+        rightSection={<IconChevronDown size={12} />}
+        style={{ cursor: 'pointer' }}
+      >
+        {element.status}
+      </Badge>
+    </Menu.Target>
+    <Menu.Dropdown>
+      {['ACTIVE', 'DISABLED', 'SUSPENDED'].map((status) => (
+        <Menu.Item
+          key={status}
+          onClick={() => handleStatusChange(element.id, status)}
+          leftSection={
+            element.status === status ? <IconCheck size={14} /> : null
+          }
+        >
+          {status}
+        </Menu.Item>
+      ))}
+    </Menu.Dropdown>
+  </Menu>
+                     {/* <Button
+                     size="xs"
+                       variant="light"
+                       color="red"
+                       onClick={() => handleStatus(element.id, 'DISABLED')}
+                       leftSection={<IconTrash size={14} />}
+                     >
+                       Status
+                     </Button> */}
+                   </Group>
+        </Table.Td>             
+    </Table.Tr>
+  ));
+
   if (isLoading) return <Loader />;
 
   return (
-    <div className="space-y-4">
+        <Container size={'lg'}>
+  
+    <Flex direction={'column'} gap={'md'}>
       <Group>
         <Title order={2}>Tenants</Title>
         <Button
@@ -93,83 +178,33 @@ useEffect(() => {
         />
       </Group>
 
-      <Table striped withColumnBorders>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Status</th>
-            <th>Theme</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table striped withTableBorder withColumnBorders>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Name</Table.Th>
+            <Table.Th>Slug</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Theme</Table.Th>
+            <Table.Th>Actions</Table.Th>
+
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
           {paginatedTenants.length === 0 ? (
-            <tr>
-              <td colSpan={6}>No tenants found</td>
-            </tr>
-          ) : (
-            paginatedTenants.map((tenant) => (
-              <tr key={tenant.id}>
-                <td>{tenant.name}</td>
-                <td>{tenant.slug}</td>
-                <td>
-                  <Badge color={getStatusColor(tenant.status)}>
-                    {tenant.status}
-                  </Badge>
-                </td>
-                <td>
-                  <div
-                    className="w-4 h-4 rounded-full border"
-                    style={{ backgroundColor: tenant.themeColor }}
-                  />
-                </td>
-                <td>
-                  <Group gap="xs">
-                    <Button
-                      size="xs"
-                      variant="light"
-                      color="blue"
-                      onClick={() =>
-                        navigate(`/super-admin/tenants/${tenant.id}/edit`)
-                      }
-                      leftSection={<IconEdit size={14} />}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      size="xs"
-                      variant="light"
-                      color="red"
-                      onClick={() => deleteTenant.mutate(tenant.id)}
-                      leftSection={<IconTrash size={14} />}
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      size="xs"
-                      variant="light"
-                      color="red"
-                      onClick={() => handleStatus(tenant.id, 'DISABLED')}
-                      leftSection={<IconTrash size={14} />}
-                    >
-                      Status
-                    </Button>
-                  </Group>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
+            <Table.Tr>
+              <Table.Td colSpan={6}>No tenants found</Table.Td>
+            </Table.Tr>
+          ) : rows}
+        </Table.Tbody>
       </Table>
 
       <Pagination
         total={Math.ceil(filteredTenants.length / ITEMS_PER_PAGE)}
         value={page}
         onChange={setPage}
-        mt="md"
       />
-    </div>
+    </Flex>
+    </Container>
   );
 }
 

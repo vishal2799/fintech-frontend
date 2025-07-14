@@ -22,7 +22,7 @@ export default function TenantFormPage() {
   }
 
   return (
-    <Container size="sm">
+    <Container size={'lg'}>
       <Title order={2} mb="md">
         {isEdit ? 'Edit Tenant' : 'Create Tenant'}
       </Title>
