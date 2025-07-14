@@ -15,5 +15,10 @@ export const updateTenant = async (id: string, data: Partial<Tenant>) => {
  return res.data
 }
 
+export const updateTenantStatus = async ( id: string, status: string ) => {
+     const res = await axios.patch(`/admin/tenants/${id}/status`, {status})
+     return res.data
+}
+
 export const deleteTenant = (id: string) =>
   axios.delete(`/admin/tenants/${id}`);

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Table,
   TextInput,
@@ -10,36 +10,49 @@ import {
   Loader,
   Title,
 } from '@mantine/core';
-import { useTenants, useDeleteTenant } from '../api/tenants.hooks';
+import { useTenants, useDeleteTenant, useUpdateTenantStatus } from '../api/tenants.hooks';
 import { IconPlus, IconSearch, IconTrash, IconEdit } from '@tabler/icons-react';
 import { useNavigate } from 'react-router';
+import { notifications } from '@mantine/notifications';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 2;
 
 export default function TenantListPage() {
   const navigate = useNavigate();
   const { data: tenants = [], isLoading } = useTenants();
   const deleteTenant = useDeleteTenant();
+  const updateTenantStatus = useUpdateTenantStatus();
 
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
-  const filteredTenants = useMemo(() => {
-    let filtered = tenants;
+const filteredTenants = useMemo(() => {
+  return tenants.filter((tenant) => {
+    const matchesSearch =
+      !search ||
+      tenant.name?.toLowerCase().includes(search.toLowerCase()) ||
+      tenant.slug?.toLowerCase().includes(search.toLowerCase());
 
-    if (search.trim()) {
-      filtered = filtered.filter((t) =>
-        t.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
+    const matchesStatus =
+      !statusFilter || tenant.status === statusFilter;
 
-    if (statusFilter) {
-      filtered = filtered.filter((t) => t.status === statusFilter);
-    }
+    return matchesSearch && matchesStatus;
+  });
+}, [tenants, search, statusFilter]);
 
-    return filtered;
-  }, [tenants, search, statusFilter]);
+const handleStatus = async (id:string, status:string) => {
+  try {
+        await updateTenantStatus.mutateAsync({ id, status });
+        notifications.show({ message: 'Tenant updated', color: 'blue' });
+      } catch (err: any) {
+        notifications.show({ message: err.message || 'Error', color: 'red' });
+      }
+}
+
+useEffect(() => {
+  setPage(1); // reset to first page when filters change
+}, [search, statusFilter]);
 
   const paginatedTenants = useMemo(() => {
     const start = (page - 1) * ITEMS_PER_PAGE;
@@ -71,7 +84,7 @@ export default function TenantListPage() {
           placeholder="Filter by status"
           data={[
             { label: 'Active', value: 'ACTIVE' },
-            { label: 'Inactive', value: 'INACTIVE' },
+            { label: 'Disabled', value: 'DISABLED' },
             { label: 'Suspended', value: 'SUSPENDED' },
           ]}
           clearable
@@ -133,6 +146,15 @@ export default function TenantListPage() {
                     >
                       Delete
                     </Button>
+                    <Button
+                      size="xs"
+                      variant="light"
+                      color="red"
+                      onClick={() => handleStatus(tenant.id, 'DISABLED')}
+                      leftSection={<IconTrash size={14} />}
+                    >
+                      Status
+                    </Button>
                   </Group>
                 </td>
               </tr>
@@ -155,7 +177,7 @@ const getStatusColor = (status: string) => {
   switch (status) {
     case 'ACTIVE':
       return 'green';
-    case 'INACTIVE':
+    case 'DISBALED':
       return 'gray';
     case 'SUSPENDED':
       return 'red';

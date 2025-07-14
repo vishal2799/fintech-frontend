@@ -18,6 +18,17 @@ export const useCreateTenant = () => {
   });
 };
 
+export const useUpdateTenantStatus = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, status }: { id: string; status: string }) => api.updateTenantStatus(id, status),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['tenants'] });
+    },
+  });
+};
+
+
 export const useUpdateTenant = () => {
   const queryClient = useQueryClient();
   return useMutation({
