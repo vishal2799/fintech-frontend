@@ -76,7 +76,7 @@ useEffect(() => {
     <Table.Tr key={element.name}>
       <Table.Td>{element.name}</Table.Td>
       <Table.Td>{element.slug}</Table.Td>
-      <Table.Td className={`text-${getStatusColor(element.status)}`}>{element.status}</Table.Td>
+      {/* <Table.Td className={`text-${getStatusColor(element.status)}`}>{element.status}</Table.Td> */}
       <Table.Td><div
                     className="w-4 h-4 rounded-full border"
                    style={{ backgroundColor: element.themeColor }}
@@ -183,7 +183,7 @@ useEffect(() => {
           <Table.Tr>
             <Table.Th>Name</Table.Th>
             <Table.Th>Slug</Table.Th>
-            <Table.Th>Status</Table.Th>
+            {/* <Table.Th>Status</Table.Th> */}
             <Table.Th>Theme</Table.Th>
             <Table.Th>Actions</Table.Th>
 
