@@ -1,0 +1,165 @@
+import { useMemo, useState } from 'react';
+import {
+  Table,
+  TextInput,
+  Button,
+  Badge,
+  Group,
+  Select,
+  Pagination,
+  Loader,
+  Title,
+} from '@mantine/core';
+import { useTenants, useDeleteTenant } from '../api/tenants.hooks';
+import { IconPlus, IconSearch, IconTrash, IconEdit } from '@tabler/icons-react';
+import { useNavigate } from 'react-router';
+
+const ITEMS_PER_PAGE = 10;
+
+export default function TenantListPage() {
+  const navigate = useNavigate();
+  const { data: tenants = [], isLoading } = useTenants();
+  const deleteTenant = useDeleteTenant();
+
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+
+  const filteredTenants = useMemo(() => {
+    let filtered = tenants;
+
+    if (search.trim()) {
+      filtered = filtered.filter((t) =>
+        t.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (statusFilter) {
+      filtered = filtered.filter((t) => t.status === statusFilter);
+    }
+
+    return filtered;
+  }, [tenants, search, statusFilter]);
+
+  const paginatedTenants = useMemo(() => {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    return filteredTenants.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredTenants, page]);
+
+  if (isLoading) return <Loader />;
+
+  return (
+    <div className="space-y-4">
+      <Group>
+        <Title order={2}>Tenants</Title>
+        <Button
+          leftSection={<IconPlus size={16} />}
+          onClick={() => navigate('/super-admin/tenants/create')}
+        >
+          Create Tenant
+        </Button>
+      </Group>
+
+      <Group grow>
+        <TextInput
+          placeholder="Search by name"
+          value={search}
+          onChange={(e) => setSearch(e.currentTarget.value)}
+          leftSection={<IconSearch size={16} />}
+        />
+        <Select
+          placeholder="Filter by status"
+          data={[
+            { label: 'Active', value: 'ACTIVE' },
+            { label: 'Inactive', value: 'INACTIVE' },
+            { label: 'Suspended', value: 'SUSPENDED' },
+          ]}
+          clearable
+          value={statusFilter}
+          onChange={setStatusFilter}
+        />
+      </Group>
+
+      <Table striped withColumnBorders>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Status</th>
+            <th>Theme</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {paginatedTenants.length === 0 ? (
+            <tr>
+              <td colSpan={6}>No tenants found</td>
+            </tr>
+          ) : (
+            paginatedTenants.map((tenant) => (
+              <tr key={tenant.id}>
+                <td>{tenant.name}</td>
+                <td>{tenant.slug}</td>
+                <td>
+                  <Badge color={getStatusColor(tenant.status)}>
+                    {tenant.status}
+                  </Badge>
+                </td>
+                <td>
+                  <div
+                    className="w-4 h-4 rounded-full border"
+                    style={{ backgroundColor: tenant.themeColor }}
+                  />
+                </td>
+                <td>
+                  <Group gap="xs">
+                    <Button
+                      size="xs"
+                      variant="light"
+                      color="blue"
+                      onClick={() =>
+                        navigate(`/super-admin/tenants/${tenant.id}/edit`)
+                      }
+                      leftSection={<IconEdit size={14} />}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      size="xs"
+                      variant="light"
+                      color="red"
+                      onClick={() => deleteTenant.mutate(tenant.id)}
+                      leftSection={<IconTrash size={14} />}
+                    >
+                      Delete
+                    </Button>
+                  </Group>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </Table>
+
+      <Pagination
+        total={Math.ceil(filteredTenants.length / ITEMS_PER_PAGE)}
+        value={page}
+        onChange={setPage}
+        mt="md"
+      />
+    </div>
+  );
+}
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'ACTIVE':
+      return 'green';
+    case 'INACTIVE':
+      return 'gray';
+    case 'SUSPENDED':
+      return 'red';
+    default:
+      return 'gray';
+  }
+};

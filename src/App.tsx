@@ -1,10 +1,10 @@
 import { MantineProvider } from "@mantine/core"
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { superAdminRoutes } from "./routes/superadmin/index";
 import { Notifications } from "@mantine/notifications";
 // import { getSubdomain } from "./utils/tenant";
 
 import '@mantine/notifications/styles.css';
+import { saRoutes } from "./portals/super-admin/features/tenants/routes";
 
 const App = () => {
   // const subdomain = getSubdomain();
@@ -21,7 +21,7 @@ const App = () => {
   //   return null;
   // }
 
-  const router = createBrowserRouter(superAdminRoutes);
+  const router = createBrowserRouter(saRoutes);
 
   return (
     <MantineProvider>

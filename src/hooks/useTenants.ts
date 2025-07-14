@@ -6,7 +6,7 @@ export const useTenants = () => {
     queryKey: ['tenants'],
     queryFn: async () => {
       const res = await axios.get('/admin/tenants');
-      return res.data;
+      return res.data.data;
     },
   });
 };
