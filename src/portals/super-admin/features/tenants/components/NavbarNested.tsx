@@ -20,7 +20,8 @@ const mockdata = [
     links: [
       { label: 'All Tenants', link: '/super-admin/tenants/list' },
       { label: 'Add Tenant', link: '/super-admin/tenants/create' },
-      { label: 'WL Admins', link: '/super-admin/wl-admins' },
+      { label: 'All WL Admins', link: '/super-admin/wl-admins/list' },
+      { label: 'Create WL Admin', link: '/super-admin/wl-admins/create' },
     ],
   },
   {
@@ -28,6 +29,7 @@ const mockdata = [
     icon: IconCalendarStats,
     links: [
       { label: 'API Clients', link: '/super-admin/api-clients' },
+      { label: 'Services', link: '/super-admin/services' },
       { label: 'Commission Plans', link: '/super-admin/commissions' },
     ],
   },

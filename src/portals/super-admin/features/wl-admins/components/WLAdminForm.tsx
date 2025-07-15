@@ -46,7 +46,7 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
         await update.mutateAsync({ id: initialValues.id, data: values });
         notifications.show({ message: 'Updated', color: 'blue' });
       }
-      navigate('/super-admin/wl-admins');
+      navigate('/super-admin/wl-admins/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error', color: 'red' });
     }

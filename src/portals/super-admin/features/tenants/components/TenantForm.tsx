@@ -47,7 +47,7 @@ export default function TenantForm({ mode, initialValues }: Props) {
         await updateMutation.mutateAsync({ id: initialValues?.id, data: values });
         notifications.show({ message: 'Tenant updated', color: 'blue' });
       }
-      navigate('/super-admin/tenants');
+      navigate('/super-admin/tenants/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error', color: 'red' });
     }

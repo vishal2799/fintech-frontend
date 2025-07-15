@@ -91,29 +91,8 @@ useEffect(() => {
                     className="w-4 h-4 rounded-full border"
                    style={{ backgroundColor: element.themeColor }}
                    /></Table.Td>
-      <Table.Td>
-               <Group gap="xs">
-                    <Button
-                       size="xs"
-                       variant="light"
-                      color="blue"
-                      onClick={() =>
-                         navigate(`/super-admin/tenants/edit/${element.id}`)
-                       }
-                       leftSection={<IconEdit size={14} />}
-                     >
-                       Edit
-                     </Button>
-                     <Button
-                       size="xs"
-                       variant="light"
-                       color="red"
-                       onClick={() => deleteTenant.mutate(element.id)}
-                     leftSection={<IconTrash size={14} />}
-                     >
-                       Delete
-                     </Button>
-                     <Menu withinPortal position="bottom-start" shadow="md">
+                   <Table.Td>
+                    <Menu withinPortal position="bottom-start" shadow="md">
     <Menu.Target>
       <Badge
         variant="light"
@@ -138,6 +117,29 @@ useEffect(() => {
       ))}
     </Menu.Dropdown>
   </Menu>
+                   </Table.Td>
+      <Table.Td>
+               <Group gap="xs">
+                    <Button
+                       size="xs"
+                       variant="light"
+                      color="blue"
+                      onClick={() =>
+                         navigate(`/super-admin/tenants/edit/${element.id}`)
+                       }
+                       leftSection={<IconEdit size={14} />}
+                     >
+                       Edit
+                     </Button>
+                     <Button
+                       size="xs"
+                       variant="light"
+                       color="red"
+                       onClick={() => deleteTenant.mutate(element.id)}
+                     leftSection={<IconTrash size={14} />}
+                     >
+                       Delete
+                     </Button>
                      {/* <Button
                      size="xs"
                        variant="light"
@@ -218,6 +220,7 @@ useEffect(() => {
 </Table.Th>
 
             <Table.Th>Theme</Table.Th>
+                        <Table.Th>Status</Table.Th>
             <Table.Th>Actions</Table.Th>
 
           </Table.Tr>
