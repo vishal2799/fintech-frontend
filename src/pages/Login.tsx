@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TextInput, PasswordInput, Button, Paper, Title, Container } from '@mantine/core';
 import API from '../api/axios';
 import { useNavigate } from 'react-router';
+import { useAuthStore } from '../stores/useAuthStore';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,38 +10,66 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    setLoading(true);
-    try {
-      const {data} = await API.post('/auth/login', { email, password });
-      localStorage.setItem('accessToken', data?.data?.accessToken);
-      localStorage.setItem('refreshToken', data?.data?.refreshToken);
+  const { login } = useAuthStore();
 
-      console.log(data);
+const handleLogin = async () => {
+  setLoading(true);
+  try {
+    const { data } = await API.post('/auth/login', { email, password });
 
-      // Optional: Save roles and permissions too
-      const payload = JSON.parse(atob(data?.data?.accessToken.split('.')[1]));
+    const accessToken = data?.data?.accessToken;
+    const refreshToken = data?.data?.refreshToken;
+    login({ accessToken, refreshToken });
 
-       // 3️⃣  Always stringify complex values
-      localStorage.setItem('roles', JSON.stringify(payload.roleNames || []));
-      localStorage.setItem('permissions', JSON.stringify(payload.permissions || []));
+    const payload = JSON.parse(atob(accessToken.split('.')[1]));
+    const roles: string[] = payload.roleNames || [];
 
-      const roles: string[] = payload.roleNames || [];
-      
-      // Redirect based on role
-      if (roles.includes('SUPER_ADMIN')) {
-        navigate('/super-admin');
-      } else if (roles.includes('WL_ADMIN')) {
-        navigate('/wl-admin');
-      } else {
-        navigate('/unauthorized');
-      }
-    } catch (err: any) {
-      alert(err.response?.data?.message || 'Login failed');
-    } finally {
-      setLoading(false);
+    if (roles.includes('SUPER_ADMIN')) {
+      navigate('/super-admin');
+    } else if (roles.includes('WL_ADMIN')) {
+      navigate('/wl-admin');
+    } else {
+      navigate('/unauthorized');
     }
-  };
+  } catch (err: any) {
+    alert(err.response?.data?.message || 'Login failed');
+  } finally {
+    setLoading(false);
+  }
+};
+
+  // const handleLogin = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const {data} = await API.post('/auth/login', { email, password });
+  //     localStorage.setItem('accessToken', data?.data?.accessToken);
+  //     localStorage.setItem('refreshToken', data?.data?.refreshToken);
+
+  //     console.log(data);
+
+  //     // Optional: Save roles and permissions too
+  //     const payload = JSON.parse(atob(data?.data?.accessToken.split('.')[1]));
+
+  //      // 3️⃣  Always stringify complex values
+  //     localStorage.setItem('roles', JSON.stringify(payload.roleNames || []));
+  //     localStorage.setItem('permissions', JSON.stringify(payload.permissions || []));
+
+  //     const roles: string[] = payload.roleNames || [];
+      
+  //     // Redirect based on role
+  //     if (roles.includes('SUPER_ADMIN')) {
+  //       navigate('/super-admin');
+  //     } else if (roles.includes('WL_ADMIN')) {
+  //       navigate('/wl-admin');
+  //     } else {
+  //       navigate('/unauthorized');
+  //     }
+  //   } catch (err: any) {
+  //     alert(err.response?.data?.message || 'Login failed');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <Container size={420} my={40}>

@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router';
-import { isLoggedIn, getUserPayload } from '../utils/auth';
+import { useAuthStore } from '../stores/useAuthStore';
 
 interface Props {
   children: React.ReactNode;
@@ -7,14 +7,12 @@ interface Props {
 }
 
 const ProtectedRoute = ({ children, allowedRoles }: Props) => {
-  if (!isLoggedIn()) {
-    return <Navigate to="/login" />;
-  }
+  const { accessToken, user } = useAuthStore();
 
-  const user = getUserPayload();
-  if (!user || !user.roleNames.some(role => allowedRoles.includes(role))) {
-    return <Navigate to="/unauthorized" />;
-  }
+  if (!accessToken || !user) return <Navigate to="/login" />;
+
+  const hasAccess = user.roleNames.some((role) => allowedRoles.includes(role));
+  if (!hasAccess) return <Navigate to="/unauthorized" />;
 
   return <>{children}</>;
 };

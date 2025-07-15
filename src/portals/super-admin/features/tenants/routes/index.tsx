@@ -7,8 +7,10 @@ import Dashboard from "../../../../../pages/super-admin/Dashboard";
 import TenantListPage from "../pages/TenantListPage";
 import Users from "../../../../../pages/super-admin/Users";
 import TenantFormPage from "../pages/TenantFormPage";
+import Home from "../pages/Home";
 
 export const saRoutes:RouteObject[] = [
+{path: '/', element: <Home />},   
 {path: '/login', element: <Login />},   
 { path: '/unauthorized', element: <Unauthorized /> },
 {

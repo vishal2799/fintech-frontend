@@ -1,12 +1,14 @@
-import { AppShell, Burger, Group, Skeleton } from "@mantine/core";
+import { AppShell, Burger, Group, Skeleton, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Navigate, NavLink, Outlet } from "react-router";
+import { useAuthStore } from "../stores/useAuthStore";
+import UserAvatarMenu from "../components/UserAvatarMenu";
 
 const SuperAdminLayout = () => {
-  const isLoggedIn = !!localStorage.getItem('accessToken');
         const [opened, { toggle }] = useDisclosure();
-
-  if (!isLoggedIn) return <Navigate to="/login" />;
+const accessToken = useAuthStore((s) => s.accessToken);
+if (!accessToken) return <Navigate to="/login" />;
+ 
 
   return (
     <AppShell
@@ -19,11 +21,11 @@ const SuperAdminLayout = () => {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
+        <Group h="100%" px="md" justify={"space-between"}>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          VMudra
+          <Title order={2}>VMudra</Title>
           {/* <MantineLogo size={30} /> */}
-        {/* <Button size="xs" variant="outline" onClick={logout}>Logout</Button> */}
+          <UserAvatarMenu />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
