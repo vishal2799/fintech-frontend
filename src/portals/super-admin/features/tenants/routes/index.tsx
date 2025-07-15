@@ -7,6 +7,8 @@ import TenantListPage from "../pages/TenantListPage";
 import TenantFormPage from "../pages/TenantFormPage";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
+import WLAdminListPage from "../../wl-admins/pages/WLAdminListPage";
+import WLAdminFormPage from "../../wl-admins/pages/WLAdminFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -22,5 +24,8 @@ export const saRoutes:RouteObject[] = [
     { path: 'tenants/list', element: <TenantListPage /> },
     {path: 'tenants/create', element: <TenantFormPage />},
     {path: 'tenants/edit/:id', element: <TenantFormPage />},
+    {path: "wl-admins", element: <WLAdminListPage /> },
+   { path: "wl-admins/create", element: <WLAdminFormPage /> },
+{ path: "wl-admins/:id/edit" , element: <WLAdminFormPage />}
   ],
 }]
