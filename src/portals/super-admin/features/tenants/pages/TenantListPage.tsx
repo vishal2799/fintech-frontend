@@ -98,7 +98,7 @@ useEffect(() => {
                        variant="light"
                       color="blue"
                       onClick={() =>
-                         navigate(`/super-admin/tenants/${element.id}/edit`)
+                         navigate(`/super-admin/tenants/edit/${element.id}`)
                        }
                        leftSection={<IconEdit size={14} />}
                      >

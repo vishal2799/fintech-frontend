@@ -18,7 +18,8 @@ const mockdata = [
     icon: IconNotes,
     initiallyOpened: true,
     links: [
-      { label: 'All Tenants', link: '/super-admin/tenants' },
+      { label: 'All Tenants', link: '/super-admin/tenants/list' },
+      { label: 'Add Tenant', link: '/super-admin/tenants/create' },
       { label: 'WL Admins', link: '/super-admin/wl-admins' },
     ],
   },

@@ -1,14 +1,13 @@
 import {
   TextInput,
   Button,
-  Select,
   ColorInput,
   Stack,
   Group,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useCreateTenant, useUpdateTenant } from '../api/tenants.hooks';
-import type { Tenant, TenantStatus } from '../types/tenant.types';
+import type { Tenant } from '../types/tenant.types';
 import { useNavigate } from 'react-router';
 import { notifications } from '@mantine/notifications';
 
@@ -17,11 +16,11 @@ type Props = {
   initialValues?: Partial<Tenant>;
 };
 
-const statusOptions: { label: string; value: TenantStatus }[] = [
-  { label: 'Active', value: 'ACTIVE' },
-  { label: 'Inactive', value: 'INACTIVE' },
-  { label: 'Suspended', value: 'SUSPENDED' },
-];
+// const statusOptions: { label: string; value: TenantStatus }[] = [
+//   { label: 'Active', value: 'ACTIVE' },
+//   { label: 'Inactive', value: 'INACTIVE' },
+//   { label: 'Suspended', value: 'SUSPENDED' },
+// ];
 
 export default function TenantForm({ mode, initialValues }: Props) {
   const navigate = useNavigate();

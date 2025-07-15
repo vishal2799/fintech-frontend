@@ -19,8 +19,8 @@ export const saRoutes:RouteObject[] = [
   </ProtectedRoute>,
   children: [
     { index: true, element: <Dashboard /> },
-    { path: 'tenants', element: <TenantListPage /> },
+    { path: 'tenants/list', element: <TenantListPage /> },
     {path: 'tenants/create', element: <TenantFormPage />},
-    {path: 'tenants/:id/edit', element: <TenantFormPage />},
+    {path: 'tenants/edit/:id', element: <TenantFormPage />},
   ],
 }]

@@ -26,7 +26,7 @@ API.interceptors.request.use((config) => {
 API.interceptors.response.use(
   (response) => response,
   async (error: AxiosError<any>) => {
-    const { logout, refreshToken, accessToken } = useAuthStore.getState();
+    const { logout, refreshToken } = useAuthStore.getState();
     const originalRequest: any = error.config;
 
     // only attempt refresh once per request chain
