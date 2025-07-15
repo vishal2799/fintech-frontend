@@ -28,8 +28,8 @@ const mockdata = [
     label: 'Services',
     icon: IconCalendarStats,
     links: [
+      { label: 'Global Services', link: '/super-admin/services' },
       { label: 'API Clients', link: '/super-admin/api-clients' },
-      { label: 'Services', link: '/super-admin/services' },
       { label: 'Commission Plans', link: '/super-admin/commissions' },
     ],
   },
