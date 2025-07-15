@@ -12,9 +12,11 @@ import {
   Container,
   Flex,
   Menu,
+  UnstyledButton,
+  Text,
 } from '@mantine/core';
 import { useTenants, useDeleteTenant, useUpdateTenantStatus } from '../api/tenants.hooks';
-import { IconPlus, IconSearch, IconTrash, IconEdit, IconChevronDown, IconCheck } from '@tabler/icons-react';
+import { IconPlus, IconSearch, IconTrash, IconEdit, IconChevronDown, IconCheck, IconSelector, IconChevronUp } from '@tabler/icons-react';
 import { useNavigate } from 'react-router';
 import { notifications } from '@mantine/notifications';
 
@@ -30,28 +32,36 @@ export default function TenantListPage() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [page, setPage] = useState(1);
 
+  const [sortBy, setSortBy] = useState<'name' | 'slug' | null>(null);
+const [reverseSortDirection, setReverseSortDirection] = useState(false);
+
+const setSorting = (field: 'name' | 'slug') => {
+  const reversed = sortBy === field ? !reverseSortDirection : false;
+  setSortBy(field);
+  setReverseSortDirection(reversed);
+};
+
 const filteredTenants = useMemo(() => {
-  return tenants.filter((tenant) => {
+  let filtered = tenants.filter((tenant) => {
     const matchesSearch =
       !search ||
       tenant.name?.toLowerCase().includes(search.toLowerCase()) ||
       tenant.slug?.toLowerCase().includes(search.toLowerCase());
 
-    const matchesStatus =
-      !statusFilter || tenant.status === statusFilter;
-
+    const matchesStatus = !statusFilter || tenant.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
-}, [tenants, search, statusFilter]);
 
-// const handleStatus = async (id:string, status:string) => {
-//   try {
-//         await updateTenantStatus.mutateAsync({ id, status });
-//         notifications.show({ message: 'Tenant updated', color: 'blue' });
-//       } catch (err: any) {
-//         notifications.show({ message: err.message || 'Error', color: 'red' });
-//       }
-// }
+  if (sortBy) {
+    filtered = [...filtered].sort((a, b) => {
+      const valA = a[sortBy]?.toLowerCase() || '';
+      const valB = b[sortBy]?.toLowerCase() || '';
+      return reverseSortDirection ? valB.localeCompare(valA) : valA.localeCompare(valB);
+    });
+  }
+
+  return filtered;
+}, [tenants, search, statusFilter, sortBy, reverseSortDirection]);
 
 const handleStatusChange = async (id: string, status: string) => {
   if (updateTenantStatus.isPending) return;
@@ -178,12 +188,35 @@ useEffect(() => {
         />
       </Group>
 
-      <Table striped withTableBorder withColumnBorders>
+      <Table striped withTableBorder withColumnBorders layout={"fixed"}>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>Name</Table.Th>
-            <Table.Th>Slug</Table.Th>
-            {/* <Table.Th>Status</Table.Th> */}
+            <Table.Th>
+  <UnstyledButton onClick={() => setSorting('name')} className="w-full">
+    <Group justify="space-between">
+      <Text fw={500} fz="sm">Name</Text>
+      {sortBy === 'name' ? (
+        reverseSortDirection ? <IconChevronUp size={14} /> : <IconChevronDown size={14} />
+      ) : (
+        <IconSelector size={14} />
+      )}
+    </Group>
+  </UnstyledButton>
+</Table.Th>
+
+<Table.Th>
+  <UnstyledButton onClick={() => setSorting('slug')} className="w-full">
+    <Group justify="space-between">
+      <Text fw={500} fz="sm">Slug</Text>
+      {sortBy === 'slug' ? (
+        reverseSortDirection ? <IconChevronUp size={14} /> : <IconChevronDown size={14} />
+      ) : (
+        <IconSelector size={14} />
+      )}
+    </Group>
+  </UnstyledButton>
+</Table.Th>
+
             <Table.Th>Theme</Table.Th>
             <Table.Th>Actions</Table.Th>
 

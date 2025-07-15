@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextInput, PasswordInput, Button, Paper, Title, Container } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Paper, Title, Container, Group, Checkbox, Anchor } from '@mantine/core';
 import API from '../api/axios';
 import { useNavigate } from 'react-router';
 import { useAuthStore } from '../stores/useAuthStore';
@@ -38,47 +38,24 @@ const handleLogin = async () => {
   }
 };
 
-  // const handleLogin = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const {data} = await API.post('/auth/login', { email, password });
-  //     localStorage.setItem('accessToken', data?.data?.accessToken);
-  //     localStorage.setItem('refreshToken', data?.data?.refreshToken);
-
-  //     console.log(data);
-
-  //     // Optional: Save roles and permissions too
-  //     const payload = JSON.parse(atob(data?.data?.accessToken.split('.')[1]));
-
-  //      // 3️⃣  Always stringify complex values
-  //     localStorage.setItem('roles', JSON.stringify(payload.roleNames || []));
-  //     localStorage.setItem('permissions', JSON.stringify(payload.permissions || []));
-
-  //     const roles: string[] = payload.roleNames || [];
-      
-  //     // Redirect based on role
-  //     if (roles.includes('SUPER_ADMIN')) {
-  //       navigate('/super-admin');
-  //     } else if (roles.includes('WL_ADMIN')) {
-  //       navigate('/wl-admin');
-  //     } else {
-  //       navigate('/unauthorized');
-  //     }
-  //   } catch (err: any) {
-  //     alert(err.response?.data?.message || 'Login failed');
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   return (
-    <Container size={420} my={40}>
-      <Title mb={30}>Super Admin Login</Title>
-      <Paper withBorder shadow="md" p={30} radius="md">
-        <TextInput label="Email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <PasswordInput label="Password" placeholder="••••••" value={password} onChange={(e) => setPassword(e.target.value)} required mt="md" />
-        <Button fullWidth mt="xl" onClick={handleLogin} loading={loading}>
-          Sign In
+      <Container size={"xs"} my={40}>
+      <Title ta="center">
+        Welcome back!
+      </Title>
+
+      <Paper withBorder shadow="sm" p={22} mt={30} radius="md">
+        <TextInput label="Email" placeholder="you@mantine.dev" required radius="md" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <PasswordInput label="Password" placeholder="Your password" required mt="md" radius="md" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Group justify="space-between" mt="lg">
+          <Checkbox label="Remember me" />
+          <Anchor component="button" size="sm">
+            Forgot password?
+          </Anchor>
+        </Group>
+        <Button fullWidth mt="xl" radius="md" onClick={handleLogin} loading={loading}>
+          Sign in
         </Button>
       </Paper>
     </Container>

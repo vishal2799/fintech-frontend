@@ -1,7 +1,6 @@
 import {
   Menu,
   Avatar,
-  Text,
   UnstyledButton,
   Group,
   Divider,

@@ -1,8 +1,9 @@
-import { AppShell, Burger, Group, Skeleton, Title } from "@mantine/core";
+import { AppShell, Burger, Group, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Navigate, NavLink, Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
 import UserAvatarMenu from "../components/UserAvatarMenu";
+import { NavbarNested } from "../portals/super-admin/features/tenants/components/NavbarNested";
 
 const SuperAdminLayout = () => {
         const [opened, { toggle }] = useDisclosure();
@@ -29,9 +30,10 @@ if (!accessToken) return <Navigate to="/login" />;
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-            <NavLink to="/super-admin">Dashboard</NavLink>
+        <NavbarNested />
+            {/* <NavLink to="/super-admin">Dashboard</NavLink>
             <NavLink to="/super-admin/tenants">Tenants</NavLink>
-            <NavLink to="/superadmin/api-clients">API Clients</NavLink>
+            <NavLink to="/superadmin/api-clients">API Clients</NavLink> */}
         {/* <NavLink
         href="#required-for-focus"
         label="First parent link"
@@ -46,12 +48,12 @@ if (!accessToken) return <Navigate to="/login" />;
           <NavLink label="Third child link" href="#required-for-focus" />
         </NavLink>
       </NavLink> */}
-        Navbar
+        {/* Navbar
         {Array(15)
           .fill(0)
           .map((_, index) => (
             <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
+          ))} */}
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />
