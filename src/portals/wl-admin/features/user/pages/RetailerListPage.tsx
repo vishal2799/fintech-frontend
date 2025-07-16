@@ -59,6 +59,7 @@ export default function RetailerListPage() {
       }
       filterFn={(row) => !status || row.status === status}
       onEdit={(row) => navigate(`/wl-admin/retailers/${row.id}/edit`)}
+      onCreate={() => navigate('/wl-admin/retailers/create')}
       onDelete={handleDelete}
       onToggle={handleToggle}
     />
