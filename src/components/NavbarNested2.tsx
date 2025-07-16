@@ -19,6 +19,8 @@ const mockdata = [
       { label: 'Add SD', link: '/wl-admin/super-distributors/create' },
       { label: 'Distributors', link: '/wl-admin/distributors/list' },
       { label: 'Add D', link: '/wl-admin/distributors/create' },
+      { label: 'Retailers', link: '/wl-admin/retailers/list' },
+      { label: 'Add R', link: '/wl-admin/retailers/create' },
       // { label: 'All WL Admins', link: '/super-admin/wl-admins/list' },
       // { label: 'Create WL Admin', link: '/super-admin/wl-admins/create' },
     ],

@@ -17,6 +17,8 @@ import SuperDistributorListPage from "../../../../wl-admin/features/user/pages/S
 import SuperDistributorFormPage from "../../../../wl-admin/features/user/pages/SuperDistributorFormPage";
 import DistributorFormPage from "../../../../wl-admin/features/user/pages/DistributorFormPage";
 import DistributorListPage from "../../../../wl-admin/features/user/pages/DistributorListPage";
+import RetailerListPage from "../../../../wl-admin/features/user/pages/RetailerListPage";
+import RetailerFormPage from "../../../../wl-admin/features/user/pages/RetailerFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -54,7 +56,9 @@ export const saRoutes:RouteObject[] = [
     { path: 'distributors/list', element: <DistributorListPage /> },
 { path: 'distributors/create', element: <DistributorFormPage /> },
 { path: 'distributors/:id/edit', element: <DistributorFormPage /> },
-
+    { path: 'retailers/list', element: <RetailerListPage /> },
+{ path: 'retailers/create', element: <RetailerFormPage /> },
+{ path: 'retailers/:id/edit', element: <RetailerFormPage /> },
   ],
 }
 ]
