@@ -1,90 +1,66 @@
-import {
-  Badge,
-  Button,
-  Container,
-  Group,
-  Loader,
-  Table,
-  Title,
-} from '@mantine/core';
 import { useNavigate } from 'react-router';
-import { IconPlus, IconTrash, IconEdit } from '@tabler/icons-react';
+import { Select } from '@mantine/core';
+import { useState } from 'react';
 import {
   useRetailers,
   useDeleteRetailer,
+  useUpdateRetailer,
 } from '../api/retailers.hooks';
 import { notifications } from '@mantine/notifications';
+import { ClientTable } from '../../../../../components/ClientTable';
 
 export default function RetailerListPage() {
   const navigate = useNavigate();
-  const { data = [], isLoading } = useRetailers();
-  const deleteMutation = useDeleteRetailer();
+  const { data = [] } = useRetailers();
+  const deleteRetailer = useDeleteRetailer();
+  const updateRetailer = useUpdateRetailer();
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this user?')) return;
+  const [status, setStatus] = useState<string | null>(null);
+
+  const handleDelete = async (row: any) => {
+    if (!confirm('Delete this retailer?')) return;
     try {
-      await deleteMutation.mutateAsync(id);
-      notifications.show({ message: 'Deleted', color: 'red' });
+      await deleteRetailer.mutateAsync(row.id);
+      notifications.show({ message: 'Retailer deleted', color: 'red' });
     } catch (err: any) {
       notifications.show({ message: err.message || 'Delete failed', color: 'red' });
     }
   };
 
-  if (isLoading) return <Loader />;
+  const handleToggle = async (row: any) => {
+    const newStatus = row.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE';
+    try {
+      await updateRetailer.mutateAsync({ id: row.id, data: { status: newStatus } });
+      notifications.show({ message: 'Status updated', color: 'blue' });
+    } catch (err: any) {
+      notifications.show({ message: err.message || 'Update failed', color: 'red' });
+    }
+  };
 
   return (
-    <Container size="lg">
-      <Group justify="space-between" mb="md">
-        <Title order={2}>Retailers</Title>
-        <Button leftSection={<IconPlus size={16} />} onClick={() => navigate('/wl-admin/retailers/create')}>
-          Add
-        </Button>
-      </Group>
-
-      <Table striped withTableBorder withColumnBorders>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Name</Table.Th>
-            <Table.Th>Email</Table.Th>
-            <Table.Th>Mobile</Table.Th>
-            <Table.Th>Status</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {data.map((u: any) => (
-            <Table.Tr key={u.id}>
-              <Table.Td>{u.name}</Table.Td>
-              <Table.Td>{u.email}</Table.Td>
-              <Table.Td>{u.mobile}</Table.Td>
-              <Table.Td>
-                <Badge color={u.status === 'ACTIVE' ? 'green' : 'red'}>{u.status}</Badge>
-              </Table.Td>
-              <Table.Td>
-                <Group gap="xs">
-                  <Button
-                    size="xs"
-                    variant="light"
-                    onClick={() => navigate(`/wl-admin/retailers/${u.id}/edit`)}
-                    leftSection={<IconEdit size={14} />}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    size="xs"
-                    variant="light"
-                    color="red"
-                    onClick={() => handleDelete(u.id)}
-                    leftSection={<IconTrash size={14} />}
-                  >
-                    Delete
-                  </Button>
-                </Group>
-              </Table.Td>
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
-    </Container>
+    <ClientTable
+      title="Retailers"
+      data={data}
+      columns={[
+        { key: 'name', label: 'Name' },
+        { key: 'email', label: 'Email' },
+        { key: 'mobile', label: 'Mobile' },
+        { key: 'status', label: 'Status', type: 'toggle' },
+      ]}
+      searchFields={['name', 'email', 'mobile']}
+      filterControls={
+        <Select
+          placeholder="Filter by status"
+          data={['ACTIVE', 'BLOCKED', 'LOCKED'].map((x) => ({ label: x, value: x }))}
+          value={status}
+          onChange={setStatus}
+          clearable
+        />
+      }
+      filterFn={(row) => !status || row.status === status}
+      onEdit={(row) => navigate(`/wl-admin/retailers/${row.id}/edit`)}
+      onDelete={handleDelete}
+      onToggle={handleToggle}
+    />
   );
 }

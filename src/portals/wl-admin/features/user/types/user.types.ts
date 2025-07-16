@@ -19,4 +19,5 @@ export type UserInput = {
   email: string;
   mobile: string;
   password: string;
+  status?: 'ACTIVE' | 'BLOCKED' | 'LOCKED';
 };
