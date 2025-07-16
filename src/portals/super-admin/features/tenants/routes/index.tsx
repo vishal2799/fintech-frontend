@@ -10,6 +10,11 @@ import Dashboard from "../pages/Dashboard";
 import WLAdminListPage from "../../wl-admins/pages/WLAdminListPage";
 import WLAdminFormPage from "../../wl-admins/pages/WLAdminFormPage";
 import ServiceListPage from "../../services/pages/ServicesListPage";
+import WLDashboard from "../../../../wl-admin/features/user/pages/Dashboard";
+import WLAdminServicesPage from "../../../../wl-admin/features/services/pages/ServicesListPage";
+import WLAdminLayout from "../../../../../layouts/WLAdminLayout";
+import SuperDistributorListPage from "../../../../wl-admin/features/user/pages/SuperDistributorListPage";
+import SuperDistributorFormPage from "../../../../wl-admin/features/user/pages/SuperDistributorFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -31,4 +36,20 @@ export const saRoutes:RouteObject[] = [
 { path: "services" , element: <ServiceListPage />}
 
   ],
-}]
+},
+{
+  path: '/wl-admin',
+  element: <ProtectedRoute allowedRoles={['WL_ADMIN']}>
+    <WLAdminLayout />
+  </ProtectedRoute>,
+  children: [
+    { index: true, element: <WLDashboard /> },
+    { path: 'tenants/list', element: <TenantListPage /> },
+    { path: "services" , element: <WLAdminServicesPage />},
+    { path: 'super-distributors/list', element: <SuperDistributorListPage /> },
+{ path: 'super-distributors/create', element: <SuperDistributorFormPage /> },
+{ path: 'super-distributors/:id/edit', element: <SuperDistributorFormPage /> },
+
+  ],
+}
+]
