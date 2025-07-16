@@ -15,6 +15,8 @@ import WLAdminServicesPage from "../../../../wl-admin/features/services/pages/Se
 import WLAdminLayout from "../../../../../layouts/WLAdminLayout";
 import SuperDistributorListPage from "../../../../wl-admin/features/user/pages/SuperDistributorListPage";
 import SuperDistributorFormPage from "../../../../wl-admin/features/user/pages/SuperDistributorFormPage";
+import DistributorFormPage from "../../../../wl-admin/features/user/pages/DistributorFormPage";
+import DistributorListPage from "../../../../wl-admin/features/user/pages/DistributorListPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -49,6 +51,9 @@ export const saRoutes:RouteObject[] = [
     { path: 'super-distributors/list', element: <SuperDistributorListPage /> },
 { path: 'super-distributors/create', element: <SuperDistributorFormPage /> },
 { path: 'super-distributors/:id/edit', element: <SuperDistributorFormPage /> },
+    { path: 'distributors/list', element: <DistributorListPage /> },
+{ path: 'distributors/create', element: <DistributorFormPage /> },
+{ path: 'distributors/:id/edit', element: <DistributorFormPage /> },
 
   ],
 }
