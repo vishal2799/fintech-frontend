@@ -33,6 +33,7 @@ const mockdata = [
       { label: 'Commission Plans', link: '/super-admin/commissions' },
     ],
   },
+  { label: 'Audit Logs', icon: IconPresentationAnalytics, link: '/super-admin/logs' },
   { label: 'Reports', icon: IconPresentationAnalytics, link: '/super-admin/reports' },
   { label: 'Contracts', icon: IconFileAnalytics, link: '/super-admin/contracts' },
   {

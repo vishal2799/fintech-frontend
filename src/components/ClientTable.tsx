@@ -110,7 +110,7 @@ export function ClientTable<T extends { id: string }>({
 
       {filterControls && <Group mb="md">{filterControls}</Group>}
 
-      <Table striped withTableBorder withColumnBorders>
+      <Table striped withTableBorder withColumnBorders layout={'fixed'}>
         <Table.Thead>
           <Table.Tr>
             {columns.map((col:any) => (

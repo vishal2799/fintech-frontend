@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { Notifications } from "@mantine/notifications";
 // import { getSubdomain } from "./utils/tenant";
 
+import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import { saRoutes } from "./portals/super-admin/features/tenants/routes";
 

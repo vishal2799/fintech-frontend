@@ -19,6 +19,7 @@ import DistributorFormPage from "../../../../wl-admin/features/user/pages/Distri
 import DistributorListPage from "../../../../wl-admin/features/user/pages/DistributorListPage";
 import RetailerListPage from "../../../../wl-admin/features/user/pages/RetailerListPage";
 import RetailerFormPage from "../../../../wl-admin/features/user/pages/RetailerFormPage";
+import AuditLogListPage from "../../audit-logs/pages/AuditLogListPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -37,6 +38,7 @@ export const saRoutes:RouteObject[] = [
     {path: "wl-admins/list", element: <WLAdminListPage /> },
    { path: "wl-admins/create", element: <WLAdminFormPage /> },
 { path: "wl-admins/:id/edit" , element: <WLAdminFormPage />},
+{ path: "logs" , element: <AuditLogListPage />},
 { path: "services" , element: <ServiceListPage />}
 
   ],
