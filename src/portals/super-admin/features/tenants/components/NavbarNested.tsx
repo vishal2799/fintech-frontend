@@ -23,11 +23,13 @@ const mockdata = [
     ],
   },
    {
-    label: 'Permissions',
+    label: 'Roles & Permissions',
     icon: IconLock,
     links: [
-          { label: 'List Permissions', link: '/super-admin/Permissions/list' },
-      { label: 'Create Permissions', link: '/super-admin/Permissions/create' },
+          { label: 'List Permissions', link: '/super-admin/permissions/list' },
+      { label: 'Create Permissions', link: '/super-admin/permissions/create' },
+       { label: 'List Roles', link: '/super-admin/roles/list' },
+      { label: 'Create Role', link: '/super-admin/roles/create' },
     ],
   },
   {

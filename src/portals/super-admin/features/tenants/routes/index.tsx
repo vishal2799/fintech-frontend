@@ -22,6 +22,8 @@ import RetailerFormPage from "../../../../wl-admin/features/user/pages/RetailerF
 import AuditLogListPage from "../../audit-logs/pages/AuditLogListPage";
 import PermissionListPage from "../../permissions/pages/PermissionListPage";
 import PermissionFormPage from "../../permissions/pages/PermissionFormPage";
+import RoleListPage from "../../roles/pages/RoleListPage";
+import RoleFormPage from "../../roles/pages/RoleFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -45,6 +47,9 @@ export const saRoutes:RouteObject[] = [
     {path: "permissions/list", element: <PermissionListPage /> },
    { path: "permissions/create", element: <PermissionFormPage /> },
     { path: "permissions/edit/:id", element: <PermissionFormPage /> },
+     {path: "roles/list", element: <RoleListPage /> },
+   { path: "roles/create", element: <RoleFormPage /> },
+    { path: "roles/edit/:id", element: <RoleFormPage /> },
   ],
 },
 {
