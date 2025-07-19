@@ -20,6 +20,14 @@ export const createRole = async (data: {
 
 export const updateRole = async (
   id: string,
+  data: Partial<{ name: string; description: string; permissionIds: string[] }>
+) => {
+  const res = await axios.patch(`${baseURL}/${id}`, data);
+  return res.data;
+};
+
+export const updateBasicRole = async (
+  id: string,
   data: Partial<{ name: string; description: string }>
 ) => {
   const res = await axios.patch(`${baseURL}/${id}`, data);

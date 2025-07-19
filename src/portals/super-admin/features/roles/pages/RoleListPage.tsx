@@ -28,11 +28,6 @@ export default function RoleListPage() {
         { key: 'name', label: 'Name' },
         { key: 'description', label: 'Description' },
         { key: 'scope', label: 'Scope' },
-        {
-          key: 'permissions',
-          label: 'Permissions',
-          render: (row) => row.permissions?.length || 0
-        }
       ]}
       searchFields={['name', 'description']}
       onEdit={(row) => navigate(`/super-admin/roles/edit/${row.id}`)}

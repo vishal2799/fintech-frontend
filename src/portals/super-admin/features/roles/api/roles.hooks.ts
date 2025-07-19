@@ -28,6 +28,16 @@ export const useUpdateRole = () => {
   });
 };
 
+export const useUpdateBasicRole = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) => api.updateBasicRole(id, data),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['roles'] });
+    },
+  });
+};
+
 export const useUpdateRolePermissions = () => {
   const qc = useQueryClient();
   return useMutation({
@@ -53,5 +63,5 @@ export const usePermissionsForRole = (id: string) =>
   useQuery({
     queryKey: ['roles', id, 'permissions'],
     queryFn: () => api.getPermissionsForRole(id),
-    enabled: !!id,
+    // enabled: !!id,
   });

@@ -14,18 +14,24 @@ export default function RoleFormPage() {
   const [initialValues, setInitialValues] = useState<any | null>(null);
 
   useEffect(() => {
-    if (isEdit && id && roles.length > 0) {
-      const match = roles.find((r) => r.id === id);
-      if (match) {
-        setInitialValues({
-          ...match,
-          permissionIds: Array.isArray(permissions)
-            ? permissions.map((p) => p.id)
-            : [],
-        });
-      }
+  if (
+    isEdit &&
+    id &&
+    roles.length > 0 &&
+    !rolesLoading &&
+    !permsLoading &&
+    permissions.length > 0
+  ) {
+    const match = roles.find((r) => r.id === id);
+    if (match) {
+      setInitialValues({
+        ...match,
+        permissionIds: permissions.map((p:any) => p.id),
+      });
     }
-  }, [isEdit, roles, permissions, id]);
+  }
+}, [isEdit, roles, rolesLoading, permissions, permsLoading, id]);
+
 
   if (isEdit && (rolesLoading || permsLoading || !initialValues)) {
     return <Loader />;
