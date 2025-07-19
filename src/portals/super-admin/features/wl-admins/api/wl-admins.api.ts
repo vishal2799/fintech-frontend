@@ -18,7 +18,7 @@ export interface UpdateWLAdminDto {
   status?: string;
 }
 
-const baseURL = '/admin/users';
+const baseURL = '/super-admin/wl-admin';
 
 export const getWLAdmins = async (tenantId?: string) => {
   const { data } = await API.get(baseURL, {
@@ -38,7 +38,7 @@ export const createWLAdmin = async (payload: CreateWLAdminDto) => {
 };
 
 export const updateWLAdmin = async (id: string, payload: UpdateWLAdminDto) => {
-  const { data } = await API.put(`${baseURL}/${id}`, payload);
+  const { data } = await API.patch(`${baseURL}/${id}`, payload);
   return data;
 };
 
