@@ -1,6 +1,7 @@
 import {
   IconCalendarStats,
   IconGauge,
+  IconLock,
   IconNotes,
   IconPresentationAnalytics,
 } from '@tabler/icons-react';
@@ -18,7 +19,15 @@ const mockdata = [
       { label: 'All Tenants', link: '/super-admin/tenants/list' },
       { label: 'Add Tenant', link: '/super-admin/tenants/create' },
       { label: 'All WL Admins', link: '/super-admin/wl-admins/list' },
-      { label: 'Create WL Admin', link: '/super-admin/wl-admins/create' },
+      { label: 'Create WL Admin', link: '/super-admin/wl-admins/create' }
+    ],
+  },
+   {
+    label: 'Permissions',
+    icon: IconLock,
+    links: [
+          { label: 'List Permissions', link: '/super-admin/Permissions/list' },
+      { label: 'Create Permissions', link: '/super-admin/Permissions/create' },
     ],
   },
   {

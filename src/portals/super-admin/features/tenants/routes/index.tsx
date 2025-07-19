@@ -20,6 +20,8 @@ import DistributorListPage from "../../../../wl-admin/features/user/pages/Distri
 import RetailerListPage from "../../../../wl-admin/features/user/pages/RetailerListPage";
 import RetailerFormPage from "../../../../wl-admin/features/user/pages/RetailerFormPage";
 import AuditLogListPage from "../../audit-logs/pages/AuditLogListPage";
+import PermissionListPage from "../../permissions/pages/PermissionListPage";
+import PermissionFormPage from "../../permissions/pages/PermissionFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -39,8 +41,10 @@ export const saRoutes:RouteObject[] = [
    { path: "wl-admins/create", element: <WLAdminFormPage /> },
 { path: "wl-admins/:id/edit" , element: <WLAdminFormPage />},
 { path: "logs" , element: <AuditLogListPage />},
-{ path: "services" , element: <ServiceListPage />}
-
+{ path: "services" , element: <ServiceListPage />},
+    {path: "permissions/list", element: <PermissionListPage /> },
+   { path: "permissions/create", element: <PermissionFormPage /> },
+    { path: "permissions/edit/:id", element: <PermissionFormPage /> },
   ],
 },
 {
