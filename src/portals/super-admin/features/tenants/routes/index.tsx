@@ -24,6 +24,8 @@ import PermissionListPage from "../../permissions/pages/PermissionListPage";
 import PermissionFormPage from "../../permissions/pages/PermissionFormPage";
 import RoleListPage from "../../roles/pages/RoleListPage";
 import RoleFormPage from "../../roles/pages/RoleFormPage";
+import EmployeeListPage from "../../employee/pages/EmployeeListPage";
+import EmployeeFormPage from "../../employee/pages/EmployeeFormPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -50,6 +52,9 @@ export const saRoutes:RouteObject[] = [
      {path: "roles/list", element: <RoleListPage /> },
    { path: "roles/create", element: <RoleFormPage /> },
     { path: "roles/edit/:id", element: <RoleFormPage /> },
+      {path: "employees/list", element: <EmployeeListPage /> },
+   { path: "employees/create", element: <EmployeeFormPage /> },
+    { path: "employees/edit/:id", element: <EmployeeFormPage /> },
   ],
 },
 {

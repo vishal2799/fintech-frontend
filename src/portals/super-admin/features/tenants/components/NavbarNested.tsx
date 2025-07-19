@@ -30,6 +30,8 @@ const mockdata = [
       { label: 'Create Permissions', link: '/super-admin/permissions/create' },
        { label: 'List Roles', link: '/super-admin/roles/list' },
       { label: 'Create Role', link: '/super-admin/roles/create' },
+       { label: 'List Employees', link: '/super-admin/employees/list' },
+      { label: 'Create Exployee', link: '/super-admin/employees/create' },
     ],
   },
   {
