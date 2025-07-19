@@ -22,21 +22,35 @@ const handleLogin = async () => {
     login({ accessToken, refreshToken });
 
     const payload = JSON.parse(atob(accessToken.split('.')[1]));
-    const roles: string[] = payload.roleNames || [];
+    const staticRole = payload.staticRole;
 
-    if (roles.includes('SUPER_ADMIN')) {
-      navigate('/super-admin');
-    } else if (roles.includes('WL_ADMIN')) {
-      navigate('/wl-admin');
-    } else {
-      navigate('/unauthorized');
+    switch (staticRole) {
+      case 'SUPER_ADMIN':
+        navigate('/super-admin');
+        break;
+      case 'WL_ADMIN':
+        navigate('/wl-admin');
+        break;
+      case 'SD':
+      case 'D':
+      case 'R':
+        navigate('/dashboard'); // or whatever route fits
+        break;
+      case 'EMPLOYEE':
+        // Optional: Handle based on permissions
+        navigate('/dashboard');
+        break;
+      default:
+        navigate('/unauthorized');
     }
+
   } catch (err: any) {
     alert(err.response?.data?.message || 'Login failed');
   } finally {
     setLoading(false);
   }
 };
+
 
 
   return (
