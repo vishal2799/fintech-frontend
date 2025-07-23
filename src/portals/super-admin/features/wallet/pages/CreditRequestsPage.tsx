@@ -1,54 +1,56 @@
-import { Table, Button, Group, Card, Title } from '@mantine/core';
 import { useCreditRequests, useApproveRequest, useRejectRequest } from '../api/wallet.hooks';
 import { notifications } from '@mantine/notifications';
+import { ClientTable } from '../../../../../components/ClientTable';
+import { Button } from '@mantine/core';
 
 export default function CreditRequestsPage() {
   const { data = [] } = useCreditRequests();
   const approve = useApproveRequest();
   const reject = useRejectRequest();
 
-  const handleAction = async (id: string, type: 'approve' | 'reject') => {
+  const handleApprove = async (row: any) => {
     try {
-      if (type === 'approve') await approve.mutateAsync(id);
-      else await reject.mutateAsync(id);
-      notifications.show({ message: `Request ${type}d`, color: 'green' });
+      await approve.mutateAsync(row.id);
+      notifications.show({ message: 'Request approved', color: 'green' });
     } catch (err: any) {
-      notifications.show({ message: err.message || 'Error', color: 'red' });
+      notifications.show({ message: err.message || 'Approval failed', color: 'red' });
+    }
+  };
+
+  const handleReject = async (row: any) => {
+    if (!confirm('Reject this request?')) return;
+    try {
+      await reject.mutateAsync(row.id);
+      notifications.show({ message: 'Request rejected', color: 'red' });
+    } catch (err: any) {
+      notifications.show({ message: err.message || 'Rejection failed', color: 'red' });
     }
   };
 
   return (
-    <Card>
-      <Title order={4} mb="sm">Credit Requests</Title>
-      <Table withTableBorder withColumnBorders withRowBorders highlightOnHover>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Tenant</Table.Th>
-            <Table.Th>Amount</Table.Th>
-            <Table.Th>Requested By</Table.Th>
-            <Table.Th>Status</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {data.map((r: any) => (
-            <Table.Tr key={r.id}>
-              <Table.Td>{r.fromTenantId}</Table.Td>
-              <Table.Td>{r.amount}</Table.Td>
-              <Table.Td>{r.requestedByUserId}</Table.Td>
-              <Table.Td>{r.status}</Table.Td>
-              <Table.Td>
-                 {r.status === 'PENDING' && (
-                  <Group>
-                    <Button size="xs" onClick={() => handleAction(r.id, 'approve')}>Approve</Button>
-                    <Button size="xs" color="red" onClick={() => handleAction(r.id, 'reject')}>Reject</Button>
-                  </Group>
-                )}
-              </Table.Td>
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
-    </Card>
+    <ClientTable
+      title="Credit Requests"
+      data={data}
+      columns={[
+        { key: 'fromTenantId', label: 'Tenant ID' },
+        { key: 'amount', label: 'Amount' },
+        { key: 'requestedByUserId', label: 'Requested By' },
+        { key: 'status', label: 'Status' },
+      ]}
+      searchFields={['fromTenantId', 'requestedByUserId', 'status']}
+      rowActions={(row) =>
+  row.status === 'PENDING'
+    ? [
+        <Button key="approve" size="xs" onClick={() => handleApprove(row)}>
+          Approve
+        </Button>,
+        <Button key="reject" size="xs" color="red" onClick={() => handleReject(row)}>
+          Reject
+        </Button>,
+      ]
+    : []
+}
+      perPage={10}
+    />
   );
 }

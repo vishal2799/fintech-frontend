@@ -1,8 +1,10 @@
+// src/pages/super-admin/wallet/api/wallet.hooks.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as api from './wallet.api';
+import type { CreditRequest } from '../types/wallet.types';
 
 export const useCreditRequests = () =>
-  useQuery({
+  useQuery<CreditRequest[]>({
     queryKey: ['credit-requests'],
     queryFn: api.getCreditRequests,
   });

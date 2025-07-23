@@ -1,4 +1,3 @@
-// src/pages/super-admin/TenantListPage.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
@@ -8,8 +7,10 @@ import {
 } from '../api/tenants.hooks';
 import { Select, Menu, Badge } from '@mantine/core';
 import { IconChevronDown, IconCheck } from '@tabler/icons-react';
-import { notifications } from '@mantine/notifications';
 import { ClientTable } from '../../../../../components/ClientTable';
+import { STATUS_OPTIONS, type TenantStatus } from '../constants';
+import type { Tenant } from '../types/tenant.types';
+import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function TenantListPage() {
   const navigate = useNavigate();
@@ -19,24 +20,25 @@ export default function TenantListPage() {
 
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
-  const handleDelete = async (row: any) => {
+  const handleDelete = async (row: Tenant) => {
     if (!confirm('Delete this tenant?')) return;
     try {
-      await deleteTenant.mutateAsync(row.id);
-      notifications.show({ message: 'Deleted', color: 'red' });
+      const res = await deleteTenant.mutateAsync(row.id);
+      showSuccess(res);
     } catch (err: any) {
-      notifications.show({ message: err.message || 'Delete failed', color: 'red' });
+      showError(err);
     }
   };
 
-  const handleStatusChange = async (id: string, status: string) => {
-    try {
-      await updateTenantStatus.mutateAsync({ id, status });
-      notifications.show({ message: 'Status updated', color: 'blue' });
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Status update failed', color: 'red' });
-    }
-  };
+  const handleStatusChange = async (id: string, status: TenantStatus) => {
+  try {
+    const res = await updateTenantStatus.mutateAsync({ id, data: { status } });
+    showSuccess(res);
+  } catch (err) {
+    showError(err);
+  }
+};
+
 
   return (
     <ClientTable
@@ -71,7 +73,7 @@ export default function TenantListPage() {
                 </Badge>
               </Menu.Target>
               <Menu.Dropdown>
-                {['ACTIVE', 'DISABLED', 'SUSPENDED'].map((status) => (
+                {STATUS_OPTIONS.map((status) => (
                   <Menu.Item
                     key={status}
                     onClick={() => handleStatusChange(row.id, status)}
@@ -91,7 +93,7 @@ export default function TenantListPage() {
       filterControls={
         <Select
           placeholder="Filter by status"
-          data={['ACTIVE', 'DISABLED', 'SUSPENDED'].map((x) => ({
+          data={STATUS_OPTIONS.map((x) => ({
             label: x,
             value: x,
           }))}
@@ -109,15 +111,12 @@ export default function TenantListPage() {
   );
 }
 
-function getStatusColor(status: string) {
-  switch (status) {
-    case 'ACTIVE':
-      return 'green';
-    case 'DISABLED':
-      return 'gray';
-    case 'SUSPENDED':
-      return 'red';
-    default:
-      return 'gray';
-  }
+const statusColorMap = {
+  ACTIVE: 'green',
+  DISABLED: 'gray',
+  SUSPENDED: 'red',
+} as const;
+
+function getStatusColor(status: string | undefined) {
+  return statusColorMap[status as keyof typeof statusColorMap] ?? 'gray';
 }

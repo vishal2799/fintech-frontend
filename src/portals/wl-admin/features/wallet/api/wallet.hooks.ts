@@ -1,14 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as api from './wallet.api';
+import type { WalletBalance, WalletTransaction } from '../types/wallet.types';
 
 export const useWalletBalance = () =>
-  useQuery({
+  useQuery<WalletBalance>({
     queryKey: ['wallet', 'balance'],
     queryFn: api.getWalletBalance,
   });
 
 export const useWalletLedger = () =>
-  useQuery({
+  useQuery<WalletTransaction[]>({
     queryKey: ['wallet', 'ledger'],
     queryFn: api.getWalletLedger,
   });

@@ -19,7 +19,6 @@ import DistributorFormPage from "../../../../wl-admin/features/user/pages/Distri
 import DistributorListPage from "../../../../wl-admin/features/user/pages/DistributorListPage";
 import RetailerListPage from "../../../../wl-admin/features/user/pages/RetailerListPage";
 import RetailerFormPage from "../../../../wl-admin/features/user/pages/RetailerFormPage";
-import AuditLogListPage from "../../audit-logs/pages/AuditLogListPage";
 import PermissionListPage from "../../permissions/pages/PermissionListPage";
 import PermissionFormPage from "../../permissions/pages/PermissionFormPage";
 import RoleListPage from "../../roles/pages/RoleListPage";
@@ -28,7 +27,8 @@ import EmployeeListPage from "../../employee/pages/EmployeeListPage";
 import EmployeeFormPage from "../../employee/pages/EmployeeFormPage";
 import CreditRequestsPage from "../../wallet/pages/CreditRequestsPage";
 import WalletDashboard from "../../../../wl-admin/features/wallet/pages/WalletDashboard";
-import CreditRequestForm from "../../../../wl-admin/features/wallet/pages/CreditRequestForm";
+import CreditRequestFormPage from "../../../../wl-admin/features/wallet/pages/CreditRequestFormPage";
+import AuditLogTable from "../../audit-logs/pages/AuditLogsList";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -47,7 +47,7 @@ export const saRoutes:RouteObject[] = [
     {path: "wl-admins/list", element: <WLAdminListPage /> },
    { path: "wl-admins/create", element: <WLAdminFormPage /> },
 { path: "wl-admins/:id/edit" , element: <WLAdminFormPage />},
-{ path: "logs" , element: <AuditLogListPage />},
+{ path: "logs" , element: <AuditLogTable />},
 { path: "services" , element: <ServiceListPage />},
     {path: "permissions/list", element: <PermissionListPage /> },
    { path: "permissions/create", element: <PermissionFormPage /> },
@@ -79,7 +79,7 @@ export const saRoutes:RouteObject[] = [
     { path: 'retailers/list', element: <RetailerListPage /> },
 { path: 'retailers/create', element: <RetailerFormPage /> },
 { path: 'retailers/:id/edit', element: <RetailerFormPage /> },
-    { path: "wallet/credit-request", element: <CreditRequestForm /> },
+    { path: "wallet/credit-request", element: <CreditRequestFormPage /> },
     { path: "wallet/dashboard", element: <WalletDashboard /> },
 
   ],

@@ -32,6 +32,7 @@ interface Props<T> {
   onCreate?: () => void;
   filterControls?: React.ReactNode;
   filterFn?: (row: T) => boolean;
+  rowActions?: (row: T) => React.ReactNode[];
 }
 
 export function ClientTable<T extends { id: string }>({
@@ -46,6 +47,7 @@ export function ClientTable<T extends { id: string }>({
   onCreate,
   filterControls,
   filterFn,
+  rowActions
 }: Props<T>) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -129,7 +131,7 @@ export function ClientTable<T extends { id: string }>({
   </Group>
 </Table.Th>
             ))}
-            {(onEdit || onDelete) && <Table.Th>Actions</Table.Th>}
+            {(onEdit || onDelete || rowActions) && <Table.Th>Actions</Table.Th>}
           </Table.Tr>
         </Table.Thead>
 
@@ -142,7 +144,7 @@ export function ClientTable<T extends { id: string }>({
                     col.render(row)
                   ) : col.type === 'badge' ? (
                     <Badge
-                      color={String(row[col.key]) === 'ACTIVE' ? 'green' : 'red'}
+                      color={String(row[col.key]) === 'ACTIVE' || 'SUCCESS' ? 'green' : 'red'}
                     >
                       {String(row[col.key])}
                     </Badge>
@@ -157,7 +159,38 @@ export function ClientTable<T extends { id: string }>({
                   )}
                 </Table.Td>
               ))}
-              {(onEdit || onDelete) && (
+              {(onEdit || onDelete || rowActions) && (
+  <Table.Td>
+    <Group gap="xs">
+      {onEdit && (
+        <Button
+          size="xs"
+          variant="light"
+          onClick={() => onEdit(row)}
+          leftSection={<IconEdit size={14} />}
+        >
+          Edit
+        </Button>
+      )}
+      {onDelete && (
+        <Button
+          size="xs"
+          variant="light"
+          color="red"
+          onClick={() => onDelete(row)}
+          leftSection={<IconTrash size={14} />}
+        >
+          Delete
+        </Button>
+      )}
+      {rowActions?.(row)?.map((action, idx) => (
+        <span key={idx}>{action}</span>
+      ))}
+    </Group>
+  </Table.Td>
+)}
+
+              {/* {(onEdit || onDelete) && (
                 <Table.Td>
                   <Group gap="xs">
                     {onEdit && (
@@ -183,7 +216,7 @@ export function ClientTable<T extends { id: string }>({
                     )}
                   </Group>
                 </Table.Td>
-              )}
+              )} */}
             </Table.Tr>
           ))}
         </Table.Tbody>

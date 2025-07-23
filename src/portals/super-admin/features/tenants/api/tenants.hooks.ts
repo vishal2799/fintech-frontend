@@ -1,6 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/tenants.api';
 import type { Tenant } from '../types/tenant.types';
+import type {
+  CreateTenantInput,
+  UpdateTenantInput,
+  UpdateTenantStatusInput,
+} from '../schema/tenant.schema';
 
 export const useTenants = () =>
   useQuery<Tenant[]>({
@@ -11,7 +16,18 @@ export const useTenants = () =>
 export const useCreateTenant = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: api.createTenant,
+    mutationFn: (data: CreateTenantInput) => api.createTenant(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenants'] });
+    },
+  });
+};
+
+export const useUpdateTenant = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: UpdateTenantInput }) =>
+      api.updateTenant(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenants'] });
     },
@@ -19,21 +35,10 @@ export const useCreateTenant = () => {
 };
 
 export const useUpdateTenantStatus = () => {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id, status }: { id: string; status: string }) => api.updateTenantStatus(id, status),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['tenants'] });
-    },
-  });
-};
-
-
-export const useUpdateTenant = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Tenant> }) =>
-      api.updateTenant(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdateTenantStatusInput }) =>
+      api.updateTenantStatus(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenants'] });
     },
@@ -43,7 +48,7 @@ export const useUpdateTenant = () => {
 export const useDeleteTenant = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: api.deleteTenant,
+    mutationFn: (id: string) => api.deleteTenant(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenants'] });
     },

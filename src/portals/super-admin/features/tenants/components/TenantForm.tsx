@@ -5,35 +5,40 @@ import {
   Stack,
   Group,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { useCreateTenant, useUpdateTenant } from '../api/tenants.hooks';
-import type { Tenant } from '../types/tenant.types';
 import { useNavigate } from 'react-router';
-import { notifications } from '@mantine/notifications';
+import { useCreateTenant, useUpdateTenant } from '../api/tenants.hooks';
+import { showError, showSuccess } from '../../../../../utils/notifications';
+import {
+  createTenantSchema,
+  updateTenantSchema,
+  type CreateTenantInput
+} from '../schema/tenant.schema.ts';
+import type { Tenant } from '../types/tenant.types';
+import { useForm } from '@mantine/form';
+import { zod4Resolver } from 'mantine-form-zod-resolver';
 
 type Props = {
   mode: 'create' | 'edit';
   initialValues?: Partial<Tenant>;
 };
 
-// const statusOptions: { label: string; value: TenantStatus }[] = [
-//   { label: 'Active', value: 'ACTIVE' },
-//   { label: 'Inactive', value: 'INACTIVE' },
-//   { label: 'Suspended', value: 'SUSPENDED' },
-// ];
-
 export default function TenantForm({ mode, initialValues }: Props) {
   const navigate = useNavigate();
-  const form = useForm<Partial<Tenant>>({
-    initialValues: {
-      name: '',
-      slug: '',
-      logoUrl: '',
-      themeColor: '#004aad',
-      status: 'ACTIVE',
-      ...initialValues,
-    },
-  });
+
+  const schema = mode === 'create' ? createTenantSchema : updateTenantSchema;
+
+const form = useForm({
+  initialValues: {
+    name: '',
+    slug: '',
+    logoUrl: '',
+    themeColor: '#004aad',
+    status: 'ACTIVE',
+    ...initialValues,
+  },
+  validate: zod4Resolver(schema)
+});
+
 
   const createMutation = useCreateTenant();
   const updateMutation = useUpdateTenant();
@@ -41,26 +46,25 @@ export default function TenantForm({ mode, initialValues }: Props) {
   const handleSubmit = form.onSubmit(async (values) => {
     try {
       if (mode === 'create') {
-        await createMutation.mutateAsync(values);
-        notifications.show({ message: 'Tenant created', color: 'green' });
+        const res = await createMutation.mutateAsync(values as CreateTenantInput);
+        showSuccess(res);
       } else if (mode === 'edit' && initialValues?.id) {
-        await updateMutation.mutateAsync({ id: initialValues?.id, data: values });
-        notifications.show({ message: 'Tenant updated', color: 'blue' });
+        const res = await updateMutation.mutateAsync({
+          id: initialValues.id,
+          data: values,
+        });
+        showSuccess(res);
       }
       navigate('/super-admin/tenants/list');
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Error', color: 'red' });
+    } catch (err) {
+      showError(err);
     }
   });
 
   return (
     <form onSubmit={handleSubmit}>
       <Stack>
-        <TextInput
-          label="Name"
-          withAsterisk
-          {...form.getInputProps('name')}
-        />
+        <TextInput label="Name" withAsterisk {...form.getInputProps('name')} />
         <TextInput
           label="Slug"
           withAsterisk
@@ -72,16 +76,7 @@ export default function TenantForm({ mode, initialValues }: Props) {
           placeholder="https://cdn.com/logo.png"
           {...form.getInputProps('logoUrl')}
         />
-        <ColorInput
-          label="Theme Color"
-          {...form.getInputProps('themeColor')}
-        />
-        {/* <Select
-          label="Status"
-          data={statusOptions}
-          {...form.getInputProps('status')}
-        /> */}
-
+        <ColorInput label="Theme Color" {...form.getInputProps('themeColor')} />
         <Group mt="md">
           <Button type="submit" loading={createMutation.isPending || updateMutation.isPending}>
             {mode === 'create' ? 'Create' : 'Update'}
