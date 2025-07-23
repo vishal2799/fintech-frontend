@@ -22,6 +22,14 @@ const mockdata = [
       { label: 'Create WL Admin', link: '/super-admin/wl-admins/create' }
     ],
   },
+  {
+    label: 'Wallet Management',
+    icon: IconNotes,
+    initiallyOpened: true,
+    links: [
+      { label: 'Credit Request', link: '/super-admin/wallet/credit-requests' },
+    ],
+  },
    {
     label: 'Roles & Permissions',
     icon: IconLock,

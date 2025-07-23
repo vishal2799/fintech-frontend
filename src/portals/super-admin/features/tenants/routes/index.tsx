@@ -26,6 +26,9 @@ import RoleListPage from "../../roles/pages/RoleListPage";
 import RoleFormPage from "../../roles/pages/RoleFormPage";
 import EmployeeListPage from "../../employee/pages/EmployeeListPage";
 import EmployeeFormPage from "../../employee/pages/EmployeeFormPage";
+import CreditRequestsPage from "../../wallet/pages/CreditRequestsPage";
+import WalletDashboard from "../../../../wl-admin/features/wallet/pages/WalletDashboard";
+import CreditRequestForm from "../../../../wl-admin/features/wallet/pages/CreditRequestForm";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -55,6 +58,7 @@ export const saRoutes:RouteObject[] = [
       {path: "employees/list", element: <EmployeeListPage /> },
    { path: "employees/create", element: <EmployeeFormPage /> },
     { path: "employees/edit/:id", element: <EmployeeFormPage /> },
+    { path: "wallet/credit-requests", element: <CreditRequestsPage /> },
   ],
 },
 {
@@ -75,6 +79,9 @@ export const saRoutes:RouteObject[] = [
     { path: 'retailers/list', element: <RetailerListPage /> },
 { path: 'retailers/create', element: <RetailerFormPage /> },
 { path: 'retailers/:id/edit', element: <RetailerFormPage /> },
+    { path: "wallet/credit-request", element: <CreditRequestForm /> },
+    { path: "wallet/dashboard", element: <WalletDashboard /> },
+
   ],
 }
 ]

@@ -26,6 +26,14 @@ const mockdata = [
     ],
   },
   {
+    label: 'Wallet Management',
+    icon: IconCalendarStats,
+    links: [
+      { label: 'Wallet Dashboard', link: '/wl-admin/wallet/dashboard' },
+      { label: 'Request Credit', link: '/wl-admin/wallet/credit-request' },
+    ],
+  },
+  {
     label: 'Services',
     icon: IconCalendarStats,
     links: [
