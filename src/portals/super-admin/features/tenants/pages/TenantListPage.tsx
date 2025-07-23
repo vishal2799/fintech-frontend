@@ -2,33 +2,33 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   useTenants,
-  useDeleteTenant,
+  // useDeleteTenant,
   useUpdateTenantStatus,
 } from '../api/tenants.hooks';
 import { Select, Menu, Badge } from '@mantine/core';
 import { IconChevronDown, IconCheck } from '@tabler/icons-react';
 import { ClientTable } from '../../../../../components/ClientTable';
 import { STATUS_OPTIONS, type TenantStatus } from '../constants';
-import type { Tenant } from '../types/tenant.types';
+// import type { Tenant } from '../types/tenant.types';
 import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function TenantListPage() {
   const navigate = useNavigate();
   const { data = [] } = useTenants();
-  const deleteTenant = useDeleteTenant();
+  // const deleteTenant = useDeleteTenant();
   const updateTenantStatus = useUpdateTenantStatus();
 
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
-  const handleDelete = async (row: Tenant) => {
-    if (!confirm('Delete this tenant?')) return;
-    try {
-      const res = await deleteTenant.mutateAsync(row.id);
-      showSuccess(res);
-    } catch (err: any) {
-      showError(err);
-    }
-  };
+  // const handleDelete = async (row: Tenant) => {
+  //   if (!confirm('Delete this tenant?')) return;
+  //   try {
+  //     const res = await deleteTenant.mutateAsync(row.id);
+  //     showSuccess(res);
+  //   } catch (err: any) {
+  //     showError(err);
+  //   }
+  // };
 
   const handleStatusChange = async (id: string, status: TenantStatus) => {
   try {
@@ -104,7 +104,7 @@ export default function TenantListPage() {
       }
       filterFn={(row) => !statusFilter || row.status === statusFilter}
       onEdit={(row) => navigate(`/super-admin/tenants/edit/${row.id}`)}
-      onDelete={handleDelete}
+      // onDelete={handleDelete}
       onCreate={() => navigate('/super-admin/tenants/create')}
       perPage={4}
     />
