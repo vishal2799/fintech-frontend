@@ -1,7 +1,10 @@
-// src/pages/super-admin/settings/permissions/hooks/permissions.hooks.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as api from '../api/permissions.api';
 import type { Permission } from '../types/permissions.types';
+import type {
+  CreatePermissionInput,
+  UpdatePermissionInput,
+} from '../schema/permissions.schema';
 
 export const usePermissions = () =>
   useQuery<Permission[]>({
@@ -12,7 +15,7 @@ export const usePermissions = () =>
 export const useCreatePermission = () => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: api.createPermission,
+    mutationFn: (data: CreatePermissionInput) => api.createPermission(data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['permissions'] });
     },
@@ -22,7 +25,7 @@ export const useCreatePermission = () => {
 export const useUpdatePermission = () => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Permission> }) =>
+    mutationFn: ({ id, data }: { id: string; data: UpdatePermissionInput }) =>
       api.updatePermission(id, data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['permissions'] });
@@ -33,7 +36,7 @@ export const useUpdatePermission = () => {
 export const useDeletePermission = () => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: api.deletePermission,
+    mutationFn: (id: string) => api.deletePermission(id),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['permissions'] });
     },

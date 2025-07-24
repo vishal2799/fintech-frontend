@@ -1,25 +1,26 @@
 import { useNavigate } from 'react-router';
 import { usePermissions, useDeletePermission } from '../api/permissions.hooks';
-import { notifications } from '@mantine/notifications';
 import { ClientTable } from '../../../../../components/ClientTable';
+import type { Permission } from '../types/permissions.types';
+import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function PermissionListPage() {
   const navigate = useNavigate();
   const { data = [] } = usePermissions();
   const deletePermission = useDeletePermission();
 
-  const handleDelete = async (row: any) => {
+  const handleDelete = async (row: Permission) => {
     if (!confirm('Delete this permission?')) return;
     try {
-      await deletePermission.mutateAsync(row.id);
-      notifications.show({ message: 'Deleted', color: 'red' });
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Delete failed', color: 'red' });
+      const res = await deletePermission.mutateAsync(row.id);
+      showSuccess(res); // if you use standardized backend responses
+    } catch (err) {
+      showError(err);
     }
   };
 
   return (
-    <ClientTable
+    <ClientTable<Permission>
       title="Permissions"
       data={data}
       columns={[
