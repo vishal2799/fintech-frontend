@@ -4,6 +4,7 @@ import {
   MultiSelect,
   Stack,
   TextInput,
+  Select,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router';
@@ -14,6 +15,8 @@ import {
 } from '../api/roles.hooks';
 import type { Role } from '../types/role.types';
 import { usePermissions } from '../../permissions/api/permissions.hooks';
+import { createRoleSchema, updateRoleSchema } from '../schema/roles.schema';
+import { zod4Resolver } from 'mantine-form-zod-resolver';
 
 type Props = {
   mode: 'create' | 'edit';
@@ -26,24 +29,26 @@ export default function RoleForm({ mode, initialValues }: Props) {
   const update = useUpdateRole();
   const { data: permissions = [] } = usePermissions();
 
-  const form = useForm<Partial<Role> & { permissionIds: string[] }>({
+    const schema = mode === "create" ? createRoleSchema : updateRoleSchema;
+  
+
+  const form = useForm({
     initialValues: {
       name: '',
       description: '',
+      scope: 'PLATFORM',
       permissionIds: [],
       ...initialValues,
     },
-    validate: {
-      name: (value) => (!value ? 'Role name is required' : null),
-    },
+    validate: zod4Resolver(schema)
   });
-  
 
   const handleSubmit = form.onSubmit(async (values) => {
     try {
       const payload = {
         name: values.name!,
-        description: values.description || '',
+        scope: values.scope as 'TENANT' | 'PLATFORM',
+        description: values.description ?? '',
         permissionIds: values.permissionIds || [],
       };
 
@@ -61,9 +66,16 @@ export default function RoleForm({ mode, initialValues }: Props) {
     }
   });
 
-  // Group permissions by module
+  // ✅ Dynamically filter based on scope
+  // const allowedScopes = form.values.scope === 'PLATFORM' ? ['PLATFORM', 'BOTH'] : ['TENANT', 'BOTH'];
+  const allowedScopes = ['PLATFORM', 'BOTH'];
+
+  const filteredPermissions = permissions.filter((p) =>
+    allowedScopes.includes(p.scope)
+  );
+
   const groupedPermissions = Object.entries(
-    permissions.reduce((acc: Record<string, { label: string; value: string }[]>, p: any) => {
+    filteredPermissions.reduce((acc: Record<string, { label: string; value: string }[]>, p) => {
       if (!acc[p.module]) acc[p.module] = [];
       acc[p.module].push({ label: p.name, value: p.id });
       return acc;
@@ -87,6 +99,17 @@ export default function RoleForm({ mode, initialValues }: Props) {
           {...form.getInputProps('description')}
         />
 
+        <Select
+          label="Scope"
+          withAsterisk
+          data={[
+            { label: 'Platform', value: 'PLATFORM' },
+            { label: 'Tenant', value: 'TENANT' },
+          ]}
+          {...form.getInputProps('scope')}
+          disabled
+        />
+
         <MultiSelect
           label="Permissions"
           data={groupedPermissions}
@@ -94,7 +117,7 @@ export default function RoleForm({ mode, initialValues }: Props) {
           clearable
           nothingFoundMessage="No permissions found"
           value={form.values.permissionIds}
-  onChange={(val) => form.setFieldValue('permissionIds', val)}
+          onChange={(val) => form.setFieldValue('permissionIds', val)}
         />
 
         <Group mt="md">

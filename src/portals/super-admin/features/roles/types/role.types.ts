@@ -1,17 +1,15 @@
-import type { Permission } from '../../permissions/types/permissions.types';
+export type RoleScope = 'TENANT' | 'PLATFORM';
 
 export interface Role {
   id: string;
   name: string;
-  description?: string;
-  scope: 'PLATFORM' | 'TENANT';
-  tenantId: string;
-  permissions: Permission[];
+  description?: string | null;
+  scope: RoleScope;
+  tenantId?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-export interface RoleFormValues {
-  name: string;
-  description?: string;
-  scope: 'PLATFORM' | 'TENANT';
+export interface RoleWithPermissions extends Role {
   permissionIds: string[];
 }

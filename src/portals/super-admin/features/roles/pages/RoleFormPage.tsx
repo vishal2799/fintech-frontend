@@ -1,48 +1,43 @@
+// src/pages/super-admin/settings/roles/pages/RoleFormPage.tsx
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { usePermissionsForRole, useRoles } from '../api/roles.hooks';
+import { useRole, useRolePermissions } from '../api/roles.hooks';
 import { Container, Loader, Title } from '@mantine/core';
 import RoleForm from '../components/RoleForm';
+import type { Role } from '../types/role.types';
 
 export default function RoleFormPage() {
   const { id } = useParams<{ id?: string }>();
   const isEdit = Boolean(id);
 
-  const { data: roles = [], isLoading: rolesLoading } = useRoles();
-  const { data: permissions = [], isLoading: permsLoading } = usePermissionsForRole(id || '');
+  // const { data: allRoles = [], isLoading: rolesLoading } = useRoles();
+  const { data: permissionIds = [], isLoading: permsLoading } = useRolePermissions(id || '');
+  const { data: roleData } = useRole(id || '');
 
-  const [initialValues, setInitialValues] = useState<any | null>(null);
+  const [initialValues, setInitialValues] = useState<Partial<Role & { permissionIds: string[] }> | null>(null);
 
   useEffect(() => {
-  if (
-    isEdit &&
-    id &&
-    roles.length > 0 &&
-    !rolesLoading &&
-    !permsLoading &&
-    permissions.length > 0
-  ) {
-    const match = roles.find((r) => r.id === id);
-    if (match) {
+    if (isEdit && id && roleData && permissionIds.length >= 0 && !permsLoading) {
       setInitialValues({
-        ...match,
-        permissionIds: permissions.map((p:any) => p.id),
+        ...roleData,
+        permissionIds,
       });
     }
-  }
-}, [isEdit, roles, rolesLoading, permissions, permsLoading, id]);
+  }, [isEdit, id, roleData, permissionIds, permsLoading]);
 
-
-  if (isEdit && (rolesLoading || permsLoading || !initialValues)) {
-    return <Loader />;
-  }
+  if (isEdit && (permsLoading || !initialValues)) return <Loader />;
 
   return (
     <Container size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Role' : 'Create Role'}
       </Title>
-      <RoleForm mode={isEdit ? 'edit' : 'create'} initialValues={initialValues || {}} />
+
+      <RoleForm
+        mode={isEdit ? 'edit' : 'create'}
+        initialValues={initialValues || {}}
+      />
     </Container>
   );
 }

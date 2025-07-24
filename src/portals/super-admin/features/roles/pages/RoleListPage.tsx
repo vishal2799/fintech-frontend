@@ -1,22 +1,23 @@
-// src/pages/super-admin/RoleListPage.tsx
+// src/pages/super-admin/settings/roles/pages/RoleListPage.tsx
 
 import { useNavigate } from 'react-router';
 import { useDeleteRole, useRoles } from '../api/roles.hooks';
-import { notifications } from '@mantine/notifications';
 import { ClientTable } from '../../../../../components/ClientTable';
+import type { Role } from '../types/role.types';
+import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function RoleListPage() {
   const navigate = useNavigate();
   const { data = [] } = useRoles();
   const deleteRole = useDeleteRole();
 
-  const handleDelete = async (row: any) => {
+  const handleDelete = async (row: Role) => {
     if (!confirm(`Delete role "${row.name}"?`)) return;
     try {
-      await deleteRole.mutateAsync(row.id);
-      notifications.show({ message: 'Role deleted', color: 'red' });
+      const res = await deleteRole.mutateAsync(row.id);
+      showSuccess(res);
     } catch (err: any) {
-      notifications.show({ message: err.message || 'Delete failed', color: 'red' });
+      showError(err);
     }
   };
 
@@ -29,7 +30,7 @@ export default function RoleListPage() {
         { key: 'description', label: 'Description' },
         { key: 'scope', label: 'Scope' },
       ]}
-      searchFields={['name', 'description']}
+      searchFields={['name', 'description', 'scope']}
       onEdit={(row) => navigate(`/super-admin/roles/edit/${row.id}`)}
       onDelete={handleDelete}
       onCreate={() => navigate('/super-admin/roles/create')}
