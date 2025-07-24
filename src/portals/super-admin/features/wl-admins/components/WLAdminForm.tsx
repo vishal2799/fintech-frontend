@@ -1,14 +1,29 @@
 import { useNavigate } from "react-router";
+import {
+  useCreateWLAdmin,
+  useUpdateWLAdmin,
+} from "../api/wl-admins.hooks";
 import { useTenants } from "../../tenants/api/tenants.hooks";
-import { useCreateWLAdmin, useUpdateWLAdmin } from "../api/wl-admins.hooks";
 import { useForm } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
-import { Button, Group, PasswordInput, Select, Stack, TextInput } from "@mantine/core";
-import type { WLAdmin } from '../types/wl-admin.types';
-import type { CreateWLAdminDto } from "../api/wl-admins.api";
+import {
+  Button,
+  Group,
+  PasswordInput,
+  Select,
+  Stack,
+  TextInput,
+} from "@mantine/core";
+import { zod4Resolver } from "mantine-form-zod-resolver";
+import {
+  createWLAdminSchema,
+  updateWLAdminSchema,
+  type CreateWLAdminInput,
+} from "../schema/wl-admins.schema";
+import type { WLAdmin } from "../types/wl-admin.types";
+import { showError, showSuccess } from "../../../../../utils/notifications";
 
 type Props = {
-  mode: 'create' | 'edit';
+  mode: "create" | "edit";
   initialValues?: Partial<WLAdmin>;
 };
 
@@ -18,69 +33,74 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
   const create = useCreateWLAdmin();
   const update = useUpdateWLAdmin();
 
-  const form = useForm<Partial<WLAdmin> & { password?: string }>({
+  const schema = mode === "create" ? createWLAdminSchema : updateWLAdminSchema;
+
+  const form = useForm({
     initialValues: {
-      name: '',
-      email: '',
-      mobile: '',
-      password: '',
-      tenantId: '',
-      status: 'ACTIVE',
+      name: "",
+      email: "",
+      mobile: "",
+      password: "",
+      tenantId: "",
+      // status: "ACTIVE",
       ...initialValues,
     },
+    validate: zod4Resolver(schema),
   });
 
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      if (mode === 'create') {
-      const payload: CreateWLAdminDto = {
-        name: values.name!,
-        email: values.email!,
-        mobile: values.mobile!,
-        password: values.password!,
-        tenantId: values.tenantId!,
-      };
-      await create.mutateAsync(payload);
-      notifications.show({ message: 'Created', color: 'green' });
+      if (mode === "create") {
+        const res = await create.mutateAsync(values as CreateWLAdminInput);
+        showSuccess(res);
       } else if (initialValues?.id) {
-        await update.mutateAsync({ id: initialValues.id, data: values });
-        notifications.show({ message: 'Updated', color: 'blue' });
+        const res = await update.mutateAsync({
+          id: initialValues.id,
+          data: {
+            ...values,
+            // status: values.status as 'ACTIVE' | 'LOCKED' | 'BLOCKED',
+          }
+        });
+        showSuccess(res);
       }
-      navigate('/super-admin/wl-admins/list');
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Error', color: 'red' });
+      navigate("/super-admin/wl-admins/list");
+    } catch (err) {
+      showError(err);
     }
   });
 
   return (
     <form onSubmit={handleSubmit}>
       <Stack>
-        <TextInput label="Name" withAsterisk {...form.getInputProps('name')} />
-        <TextInput label="Email" withAsterisk {...form.getInputProps('email')} />
-        <TextInput label="Mobile" withAsterisk {...form.getInputProps('mobile')} />
+        <TextInput label="Name" withAsterisk {...form.getInputProps("name")} />
+        <TextInput label="Email" withAsterisk {...form.getInputProps("email")} />
+        <TextInput label="Mobile" withAsterisk {...form.getInputProps("mobile")} />
 
-        {mode === 'create' && (
-          <PasswordInput label="Password" withAsterisk {...form.getInputProps('password')} />
+        {mode === "create" && (
+          <PasswordInput label="Password" withAsterisk {...form.getInputProps("password")} />
         )}
 
         <Select
           label="Tenant"
           data={tenants.map((t: any) => ({ label: t.name, value: t.id }))}
-          {...form.getInputProps('tenantId')}
-          disabled={mode === 'edit'}
+          {...form.getInputProps("tenantId")}
+          disabled={mode === "edit"}
         />
 
-        {mode === 'edit' && (
+        {/* {mode === "edit" && (
           <Select
             label="Status"
-            data={['ACTIVE', 'LOCKED', 'BLOCKED'].map((s) => ({ label: s, value: s }))}
-            {...form.getInputProps('status')}
+            data={["ACTIVE", "LOCKED", "BLOCKED"].map((s) => ({
+              label: s,
+              value: s,
+            }))}
+            {...form.getInputProps("status")}
           />
-        )}
+        )} */}
 
         <Group mt="md">
           <Button type="submit" loading={create.isPending || update.isPending}>
-            {mode === 'create' ? 'Create' : 'Update'}
+            {mode === "create" ? "Create" : "Update"}
           </Button>
           <Button variant="light" onClick={() => navigate(-1)}>
             Cancel
