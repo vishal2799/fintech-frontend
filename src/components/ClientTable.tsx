@@ -18,6 +18,7 @@ interface Column<T> {
   label: string;
   type?: 'text' | 'badge' | 'toggle';
   render?: (row: T) => React.ReactNode;
+  renderExport?: (row: T) => string; // ✅ Add this line
 }
 
 interface Props<T> {

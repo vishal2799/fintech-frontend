@@ -13,6 +13,7 @@ import autoTable from 'jspdf-autotable';
 interface ExportColumn<T> {
   key: keyof T;
   label: string;
+  renderExport?: (row: T) => string;
 }
 
 interface ExportMenuProps<T> {
@@ -26,7 +27,9 @@ export function ExportMenu<T>({ title, columns, data }: ExportMenuProps<T>) {
     const rows = data.map(row => {
       const obj: Record<string, string> = {};
       columns.forEach(col => {
-        obj[col.label] = String(row[col.key] ?? '');
+        obj[col.label] = col.renderExport
+  ? col.renderExport(row)
+  : String(row[col.key] ?? '');
       });
       return obj;
     });
@@ -42,7 +45,9 @@ export function ExportMenu<T>({ title, columns, data }: ExportMenuProps<T>) {
     const rows = data.map(row => {
       const obj: Record<string, string> = {};
       columns.forEach(col => {
-        obj[col.label] = String(row[col.key] ?? '');
+        obj[col.label] = col.renderExport
+  ? col.renderExport(row)
+  : String(row[col.key] ?? '');
       });
       return obj;
     });
@@ -58,7 +63,11 @@ export function ExportMenu<T>({ title, columns, data }: ExportMenuProps<T>) {
     const doc = new jsPDF();
     autoTable(doc, {
       head: [columns.map(col => col.label)],
-      body: data.map(row => columns.map(col => String(row[col.key] ?? ''))),
+      body: data.map(row =>
+  columns.map(col =>
+    col.renderExport ? col.renderExport(row) : String(row[col.key] ?? '')
+  )
+),
     });
     doc.save(`${title}.pdf`);
   };

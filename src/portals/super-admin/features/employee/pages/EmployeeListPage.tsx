@@ -33,6 +33,7 @@ export default function EmployeeListPage() {
           key: 'role',
           label: 'Role',
           render: (row: Employee) => row.role?.name || '-',
+          renderExport: (row: Employee) => row.role?.name || '', // 👈 Fix export
         },
       ]}
       searchFields={['name', 'email', 'mobile']}
