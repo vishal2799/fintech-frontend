@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import { useCreditRequests } from '../api/wallet.hooks';
-import { formatDateTime } from '../../../../../utils/formatters';
+// import { formatDateTime } from '../../../../../utils/formatters';
 import { ClientTable } from '../../../../../components/ClientTable';
 import type { CreditRequest } from '../types/wallet.types';
 import { Badge } from '@mantine/core';
@@ -33,20 +33,20 @@ export default function CreditRequestListPage() {
           key: 'remarks',
           label: 'Remarks',
         },
-        {
-          key: 'createdAt',
-          label: 'Requested At',
-          render: (row: CreditRequest) => formatDateTime(row.createdAt),
-          renderExport: (row) => formatDateTime(row.createdAt),
-        },
-        {
-          key: 'updatedAt',
-          label: 'Updated At',
-          render: (row: CreditRequest) =>
-            row.status === 'APPROVED' ? formatDateTime(row.updatedAt) : '-',
-          renderExport: (row) =>
-            row.status === 'APPROVED' ? formatDateTime(row.updatedAt) : '-',
-        },
+        // {
+        //   key: 'createdAt',
+        //   label: 'Requested At',
+        //   render: (row: CreditRequest) => formatDateTime(row.createdAt),
+        //   renderExport: (row) => formatDateTime(row.createdAt),
+        // },
+        // {
+        //   key: 'updatedAt',
+        //   label: 'Updated At',
+        //   render: (row: CreditRequest) =>
+        //     row.status === 'APPROVED' ? formatDateTime(row.updatedAt) : '-',
+        //   renderExport: (row) =>
+        //     row.status === 'APPROVED' ? formatDateTime(row.updatedAt) : '-',
+        // },
       ]}
       perPage={10}
       onCreate={() => navigate('/wl-admin/wallet/request')}

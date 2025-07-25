@@ -26,9 +26,10 @@ import RoleFormPage from "../../roles/pages/RoleFormPage";
 import EmployeeListPage from "../../employee/pages/EmployeeListPage";
 import EmployeeFormPage from "../../employee/pages/EmployeeFormPage";
 import CreditRequestsPage from "../../wallet/pages/CreditRequestsPage";
-import WalletDashboard from "../../../../wl-admin/features/wallet/pages/WalletDashboard";
 import CreditRequestFormPage from "../../../../wl-admin/features/wallet/pages/CreditRequestFormPage";
 import AuditLogTable from "../../audit-logs/pages/AuditLogsList";
+import WalletPage from "../../../../wl-admin/features/wallet/pages/WalletPage";
+import CreditRequestListPage from "../../../../wl-admin/features/wallet/pages/CreditRequestsList";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -80,7 +81,8 @@ export const saRoutes:RouteObject[] = [
 { path: 'retailers/create', element: <RetailerFormPage /> },
 { path: 'retailers/:id/edit', element: <RetailerFormPage /> },
     { path: "wallet/credit-request", element: <CreditRequestFormPage /> },
-    { path: "wallet/dashboard", element: <WalletDashboard /> },
+    { path: "wallet/dashboard", element: <WalletPage /> },
+    { path: "wallet/credit-requests", element: <CreditRequestListPage /> },
 
   ],
 }

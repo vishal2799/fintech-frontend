@@ -31,6 +31,7 @@ const mockdata = [
     links: [
       { label: 'Wallet Dashboard', link: '/wl-admin/wallet/dashboard' },
       { label: 'Request Credit', link: '/wl-admin/wallet/credit-request' },
+      { label: 'Credit Requests List', link: '/wl-admin/wallet/credit-requests' },
     ],
   },
   {

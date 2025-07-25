@@ -3,22 +3,22 @@ import type { CreditRequestInput } from '../schema/wallet.schema';
 import type { CreditRequest, TenantWallet, WalletTransaction } from '../types/wallet.types';
 
 export const getWalletBalance = async (): Promise<TenantWallet> => {
-  const res = await API.get('/wallet/balance');
+  const res = await API.get('/wallet/admin/balance');
   return res.data.data;
 };
 
 export const getWalletLedger = async (): Promise<WalletTransaction[]> => {
-  const res = await API.get('/wallet/ledger');
+  const res = await API.get('/wallet/admin/ledger');
   return res.data.data;
 };
 
 export const requestCredit = async (payload: CreditRequestInput) => {
-  const res = await API.post('/wallet/request-credit', payload);
+  const res = await API.post('/wallet/admin/request-credit', payload);
   return res.data;
 };
 
 export const getCreditRequests = async (): Promise<CreditRequest[]> => {
-  const res = await API.get('/wallet/requests');
+  const res = await API.get('/wallet/admin/credit-requests');
   return res.data.data;
 };
 
