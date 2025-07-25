@@ -1,28 +1,37 @@
-import axios from '../../../../../api/axios';
+import API from '../../../../../api/axios';
+import type { CreateEmployeeInput, UpdateEmployeeInput } from '../schema/employees.schema';
 import type { Employee } from '../types/employees.types';
 
-const baseURL = '/employees';
+const BASE_URL = '/employees';
 
+/**
+ * List all employees for the current tenant
+ */
 export const getEmployees = async (): Promise<Employee[]> => {
-  const res = await axios.get(baseURL);
+  const res = await API.get(BASE_URL);
   return res.data.data;
 };
 
-export const createEmployee = async (data: {
-  name: string;
-  email: string;
-  mobile: string;
-  password: string;
-  roleId: string;
-}) => {
-  const res = await axios.post(baseURL, data);
+/**
+ * Create a new employee
+ */
+export const createEmployee = async (payload: CreateEmployeeInput) => {
+  const res = await API.post(BASE_URL, payload);
   return res.data;
 };
 
-export const updateEmployee = async (id: string, data: Partial<Employee>) => {
-  const res = await axios.patch(`${baseURL}/${id}`, data);
+/**
+ * Update employee (basic info + role)
+ */
+export const updateEmployee = async (id: string, data: UpdateEmployeeInput) => {
+  const res = await API.put(`${BASE_URL}/${id}`, data);
   return res.data;
 };
 
-export const deleteEmployee = (id: string) =>
-  axios.delete(`${baseURL}/${id}`);
+/**
+ * Delete employee
+ */
+export const deleteEmployee = async (id: string) => {
+  const res = await API.delete(`${BASE_URL}/${id}`);
+  return res.data;
+};

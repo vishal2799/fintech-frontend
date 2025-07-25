@@ -1,39 +1,44 @@
-import { useEmployees, useDeleteEmployee } from '../api/employees.hooks';
 import { useNavigate } from 'react-router';
+import { useEmployees, useDeleteEmployee } from '../api/employees.hooks';
 import { ClientTable } from '../../../../../components/ClientTable';
-import { notifications } from '@mantine/notifications';
+import type { Employee } from '../types/employees.types';
+import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function EmployeeListPage() {
-  const { data = [] } = useEmployees();
-  const navigate = useNavigate();
+  const { data: employees = [] } = useEmployees();
   const deleteEmployee = useDeleteEmployee();
+  const navigate = useNavigate();
 
-  const handleDelete = async (row: any) => {
-    if (!confirm('Delete this employee?')) return;
+  const handleDelete = async (row: Employee) => {
+    const confirmDelete = window.confirm(`Delete employee "${row.name}"?`);
+    if (!confirmDelete) return;
+
     try {
-      await deleteEmployee.mutateAsync(row.id);
-      notifications.show({ message: 'Deleted', color: 'red' });
+      const res = await deleteEmployee.mutateAsync(row.id);
+      showSuccess(res);
     } catch (err: any) {
-      notifications.show({ message: err.message || 'Delete failed', color: 'red' });
+      showError(err);
     }
   };
 
   return (
     <ClientTable
       title="Employees"
-      data={data}
+      data={employees}
       columns={[
         { key: 'name', label: 'Name' },
         { key: 'email', label: 'Email' },
         { key: 'mobile', label: 'Mobile' },
         {
-  key: 'role', // still needs a valid key, even if unused
-  label: 'Role',
-  render: (row) => row.role?.name || '-',
-}
+          key: 'role',
+          label: 'Role',
+          render: (row: Employee) => row.role?.name || '-',
+        },
       ]}
       searchFields={['name', 'email', 'mobile']}
-      onEdit={(row) => navigate(`/super-admin/employees/edit/${row.id}`)}
+      onEdit={(row: Employee) =>
+        navigate(`/super-admin/employees/edit/${row.id}`)
+      }
       onDelete={handleDelete}
       onCreate={() => navigate('/super-admin/employees/create')}
     />
