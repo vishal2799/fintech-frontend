@@ -36,7 +36,7 @@ export default function EmployeeListPage() {
           renderExport: (row: Employee) => row.role?.name || '', // 👈 Fix export
         },
       ]}
-      searchFields={['name', 'email', 'mobile']}
+      searchFields={['name', 'email', 'mobile', 'role.name']}
       onEdit={(row: Employee) =>
         navigate(`/super-admin/employees/edit/${row.id}`)
       }

@@ -25,7 +25,7 @@ interface Props<T> {
   title: string;
   data: T[];
   columns: Column<T>[];
-  searchFields?: (keyof T)[];
+  searchFields?: string[];
   perPage?: number;
   onEdit?: (row: T) => void;
   onDelete?: (row: T) => void;
@@ -35,6 +35,11 @@ interface Props<T> {
   filterFn?: (row: T) => boolean;
   rowActions?: (row: T) => React.ReactNode[];
 }
+
+function getNestedValue(obj: any, path: string): string {
+  return path.split('.').reduce((acc, key) => acc?.[key], obj) ?? '';
+}
+
 
 export function ClientTable<T extends { id: string }>({
   title,
@@ -64,10 +69,10 @@ export function ClientTable<T extends { id: string }>({
     if (search) {
       const q = search.toLowerCase();
       result = result.filter((row) =>
-        searchFields.some((key) =>
-          String(row[key]).toLowerCase().includes(q)
-        )
-      );
+  searchFields.some((path) =>
+    getNestedValue(row, path).toLowerCase().includes(q)
+  )
+);
     }
 
     if (sortKey) {
