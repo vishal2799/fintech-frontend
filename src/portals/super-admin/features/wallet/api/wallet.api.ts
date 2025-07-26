@@ -5,7 +5,7 @@ import type {
   HoldWalletInput,
   ReleaseWalletInput,
 } from '../schema/wallet.schema';
-import type { TenantWalletSummary } from '../types/wallet.types';
+import type { CreditRequest, TenantWalletSummary } from '../types/wallet.types';
 
 const BASE_URL = '/wallet/super-admin';
 
@@ -34,6 +34,20 @@ export const releaseTenantWallet = async (payload: ReleaseWalletInput) => {
   return res.data;
 };
 
+export const getAllCreditRequests = async (): Promise<CreditRequest[]> => {
+  const res = await axios.get(`${BASE_URL}/credit-requests`);
+  return res.data.data;
+};
+
+export const approveCreditRequest = async (id: string) => {
+  const res = await axios.post(`${BASE_URL}/approve/${id}`, {});
+  return res.data;
+};
+
+export const rejectCreditRequest = async(params: { id: string; remarks?: string }) => {
+  const res = await axios.post(`${BASE_URL}/reject/${params.id}`, { remarks: params.remarks });
+  return res.data;
+};
 
 // import axios from '../../../../../api/axios';
 // import type {

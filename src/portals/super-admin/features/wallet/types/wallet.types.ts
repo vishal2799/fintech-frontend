@@ -6,6 +6,21 @@ export interface TenantWalletSummary {
   heldAmount: string;
 }
 
+export interface CreditRequest {
+  id: string;
+  fromTenantId: string;
+  tenantName: string;
+  amount: number;
+  requestedByUserId: string;
+  requestedByUserName: string;
+  approvedByUserId?: string;
+  remarks?: string;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  createdAt: string;
+  updatedAt?: string;
+}
+
+
 
 // export interface WalletBalance {
 //   tenantId: string;

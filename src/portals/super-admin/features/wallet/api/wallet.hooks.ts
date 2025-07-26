@@ -6,6 +6,7 @@ import type {
   HoldWalletInput,
   ReleaseWalletInput,
 } from '../schema/wallet.schema';
+import type { CreditRequest } from '../types/wallet.types';
 
 export const useTenantWalletSummaries = () => {
   return useQuery({
@@ -50,6 +51,33 @@ export const useReleaseTenantWallet = () => {
     mutationFn: (payload: ReleaseWalletInput) => api.releaseTenantWallet(payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['tenant-wallet-summaries'] });
+    },
+  });
+};
+
+export const useAllCreditRequests = () =>
+  useQuery<CreditRequest[]>({
+    queryKey: ['credit-requests'],
+    queryFn: api.getAllCreditRequests,
+  });
+
+export const useApproveCreditRequest = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.approveCreditRequest(id),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['credit-requests'] });
+    },
+  });
+};
+
+export const useRejectCreditRequest = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { id: string; remarks?: string }) =>
+      api.rejectCreditRequest(payload),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['credit-requests'] });
     },
   });
 };
