@@ -30,6 +30,7 @@ import CreditRequestFormPage from "../../../../wl-admin/features/wallet/pages/Cr
 import AuditLogTable from "../../audit-logs/pages/AuditLogsList";
 import WalletPage from "../../../../wl-admin/features/wallet/pages/WalletPage";
 import CreditRequestListPage from "../../../../wl-admin/features/wallet/pages/CreditRequestsList";
+import TenantWalletListPage from "../../wallet/pages/TenantWalletListPage";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
@@ -59,6 +60,7 @@ export const saRoutes:RouteObject[] = [
       {path: "employees/list", element: <EmployeeListPage /> },
    { path: "employees/create", element: <EmployeeFormPage /> },
     { path: "employees/edit/:id", element: <EmployeeFormPage /> },
+        { path: "wallet/tenant-list", element: <TenantWalletListPage /> },
     { path: "wallet/credit-requests", element: <CreditRequestsPage /> },
   ],
 },

@@ -27,6 +27,7 @@ const mockdata = [
     icon: IconNotes,
     initiallyOpened: true,
     links: [
+      { label: 'Tenant List', link: '/super-admin/wallet/tenant-list' },
       { label: 'Credit Request', link: '/super-admin/wallet/credit-requests' },
     ],
   },
