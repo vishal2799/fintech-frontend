@@ -1,5 +1,5 @@
 import axios from '../../../../../api/axios';
-import type { AuditLog } from '../pages/AuditLogsList';
+import type { AuditLog } from '../types/auditLog2.types';
 
 export type FetchAuditLogsParams = {
   page?: number;

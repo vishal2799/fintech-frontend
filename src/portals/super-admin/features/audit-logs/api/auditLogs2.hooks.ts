@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAuditLogs, type FetchAuditLogsParams } from './auditLogs2.api';
-import type { AuditLog } from '../pages/AuditLogsList';
+import type { AuditLog } from '../types/auditLog2.types';
 
 export const useAuditLogs = (params: FetchAuditLogsParams) =>
   useQuery<{

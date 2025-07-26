@@ -1,5 +1,5 @@
 // src/pages/super-admin/audit-logs/components/AuditLogTable.tsx
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import type { ColumnDef } from '@tanstack/react-table';
 import type { AuditLog } from '../types/auditLog2.types';
 import { ServerTable } from '../../../../../components/ServerTable';
