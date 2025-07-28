@@ -3,6 +3,9 @@ import { z } from 'zod';
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
+  latitude: z.number(),     // ✅ added
+  longitude: z.number(),
+  accuracy: z.number()
 });
 
 export const otpLoginSchema = z.object({
