@@ -1,5 +1,5 @@
 import { type RouteObject } from "react-router";
-import Login from "../../../../../pages/Login";
+// import Login from "../../../../../pages/Login";
 import Unauthorized from "../../../../../pages/Unauthorized";
 import ProtectedRoute from "../../../../../components/ProtectedRoute";
 import SuperAdminLayout from "../../../../../layouts/SuperAdminLayout";
@@ -31,10 +31,13 @@ import AuditLogTable from "../../audit-logs/pages/AuditLogsList";
 import WalletPage from "../../../../wl-admin/features/wallet/pages/WalletPage";
 import CreditRequestListPage from "../../../../wl-admin/features/wallet/pages/CreditRequestsList";
 import TenantWalletListPage from "../../wallet/pages/TenantWalletListPage";
+import Login from "../../../../common/auth/pages/Login";
+import VerifyOtp from "../../../../common/auth/pages/VerifyOtp";
 
 export const saRoutes:RouteObject[] = [
 {path: '/', element: <Home />},   
 {path: '/login', element: <Login />},   
+{path: '/verify-otp', element: <VerifyOtp />},   
 { path: '/unauthorized', element: <Unauthorized /> },
 {
   path: '/super-admin',
