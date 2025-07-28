@@ -1,7 +1,10 @@
 import axios, { AxiosError } from 'axios';
 import { useAuthStore } from '../stores/useAuthStore';
 
-const baseURL = import.meta.env.VITE_API_URL;          // e.g. http://localhost:3000/api
+const port = 5000;
+export const baseURL = `${window.location.protocol}//${window.location.hostname}:${port}/api`;
+
+// const baseURL = import.meta.env.VITE_API_URL;          // e.g. http://localhost:3000/api
 
 // ────────────────────────────────────────────────────────────
 // 1. Create instance

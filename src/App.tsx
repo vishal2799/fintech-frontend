@@ -6,8 +6,29 @@ import { Notifications } from "@mantine/notifications";
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import { saRoutes } from "./portals/super-admin/features/tenants/routes";
+import { useEffect, useState } from "react";
+
+const users = [
+  {
+    username: 'john'
+  },
+  {
+    username: 'tom'
+  }
+]
 
 const App = () => {
+  const [subDomain, setSubDomain] = useState(null);
+  useEffect(() => {
+    const host = window.location.host;
+
+    const arr = host.split('.').slice(0, host.includes('localhost') ? -1 : -2);
+    if(arr.length > 0) setSubDomain(arr[0]);
+  
+  }, []);
+
+  const requestedUser = users.find((user) => user?.username === subDomain);
+  
   // const subdomain = getSubdomain();
   // let appRoutes;
   // if(subdomain === 'superadmin'){
@@ -25,10 +46,13 @@ const App = () => {
   const router = createBrowserRouter(saRoutes);
 
   return (
-    <MantineProvider>
-            <Notifications />
-        <RouterProvider router={router} />
-    </MantineProvider>
+    <div className="bg-white">
+      <h3>{requestedUser?.username}</h3>
+    </div>
+    // <MantineProvider>
+    //         <Notifications />
+    //     <RouterProvider router={router} />
+    // </MantineProvider>
   )
 }
 
