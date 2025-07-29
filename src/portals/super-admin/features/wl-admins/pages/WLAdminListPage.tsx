@@ -90,9 +90,9 @@ export default function WLAdminListPage() {
         />
       }
       filterFn={(row) => !statusFilter || row.status === statusFilter}
-      onEdit={(row) => navigate(`/super-admin/wl-admins/${row.id}/edit`)}
+      onEdit={(row) => navigate(`/wl-admins/edit/${row?.id}`)}
       onDelete={handleDelete}
-      onCreate={() => navigate('/super-admin/wl-admins/create')}
+      onCreate={() => navigate('/wl-admins/create')}
       perPage={5}
     />
   );

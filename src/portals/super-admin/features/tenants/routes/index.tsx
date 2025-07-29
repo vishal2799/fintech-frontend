@@ -43,7 +43,7 @@ export const saRoutes:RouteObject[] = [
   path: '/super-admin',
   element: <ProtectedRoute allowedRoles={['SUPER_ADMIN']}>
     <SuperAdminLayout />
-  </ProtectedRoute>,
+  </ProtectedRoute>, 
   children: [
     { index: true, element: <Dashboard /> },
     { path: 'tenants/list', element: <TenantListPage /> },

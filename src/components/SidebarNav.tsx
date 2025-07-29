@@ -2,8 +2,14 @@ import { LinksGroup } from "../components/LinksGroup";
 import { ScrollArea } from "@mantine/core";
 import {
   IconGauge,
-  IconNotes,
   IconLock,
+  IconPresentationAnalytics,
+  IconBuildingSkyscraper,
+  IconUserShield,
+  IconSettingsCog,
+  IconUsersGroup,
+  IconWallet,
+  IconPackages,
 } from "@tabler/icons-react";
 
 export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
@@ -14,15 +20,24 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
       { label: 'Dashboard', icon: IconGauge, link: '/super-admin' },
       {
         label: 'Tenants',
-        icon: IconNotes,
+        icon: IconBuildingSkyscraper,
+        initiallyOpened: true,
         links: [
           { label: 'All Tenants', link: '/tenants/list' },
           { label: 'Add Tenant', link: '/tenants/create' },
         ],
       },
       {
+        label: 'WL Admins',
+        icon: IconUserShield,
+        links: [
+          { label: 'All WL-Admins', link: '/wl-admins/list' },
+          { label: 'Add WL Admin', link: '/wl-admins/create' },
+        ],
+      },
+      {
         label: 'Permissions',
-        icon: IconNotes,
+        icon: IconLock,
         links: [
           { label: 'All Permissions', link: '/permissions/list' },
           { label: 'Add Permission', link: '/permissions/create' },
@@ -30,7 +45,7 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
       },
       {
         label: 'Roles',
-        icon: IconNotes,
+        icon: IconSettingsCog,
         links: [
           { label: 'All Roles', link: '/roles/list' },
           { label: 'Add Role', link: '/roles/create' },
@@ -38,12 +53,28 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
       },
       {
         label: 'Employees',
-        icon: IconNotes,
+        icon: IconUsersGroup,
         links: [
           { label: 'All Employees', link: '/employees/list' },
           { label: 'Add Employee', link: '/employees/create' },
         ],
       },
+       {
+    label: 'Wallet Management',
+    icon: IconWallet,
+    links: [
+      { label: 'Tenant List', link: '/wallet/tenant-list' },
+      { label: 'Credit Request', link: '/wallet/credit-requests' },
+    ],
+  },
+  {
+    label: 'Services',
+    icon: IconPackages,
+    links: [
+      { label: 'Global Services', link: '/services' },
+    ],
+  },
+    { label: 'Audit Logs', icon: IconPresentationAnalytics, link: '/logs' },
     ];
   }
 

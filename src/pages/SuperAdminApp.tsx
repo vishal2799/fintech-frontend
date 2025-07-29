@@ -14,6 +14,12 @@ import RoleListPage from "../portals/super-admin/features/roles/pages/RoleListPa
 import RoleFormPage from "../portals/super-admin/features/roles/pages/RoleFormPage";
 import EmployeeListPage from "../portals/super-admin/features/employee/pages/EmployeeListPage";
 import EmployeeFormPage from "../portals/super-admin/features/employee/pages/EmployeeFormPage";
+import WLAdminListPage from "../portals/super-admin/features/wl-admins/pages/WLAdminListPage";
+import WLAdminFormPage from "../portals/super-admin/features/wl-admins/pages/WLAdminFormPage";
+import TenantWalletListPage from "../portals/super-admin/features/wallet/pages/TenantWalletListPage";
+import CreditRequestListPage from "../portals/super-admin/features/wallet/pages/CreditRequestsPage";
+import AuditLogTable from "../portals/super-admin/features/audit-logs/pages/AuditLogsList";
+import ServiceListPage from "../portals/super-admin/features/services/pages/ServicesListPage";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -29,6 +35,11 @@ const router = createBrowserRouter([
         {path: 'create', element: <TenantFormPage />},
         {path: 'edit/:id', element: <TenantFormPage />},
       ]},
+      {path: '/wl-admins', children: [
+            {path: "list", element: <WLAdminListPage /> },
+           { path: "create", element: <WLAdminFormPage /> },
+        { path: "edit/:id" , element: <WLAdminFormPage />},
+      ]},
       {path: '/permissions', children: [
         {path: "list", element: <PermissionListPage /> },
         { path: "create", element: <PermissionFormPage /> },
@@ -43,7 +54,13 @@ const router = createBrowserRouter([
               {path: "list", element: <EmployeeListPage /> },
            { path: "create", element: <EmployeeFormPage /> },
             { path: "edit/:id", element: <EmployeeFormPage /> },
-      ]}
+      ]},
+      {path: '/wallet', children: [
+                { path: "tenant-list", element: <TenantWalletListPage /> },
+            { path: "credit-requests", element: <CreditRequestListPage /> },
+      ]},
+      { path: "/logs" , element: <AuditLogTable />},
+      { path: "/services" , element: <ServiceListPage />},
     ]
   },
 ]);

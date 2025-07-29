@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 import { ClientTable } from '../../../../../components/ClientTable';
 import {
   useTenantWalletSummaries,
@@ -23,7 +23,7 @@ import type { TenantWalletSummary } from '../types/wallet.types';
 
 export default function TenantWalletListPage() {
   const { data = [] } = useTenantWalletSummaries();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const credit = useCreditTenantWallet();
   const debit = useDebitTenantWallet();
@@ -94,7 +94,7 @@ export default function TenantWalletListPage() {
           },
         ]}
         searchFields={['tenantName']}
-        onCreate={() => navigate('/super-admin/tenants/create')}
+        // onCreate={() => navigate('/super-admin/tenants/create')}
         rowActions={(row) => [
           <Button size="xs" variant="light" onClick={() => openModal(row, 'CREDIT')}>Credit</Button>,
           <Button size="xs" variant="light" color='red' onClick={() => openModal(row, 'DEBIT')}>Debit</Button>,
