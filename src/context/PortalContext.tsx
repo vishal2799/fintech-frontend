@@ -5,15 +5,18 @@ import { getPortalInfo } from '../utils/getPortalInfo';
 type PortalContextType = {
   type: 'superadmin' | 'tenant' | null;
   subdomain: string | null;
+  portalSlug: string;
+  portalPath: string;
   tenant: any | null;
 };
 
 const PortalContext = createContext<PortalContextType>({
   type: null,
   subdomain: null,
+  portalSlug: '',
+  portalPath: '',
   tenant: null,
 });
-
 
 export const PortalProvider = ({ children }: { children: React.ReactNode }) => {
   const [info] = useState(() => getPortalInfo());

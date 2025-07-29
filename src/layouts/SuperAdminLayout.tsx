@@ -31,29 +31,6 @@ if (!accessToken) return <Navigate to="/login" />;
       </AppShell.Header>
       <AppShell.Navbar p="md">
         <NavbarNested />
-            {/* <NavLink to="/super-admin">Dashboard</NavLink>
-            <NavLink to="/super-admin/tenants">Tenants</NavLink>
-            <NavLink to="/superadmin/api-clients">API Clients</NavLink> */}
-        {/* <NavLink
-        href="#required-for-focus"
-        label="First parent link"
-        leftSection={<IconGauge size={16} stroke={1.5} />}
-        childrenOffset={28}
-      >
-        <NavLink href="#required-for-focus" label="First child link" />
-        <NavLink label="Second child link" href="#required-for-focus" />
-        <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
-          <NavLink label="First child link" href="#required-for-focus" />
-          <NavLink label="Second child link" href="#required-for-focus" />
-          <NavLink label="Third child link" href="#required-for-focus" />
-        </NavLink>
-      </NavLink> */}
-        {/* Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))} */}
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />

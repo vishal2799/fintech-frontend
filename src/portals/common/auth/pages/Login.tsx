@@ -8,6 +8,7 @@ import {
   Group,
   Checkbox,
   Anchor,
+  Box,
 } from '@mantine/core';
 import { useNavigate } from 'react-router';
 import { loginSchema, type LoginInput } from '../schema/auth.schema';
@@ -17,8 +18,11 @@ import { useForm } from '@mantine/form';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
 import axios from '../../../../api/axios';
 import { getUserLocation } from '../../../../utils/clientMeta';
+import { usePortal } from '../../../../context/PortalContext';
 
 const Login = () => {
+     const { portalPath, tenant, type } = usePortal();
+
   const navigate = useNavigate();
 
   const form = useForm<LoginInput>({
@@ -38,7 +42,7 @@ const Login = () => {
     onSuccess: (_res, variables) => {
       sessionStorage.setItem('otpEmail', variables.email);
       notifications.show({ message: 'OTP sent to your email', color: 'green' });
-      navigate('/verify-otp');
+      navigate(`${portalPath}/verify-otp`);
     },
     onError: (err: any) => {
       notifications.show({
@@ -68,36 +72,68 @@ sessionStorage.setItem('userLocation', JSON.stringify({ latitude, longitude, acc
   };
 
   return (
-    <Container size="xs" my={40}>
-      <Title ta="center">Welcome back!</Title>
+  <Box
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <Container size="md" maw={500} w="100%">
+        <Box mb="lg">
+          {type === 'superadmin' ? (
+            <>
+              <Group justify="center" mb="xs">
+                <Title order={2} ta="center">VMudra</Title>
+              </Group>
+              <Title order={3} ta="center" c="dimmed">
+                Welcome back, Super Admin!
+              </Title>
+            </>
+          ) : (
+            <>
+              <Group justify="center" mb="xs">
+                <Title order={2} ta="center">{tenant?.name || 'Tenant'}</Title>
+              </Group>
+              <Title order={3} ta="center" c="dimmed">
+                Welcome back!
+              </Title>
+            </>
+          )}
+        </Box>
 
-      <Paper withBorder shadow="sm" p={22} mt={30} radius="md">
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput
-            label="Email"
-            placeholder="you@example.com"
-            withAsterisk
-            radius="md"
-            {...form.getInputProps('email')}
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            mt="md"
-            radius="md"
-            withAsterisk
-            {...form.getInputProps('password')}
-          />
-          <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
-            <Anchor component="button" size="sm">Forgot password?</Anchor>
-          </Group>
-          <Button fullWidth mt="xl" radius="md" type="submit" loading={mutation.isPending}>
-            Sign in
-          </Button>
-        </form>
-      </Paper>
-    </Container>
+        <Paper withBorder shadow="sm" p={"lg"} radius="md">
+          <form onSubmit={form.onSubmit(handleSubmit)}>
+            <TextInput
+              label="Email"
+              placeholder="you@example.com"
+              withAsterisk
+              radius="md"
+              {...form.getInputProps('email')}
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              mt="md"
+              radius="md"
+              withAsterisk
+              {...form.getInputProps('password')}
+            />
+            <Group justify="space-between" mt="lg">
+              <Checkbox label="Remember me" />
+              <Anchor component="button" size="sm">
+                Forgot password?
+              </Anchor>
+            </Group>
+            <Button fullWidth mt="xl" radius="md" type="submit" loading={mutation.isPending}>
+              Sign in
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 

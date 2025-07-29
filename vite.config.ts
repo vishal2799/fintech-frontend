@@ -10,5 +10,6 @@ server: {
     host: true, // 👈 allows all hosts, including subdomains like wl1.localhost
   // host: '0.0.0.0',  // or true
     port: 5173,
+    allowedHosts: ['wallets.mycompany.com', 'billing.partnercorp.org'],
   }
 })

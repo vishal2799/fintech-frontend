@@ -5,6 +5,7 @@ import {
   TextInput,
   Title,
   Group,
+  Box,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router';
@@ -15,8 +16,11 @@ import axios from '../../../../api/axios';
 
 import { otpLoginSchema as verifyOtpSchema, type OtpLoginInput as VerifyOtpInput } from '../schema/auth.schema';
 import { useAuthStore } from '../../../../stores/useAuthStore';
+import { usePortal } from '../../../../context/PortalContext';
 
 export default function VerifyOtp() {
+       const { portalPath } = usePortal();
+  
   const navigate = useNavigate();
   const { login } = useAuthStore();
 
@@ -58,23 +62,23 @@ if (!location.latitude || !location.longitude) {
       const staticRole = payload.staticRole;
 
       notifications.show({ message: 'Login successful', color: 'green' });
-
-      switch (staticRole) {
-        case 'SUPER_ADMIN':
-          navigate('/super-admin');
-          break;
-        case 'WL_ADMIN':
-          navigate('/wl-admin');
-          break;
-        case 'SD':
-        case 'D':
-        case 'R':
-        case 'EMPLOYEE':
-          navigate('/dashboard');
-          break;
-        default:
-          navigate('/unauthorized');
-      }
+      navigate(`${portalPath}/`);
+      // switch (staticRole) {
+      //   case 'SUPER_ADMIN':
+      //     navigate('/super-admin');
+      //     break;
+      //   case 'WL_ADMIN':
+      //     navigate('/wl-admin');
+      //     break;
+      //   case 'SD':
+      //   case 'D':
+      //   case 'R':
+      //   case 'EMPLOYEE':
+      //     navigate('/dashboard');
+      //     break;
+      //   default:
+      //     navigate('/unauthorized');
+      // }
     },
     onError: (err: any) => {
       notifications.show({
@@ -89,33 +93,45 @@ if (!location.latitude || !location.longitude) {
   });
 
   return (
-    <Container size="xs" my={40}>
-      <Title ta="center">Verify OTP</Title>
+        <Box
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+      }}
+    >
+      <Container size="md" maw={460} w="100%">
+        <Title order={2} ta="center" mb="md">
+          Verify OTP
+        </Title>
 
-      <Paper withBorder shadow="sm" p={22} mt={30} radius="md">
-        <form onSubmit={handleSubmit}>
-          <TextInput
-            label="Email"
-            withAsterisk
-            disabled
-            {...form.getInputProps('identifier')}
-          />
-          <TextInput
-            label="OTP"
-            withAsterisk
-            mt="md"
-            placeholder="Enter the 6-digit OTP"
-            {...form.getInputProps('otp')}
-          />
+        <Paper withBorder shadow="sm" p={24} radius="md">
+          <form onSubmit={handleSubmit}>
+            <TextInput
+              label="Email"
+              withAsterisk
+              disabled
+              {...form.getInputProps('identifier')}
+            />
+            <TextInput
+              label="OTP"
+              withAsterisk
+              mt="md"
+              placeholder="Enter the 6-digit OTP"
+              {...form.getInputProps('otp')}
+            />
 
-          <Group justify="flex-end" mt="xl">
-            <Button type="submit" loading={mutation.isPending}>
-              Verify OTP
-            </Button>
-          </Group>
-        </form>
-      </Paper>
-    </Container>
+            <Group justify="flex-end" mt="xl">
+              <Button type="submit" loading={mutation.isPending}>
+                Verify OTP
+              </Button>
+            </Group>
+          </form>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
 

@@ -41,23 +41,23 @@ const Login = () => {
       const staticRole = payload.staticRole;
 
       notifications.show({ message: 'Login successful', color: 'green' });
-
-      switch (staticRole) {
-        case 'SUPER_ADMIN':
-          navigate('/super-admin');
-          break;
-        case 'WL_ADMIN':
-          navigate('/wl-admin');
-          break;
-        case 'SD':
-        case 'D':
-        case 'R':
-        case 'EMPLOYEE':
-          navigate('/dashboard');
-          break;
-        default:
-          navigate('/unauthorized');
-      }
+      navigate('/dashboard');
+      // switch (staticRole) {
+      //   case 'SUPER_ADMIN':
+      //     navigate('/super-admin');
+      //     break;
+      //   case 'WL_ADMIN':
+      //     navigate('/wl-admin');
+      //     break;
+      //   case 'SD':
+      //   case 'D':
+      //   case 'R':
+      //   case 'EMPLOYEE':
+      //     navigate('/dashboard');
+      //     break;
+      //   default:
+      //     navigate('/unauthorized');
+      // }
     },
     onError: (err: any) => {
       notifications.show({

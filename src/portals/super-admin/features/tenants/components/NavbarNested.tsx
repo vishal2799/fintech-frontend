@@ -48,22 +48,9 @@ const mockdata = [
     icon: IconCalendarStats,
     links: [
       { label: 'Global Services', link: '/super-admin/services' },
-      // { label: 'API Clients', link: '/super-admin/api-clients' },
-      // { label: 'Commission Plans', link: '/super-admin/commissions' },
     ],
   },
   { label: 'Audit Logs', icon: IconPresentationAnalytics, link: '/super-admin/logs' },
-  // { label: 'Reports', icon: IconPresentationAnalytics, link: '/super-admin/reports' },
-  // { label: 'Contracts', icon: IconFileAnalytics, link: '/super-admin/contracts' },
-  // {
-  //   label: 'Security',
-  //   icon: IconLock,
-  //   links: [
-  //     { label: 'Enable 2FA', link: '/super-admin/security/2fa' },
-  //     { label: 'Change Password', link: '/super-admin/security/change-password' },
-  //   ],
-  // },
-  // { label: 'Settings', icon: IconAdjustments, link: '/super-admin/settings' },
 ];
 
 export function NavbarNested() {
