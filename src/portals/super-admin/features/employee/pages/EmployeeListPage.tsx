@@ -38,10 +38,10 @@ export default function EmployeeListPage() {
       ]}
       searchFields={['name', 'email', 'mobile', 'role.name']}
       onEdit={(row: Employee) =>
-        navigate(`/super-admin/employees/edit/${row.id}`)
+        navigate(`/employees/edit/${row.id}`)
       }
       onDelete={handleDelete}
-      onCreate={() => navigate('/super-admin/employees/create')}
+      onCreate={() => navigate('/employees/create')}
     />
   );
 }

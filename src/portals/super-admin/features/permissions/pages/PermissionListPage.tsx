@@ -30,9 +30,9 @@ export default function PermissionListPage() {
         { key: 'description', label: 'Description' },
       ]}
       searchFields={['name', 'module', 'description', 'scope']}
-      onEdit={(row) => navigate(`/super-admin/permissions/edit/${row.id}`)}
+      onEdit={(row) => navigate(`/permissions/edit/${row.id}`)}
       onDelete={handleDelete}
-      onCreate={() => navigate('/super-admin/permissions/create')}
+      onCreate={() => navigate('/permissions/create')}
       perPage={10}
     />
   );

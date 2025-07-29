@@ -58,7 +58,7 @@ export default function PermissionForm({ mode, initialValues }: Props) {
         });
         showSuccess(res);
       }
-      navigate('/super-admin/permissions/list');
+      navigate('/permissions/list');
     } catch (err: any) {
       showError(err);
     }

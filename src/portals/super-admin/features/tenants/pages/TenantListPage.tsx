@@ -103,9 +103,9 @@ export default function TenantListPage() {
         />
       }
       filterFn={(row) => !statusFilter || row.status === statusFilter}
-      onEdit={(row) => navigate(`/super-admin/tenants/edit/${row.id}`)}
+      onEdit={(row) => navigate(`/tenants/edit/${row.id}`)}
       // onDelete={handleDelete}
-      onCreate={() => navigate('/super-admin/tenants/create')}
+      onCreate={() => navigate('/tenants/create')}
       perPage={4}
     />
   );

@@ -72,7 +72,7 @@ export default function EmployeeForm({ mode, initialValues }: Props) {
         const updateRes = await update.mutateAsync({ id: initialValues.id, data: payload });
         showSuccess(updateRes);
       }
-      navigate('/super-admin/employees/list');
+      navigate('/employees/list');
     } catch (err: any) {
       showError(err);
     }

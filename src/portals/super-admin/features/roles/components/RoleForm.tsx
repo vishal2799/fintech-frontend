@@ -60,7 +60,7 @@ export default function RoleForm({ mode, initialValues }: Props) {
         notifications.show({ message: 'Role updated', color: 'blue' });
       }
 
-      navigate('/super-admin/roles/list');
+      navigate('/roles/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error occurred', color: 'red' });
     }

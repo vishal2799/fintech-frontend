@@ -31,9 +31,9 @@ export default function RoleListPage() {
         { key: 'scope', label: 'Scope' },
       ]}
       searchFields={['name', 'description', 'scope']}
-      onEdit={(row) => navigate(`/super-admin/roles/edit/${row.id}`)}
+      onEdit={(row) => navigate(`/roles/edit/${row.id}`)}
       onDelete={handleDelete}
-      onCreate={() => navigate('/super-admin/roles/create')}
+      onCreate={() => navigate('/roles/create')}
       perPage={5}
     />
   );

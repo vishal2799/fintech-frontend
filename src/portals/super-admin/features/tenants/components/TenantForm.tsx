@@ -55,7 +55,7 @@ const form = useForm({
         });
         showSuccess(res);
       }
-      navigate('/super-admin/tenants/list');
+      navigate('/tenants/list');
     } catch (err) {
       showError(err);
     }

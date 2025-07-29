@@ -6,6 +6,7 @@ import VerifyOtp from "../portals/common/auth/pages/VerifyOtp";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
 import TenantThemeProvider from "../context/TenantThemeProvider";
+import { Notifications } from "@mantine/notifications";
 
 // const router = createBrowserRouter([
 //   {
@@ -150,6 +151,7 @@ const TenantApp = () => {
 
   return (
 <TenantThemeProvider>
+  <Notifications />
             <RouterProvider router={tenantRouter} />
 </TenantThemeProvider>
   )
