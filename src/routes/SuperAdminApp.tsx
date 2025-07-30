@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Unauthorized from "./Unauthorized";
+import Unauthorized from "../portals/common/pages/Unauthorized";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
 import { PermissionGuard } from "../components/PermissionGuard";

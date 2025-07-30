@@ -1,4 +1,3 @@
-// src/components/shared/ClientTable.tsx
 import {
   Table,
   Pagination,
@@ -8,7 +7,7 @@ import {
   Badge,
   Container,
   Switch,
-  useMantineTheme,
+  // useMantineTheme,
   Text,
 } from '@mantine/core';
 import { IconEdit, IconSearch, IconSelector, IconTrash } from '@tabler/icons-react';
@@ -57,7 +56,7 @@ export function ClientTable<T extends { id: string }>({
   filterFn,
   rowActions,
 }: Props<T>) {
-  const theme = useMantineTheme();
+  // const theme = useMantineTheme();
 
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);

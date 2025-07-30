@@ -17,7 +17,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
   const theme = useMantineTheme();
 const { colorScheme } = useMantineColorScheme();
 
-  const primaryColor = theme.colors[theme.primaryColor][6]; // use shade 6 or adjust
+  const primaryColor = theme.colors[theme.primaryColor][6];
 
   const hasLinks = Array.isArray(links) && links.length > 0;
 

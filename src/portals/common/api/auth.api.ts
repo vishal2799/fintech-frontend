@@ -6,3 +6,5 @@ export const login = (data: LoginInput) =>
 
 export const verifyOtpLogin = (data: OtpLoginInput) =>
   axios.post('/auth/verify-otp', data).then(res => res.data);
+
+export const logoutAPI = () => axios.post('/auth/logout');

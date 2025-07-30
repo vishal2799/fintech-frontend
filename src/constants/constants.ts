@@ -1,4 +1,4 @@
-import type { WLAdminStatus } from "../portals/super-admin/features/wl-admins/types/wl-admin.types";
+import type { WLAdminStatus } from "../portals/super-admin/types/wl-admin.types";
 
 export const WL_ADMIN_STATUSES: WLAdminStatus[] = ['ACTIVE', 'LOCKED', 'BLOCKED'];
 
