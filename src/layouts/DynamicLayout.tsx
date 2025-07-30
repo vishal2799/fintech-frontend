@@ -8,6 +8,7 @@ import { SidebarNav } from "../components/SidebarNav";
 // import DarkModeToggle from "../components/DarkModeToggle";
 import { IconPalette } from "@tabler/icons-react";
 import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
+import type { Scope, StaticRole } from "../navigation";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -50,7 +51,8 @@ const DynamicLayout = () => {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <SidebarNav staticRole={user.staticRole} />
+        {/* <SidebarNav staticRole={user.staticRole as StaticRole} scope={user.scope as Scope} /> */}
+        <SidebarNav />
       </AppShell.Navbar>
 
       <AppShell.Main>

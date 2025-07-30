@@ -9,6 +9,7 @@ interface UserPayload {
   roleNames: string[]; // dynamic roles (for employees)
   tenantId?: string;
   permissions: string[];
+  scope: string
 }
 
 interface AuthState {
@@ -38,6 +39,7 @@ export const useAuthStore = create<AuthState>()(
             staticRole: payload.staticRole || undefined,
             roleNames: payload.roleNames || [],
             permissions: payload.permissions || [],
+            scope: payload.scope
           },
         });
       },

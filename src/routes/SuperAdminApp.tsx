@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         { path: "edit/:id" , element: <WLAdminFormPage />},
       ]},
       {path: '/permissions', children: [
-        {path: "list", element: <PermissionListPage /> },
+        {path: "list", element: <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.PERMISSIONS_READ}><PermissionListPage /></PermissionGuard> },
         { path: "create", element: <PermissionFormPage /> },
         { path: "edit/:id", element: <PermissionFormPage /> },
       ]},
