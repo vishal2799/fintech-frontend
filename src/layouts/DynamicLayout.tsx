@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, Title } from "@mantine/core";
+import { ActionIcon, AppShell, Burger, Group, Popover, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Outlet, Navigate } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
@@ -6,6 +6,8 @@ import { usePortal } from "../context/PortalContext";
 import UserAvatarMenu from "../components/UserAvatarMenu";
 import { SidebarNav } from "../components/SidebarNav";
 import DarkModeToggle from "../components/DarkModeToggle";
+import { IconPalette } from "@tabler/icons-react";
+import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -31,7 +33,17 @@ const DynamicLayout = () => {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Title order={3}>{title}</Title>
           <Group>
-            <DarkModeToggle />
+            <Popover>
+  <Popover.Target>
+    <ActionIcon variant="light" title="Theme Settings">
+      <IconPalette size={20} />
+    </ActionIcon>
+  </Popover.Target>
+  <Popover.Dropdown>
+    <ThemeSettingsPanel />
+  </Popover.Dropdown>
+</Popover>
+            {/* <DarkModeToggle /> */}
           <UserAvatarMenu />
           </Group>
         </Group>
