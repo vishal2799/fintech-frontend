@@ -5,7 +5,7 @@ import { useAuthStore } from "../stores/useAuthStore";
 import { usePortal } from "../context/PortalContext";
 import UserAvatarMenu from "../components/UserAvatarMenu";
 import { SidebarNav } from "../components/SidebarNav";
-import DarkModeToggle from "../components/DarkModeToggle";
+// import DarkModeToggle from "../components/DarkModeToggle";
 import { IconPalette } from "@tabler/icons-react";
 import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
 
