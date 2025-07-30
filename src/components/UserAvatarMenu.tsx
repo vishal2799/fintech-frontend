@@ -55,7 +55,7 @@ const logout = useAuthStore((state) => state.logout);
 
         <Divider />
         <Menu.Item
-          color="red"
+        color='red'
           leftSection={<IconLogout size={14} />}
           onClick={() => {
             logout().then(() => {

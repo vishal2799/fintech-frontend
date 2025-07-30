@@ -5,8 +5,12 @@ import Login from "../portals/common/auth/pages/Login";
 import VerifyOtp from "../portals/common/auth/pages/VerifyOtp";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
-import TenantThemeProvider from "../context/TenantThemeProvider";
-import { Notifications } from "@mantine/notifications";
+import SuperDistributorListPage from "../portals/wl-admin/features/user/pages/SuperDistributorListPage";
+import SuperDistributorFormPage from "../portals/wl-admin/features/user/pages/SuperDistributorFormPage";
+import DistributorListPage from "../portals/wl-admin/features/user/pages/DistributorListPage";
+import DistributorFormPage from "../portals/wl-admin/features/user/pages/DistributorFormPage";
+import RetailerListPage from "../portals/wl-admin/features/user/pages/RetailerListPage";
+import RetailerFormPage from "../portals/wl-admin/features/user/pages/RetailerFormPage";
 
 // const router = createBrowserRouter([
 //   {
@@ -107,6 +111,7 @@ import { Notifications } from "@mantine/notifications";
 // ]);
 
 const tenantRouter = createBrowserRouter([
+  // {path: '/', element: <div>Hi</div>},
   { path: '/admin/login', element: <Login /> },
   { path: '/admin/verify-otp', element: <VerifyOtp /> },
   { path: '/retailer/login', element: <Login /> },
@@ -122,7 +127,21 @@ const tenantRouter = createBrowserRouter([
     ),
     children: [
       { index: true, element: <div>Admin Dashboard</div> },
-      // other admin routes...
+      {path: 'super-distributors', children: [
+              {path: 'list', element: <SuperDistributorListPage />},
+              {path: 'create', element: <SuperDistributorFormPage />},
+              {path: 'edit/:id', element: <SuperDistributorFormPage />},
+      ]},
+      {path: 'distributors', children: [
+              {path: 'list', element: <DistributorListPage />},
+              {path: 'create', element: <DistributorFormPage />},
+              {path: 'edit/:id', element: <DistributorFormPage />},
+      ]},
+      {path: 'retailers', children: [
+              {path: 'list', element: <RetailerListPage />},
+              {path: 'create', element: <RetailerFormPage />},
+              {path: 'edit/:id', element: <RetailerFormPage />},
+      ]},
     ]
   },
   {
@@ -150,10 +169,7 @@ const TenantApp = () => {
   if (!tenant) return <div>Loading tenant...</div>;
 
   return (
-<TenantThemeProvider>
-  <Notifications />
             <RouterProvider router={tenantRouter} />
-</TenantThemeProvider>
   )
 }
 

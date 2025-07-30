@@ -5,6 +5,7 @@ import { useAuthStore } from "../stores/useAuthStore";
 import { usePortal } from "../context/PortalContext";
 import UserAvatarMenu from "../components/UserAvatarMenu";
 import { SidebarNav } from "../components/SidebarNav";
+import DarkModeToggle from "../components/DarkModeToggle";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -29,7 +30,10 @@ const DynamicLayout = () => {
         <Group h="100%" px="md" justify="space-between">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Title order={3}>{title}</Title>
+          <Group>
+            <DarkModeToggle />
           <UserAvatarMenu />
+          </Group>
         </Group>
       </AppShell.Header>
 

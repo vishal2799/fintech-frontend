@@ -10,6 +10,7 @@ import {
   IconUsersGroup,
   IconWallet,
   IconPackages,
+  IconUsers,
 } from "@tabler/icons-react";
 
 export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
@@ -17,7 +18,7 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
 
   if (staticRole === "SUPER_ADMIN") {
     navItems = [
-      { label: 'Dashboard', icon: IconGauge, link: '/super-admin' },
+      { label: 'Dashboard', icon: IconGauge, link: '/' },
       {
         label: 'Tenants',
         icon: IconBuildingSkyscraper,
@@ -26,7 +27,7 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
           { label: 'All Tenants', link: '/tenants/list' },
           { label: 'Add Tenant', link: '/tenants/create' },
         ],
-      },
+      }, 
       {
         label: 'WL Admins',
         icon: IconUserShield,
@@ -81,14 +82,19 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
   if (staticRole === "WL_ADMIN") {
     navItems = [
       { label: 'Dashboard', icon: IconGauge, link: '/admin' },
-      {
-        label: 'Employees',
-        icon: IconLock,
-        links: [
-          { label: 'List', link: '/admin/employees/list' },
-          { label: 'Create', link: '/admin/employees/create' },
-        ],
-      },
+  {
+    label: 'Members',
+    icon: IconUsers,
+    initiallyOpened: true, 
+    links: [
+      { label: 'Super Distributors', link: 'super-distributors/list' },
+      { label: 'Add SD', link: 'super-distributors/create' },
+      { label: 'Distributors', link: 'distributors/list' },
+      { label: 'Add D', link: 'distributors/create' },
+      { label: 'Retailers', link: 'retailers/list' },
+      { label: 'Add R', link: 'retailers/create' },
+    ],
+  },
     ];
   }
 

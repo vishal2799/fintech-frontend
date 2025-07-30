@@ -13,7 +13,7 @@ const mockdata = [
   {
     label: 'Members',
     icon: IconNotes,
-    initiallyOpened: true,
+    initiallyOpened: true, 
     links: [
       { label: 'Super Distributors', link: '/wl-admin/super-distributors/list' },
       { label: 'Add SD', link: '/wl-admin/super-distributors/create' },

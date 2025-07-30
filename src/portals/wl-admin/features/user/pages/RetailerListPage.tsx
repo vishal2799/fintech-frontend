@@ -6,8 +6,10 @@ import {
   useDeleteRetailer,
   useUpdateRetailer,
 } from '../api/retailers.hooks';
-import { notifications } from '@mantine/notifications';
+import { showError, showSuccess } from '../../../../../utils/notifications';
 import { ClientTable } from '../../../../../components/ClientTable';
+
+const RETAILER_STATUS_OPTIONS = ['ACTIVE', 'BLOCKED', 'LOCKED'] as const;
 
 export default function RetailerListPage() {
   const navigate = useNavigate();
@@ -15,15 +17,15 @@ export default function RetailerListPage() {
   const deleteRetailer = useDeleteRetailer();
   const updateRetailer = useUpdateRetailer();
 
-  const [status, setStatus] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const handleDelete = async (row: any) => {
     if (!confirm('Delete this retailer?')) return;
     try {
       await deleteRetailer.mutateAsync(row.id);
-      notifications.show({ message: 'Retailer deleted', color: 'red' });
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Delete failed', color: 'red' });
+      showSuccess('Retailer deleted');
+    } catch (err) {
+      showError(err);
     }
   };
 
@@ -31,9 +33,9 @@ export default function RetailerListPage() {
     const newStatus = row.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE';
     try {
       await updateRetailer.mutateAsync({ id: row.id, data: { status: newStatus } });
-      notifications.show({ message: 'Status updated', color: 'blue' });
-    } catch (err: any) {
-      notifications.show({ message: err.message || 'Update failed', color: 'red' });
+      showSuccess(`Retailer ${newStatus.toLowerCase()}`);
+    } catch (err) {
+      showError(err);
     }
   };
 
@@ -45,21 +47,25 @@ export default function RetailerListPage() {
         { key: 'name', label: 'Name' },
         { key: 'email', label: 'Email' },
         { key: 'mobile', label: 'Mobile' },
-        { key: 'status', label: 'Status', type: 'toggle' },
+        {
+          key: 'status',
+          label: 'Status',
+          type: 'toggle',
+        },
       ]}
       searchFields={['name', 'email', 'mobile']}
       filterControls={
         <Select
           placeholder="Filter by status"
-          data={['ACTIVE', 'BLOCKED', 'LOCKED'].map((x) => ({ label: x, value: x }))}
-          value={status}
-          onChange={setStatus}
+          data={RETAILER_STATUS_OPTIONS.map((x) => ({ label: x, value: x }))}
+          value={statusFilter}
+          onChange={setStatusFilter}
           clearable
         />
       }
-      filterFn={(row) => !status || row.status === status}
-      onEdit={(row) => navigate(`/wl-admin/retailers/${row.id}/edit`)}
-      onCreate={() => navigate('/wl-admin/retailers/create')}
+      filterFn={(row) => !statusFilter || row.status === statusFilter}
+      onEdit={(row) => navigate(`/admin/retailers/edit/${row.id}`)}
+      onCreate={() => navigate('/admin/retailers/create')}
       onDelete={handleDelete}
       onToggle={handleToggle}
     />

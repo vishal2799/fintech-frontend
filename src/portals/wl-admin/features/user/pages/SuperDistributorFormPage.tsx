@@ -54,7 +54,7 @@ export default function SuperDistributorFormPage() {
         await createMutation.mutateAsync(formValues);
         notifications.show({ message: 'Created', color: 'green' });
       }
-      navigate('/wl-admin/super-distributors/list');
+      navigate('/admin/super-distributors/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error', color: 'red' });
     }
@@ -63,7 +63,7 @@ export default function SuperDistributorFormPage() {
   if (isEdit && (isLoading || !formValues.name)) return <Loader />;
 
   return (
-    <Container size="sm">
+    <Container size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Super Distributor' : 'Create Super Distributor'}
       </Title>

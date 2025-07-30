@@ -60,7 +60,7 @@ export default function DistributorFormPage() {
         await createMutation.mutateAsync(formValues);
         notifications.show({ message: 'Created', color: 'green' });
       }
-      navigate('/wl-admin/distributors/list');
+      navigate('/admin/distributors/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error', color: 'red' });
     }
@@ -69,7 +69,7 @@ export default function DistributorFormPage() {
   if (isEdit && (isLoading || !formValues.name)) return <Loader />;
 
   return (
-    <Container size="sm">
+    <Container size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Distributor' : 'Create Distributor'}
       </Title>

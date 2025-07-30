@@ -59,7 +59,7 @@ export default function RetailerFormPage() {
         await createMutation.mutateAsync(formValues);
         notifications.show({ message: 'Created', color: 'green' });
       }
-      navigate('/wl-admin/retailers/list');
+      navigate('/admin/retailers/list');
     } catch (err: any) {
       notifications.show({ message: err.message || 'Error', color: 'red' });
     }
@@ -68,7 +68,7 @@ export default function RetailerFormPage() {
   if (isEdit && (isLoading || !formValues.name)) return <Loader />;
 
   return (
-    <Container size="sm">
+    <Container size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Retailer' : 'Create Retailer'}
       </Title>

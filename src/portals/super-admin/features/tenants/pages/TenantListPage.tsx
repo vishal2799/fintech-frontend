@@ -9,7 +9,6 @@ import { Select, Menu, Badge } from '@mantine/core';
 import { IconChevronDown, IconCheck } from '@tabler/icons-react';
 import { ClientTable } from '../../../../../components/ClientTable';
 import { STATUS_OPTIONS, type TenantStatus } from '../constants';
-// import type { Tenant } from '../types/tenant.types';
 import { showError, showSuccess } from '../../../../../utils/notifications';
 
 export default function TenantListPage() {

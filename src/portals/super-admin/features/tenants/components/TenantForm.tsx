@@ -16,6 +16,7 @@ import {
 import type { Tenant } from '../types/tenant.types';
 import { useForm } from '@mantine/form';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
+import { THEME_COLORS } from '../../../../../constants/constants.ts';
 
 type Props = {
   mode: 'create' | 'edit';
@@ -76,7 +77,15 @@ const form = useForm({
           placeholder="https://cdn.com/logo.png"
           {...form.getInputProps('logoUrl')}
         />
-        <ColorInput label="Theme Color" {...form.getInputProps('themeColor')} />
+        <ColorInput
+  label="Theme Color"
+  format="hex"
+  swatches={THEME_COLORS}
+  swatchesPerRow={5}
+  withPicker={false}
+  {...form.getInputProps('themeColor')}
+/>
+        {/* <ColorInput label="Theme Color" {...form.getInputProps('themeColor')} /> */}
         <Group mt="md">
           <Button type="submit" loading={createMutation.isPending || updateMutation.isPending}>
             {mode === 'create' ? 'Create' : 'Update'}

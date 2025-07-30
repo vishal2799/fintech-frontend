@@ -1,3 +1,4 @@
+import { AppThemeProvider } from "./context/AppThemeProvider";
 import { usePortal } from "./context/PortalContext";
 import SuperAdminApp from "./pages/SuperAdminApp";
 import TenantApp from "./pages/TenantApp";
@@ -11,5 +12,9 @@ export default function App() {
 
   if (!portal?.type) return <div>Invalid or loading portal...</div>;
 
-  return portal.type === 'superadmin' ? <SuperAdminApp /> : <TenantApp />;
+  return (
+        <AppThemeProvider>
+                {portal.type === 'superadmin' ? <SuperAdminApp /> : <TenantApp />}
+        </AppThemeProvider>
+)
 }
