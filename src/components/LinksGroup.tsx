@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router';
-import { Group, Collapse, UnstyledButton } from '@mantine/core';
+import { NavLink } from 'react-router'; 
+import { Group, Collapse, UnstyledButton, useMantineTheme, useMantineColorScheme } from '@mantine/core';
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
 
 type SubLink = { label: string; link: string };
@@ -14,6 +14,11 @@ type Props = {
 
 export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: Props) {
   const [opened, setOpened] = useState(initiallyOpened || false);
+  const theme = useMantineTheme();
+const { colorScheme } = useMantineColorScheme();
+
+  const primaryColor = theme.colors[theme.primaryColor][6]; // use shade 6 or adjust
+
   const hasLinks = Array.isArray(links) && links.length > 0;
 
   return (
@@ -30,7 +35,16 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
             ) : (
               <NavLink
                 to={link || '#'}
-                className="text-sm font-medium text-gray-800 dark:text-gray-100"
+                className={({ isActive }) =>
+                  `text-sm font-medium ${
+                    isActive
+                      ? 'font-semibold'
+                      : 'text-gray-800 dark:text-gray-100'
+                  }`
+                }
+                style={({ isActive }) =>
+                  isActive ? { color: primaryColor } : undefined
+                }
               >
                 {label}
               </NavLink>
@@ -47,10 +61,15 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
               <NavLink
                 key={item.label}
                 to={item.link}
-                className={({ isActive }) =>
-                  `text-sm rounded-md px-2 py-1 hover:bg-gray-100 dark:hover:bg-zinc-800 ${
-                    isActive ? 'text-blue-600 font-semibold' : 'text-gray-700 dark:text-gray-200'
-                  }`
+                className="text-sm rounded-md px-2 py-1 hover:bg-gray-100 dark:hover:bg-zinc-800"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        color: primaryColor,
+                        fontWeight: 600,
+                        backgroundColor: colorScheme === 'dark' ? theme.colors.dark[6] : '#f1f5f9',
+                      }
+                    : undefined
                 }
               >
                 {item.label}

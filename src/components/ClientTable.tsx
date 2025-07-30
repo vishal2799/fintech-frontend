@@ -8,6 +8,8 @@ import {
   Badge,
   Container,
   Switch,
+  useMantineTheme,
+  Text,
 } from '@mantine/core';
 import { IconEdit, IconSearch, IconSelector, IconTrash } from '@tabler/icons-react';
 import { useMemo, useState, useEffect } from 'react';
@@ -55,6 +57,8 @@ export function ClientTable<T extends { id: string }>({
   filterFn,
   rowActions,
 }: Props<T>) {
+  const theme = useMantineTheme();
+
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [sortKey, setSortKey] = useState<keyof T | null>(null);
@@ -172,6 +176,13 @@ export function ClientTable<T extends { id: string }>({
         </Table.Thead>
 
         <Table.Tbody>
+          {paginated.length === 0 && (
+  <Table.Tr>
+    <Table.Td colSpan={columns.length + 1}>
+      <Text c="dimmed">No data found</Text>
+    </Table.Td>
+  </Table.Tr>
+)}
           {paginated.map((row) => (
             <Table.Tr key={row.id}>
               {columns.map((col) => (
@@ -179,7 +190,8 @@ export function ClientTable<T extends { id: string }>({
                   {col.render ? (
                     col.render(row)
                   ) : col.type === 'badge' ? (
-                    <Badge color={['ACTIVE', 'SUCCESS'].includes(String(row[col.key])) ? 'green' : 'red'}>
+                    // <Badge color={['ACTIVE', 'SUCCESS'].includes(String(row[col.key])) ? theme.primaryColor : 'red'}>
+                      <Badge color={['ACTIVE', 'SUCCESS'].includes(String(row[col.key])) ? 'green' : 'red'}> 
                       {String(row[col.key])}
                     </Badge>
                   ) : col.type === 'toggle' ? (

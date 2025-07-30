@@ -98,8 +98,6 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
     ];
   }
 
-  // Add more roles...
-
   return (
     <ScrollArea className="h-full">
       {navItems.map((item:any) => (
