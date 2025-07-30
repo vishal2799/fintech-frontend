@@ -8,7 +8,7 @@ import { SidebarNav } from "../components/SidebarNav";
 // import DarkModeToggle from "../components/DarkModeToggle";
 import { IconPalette } from "@tabler/icons-react";
 import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
-import type { Scope, StaticRole } from "../navigation";
+// import type { Scope, StaticRole } from "../navigation";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();

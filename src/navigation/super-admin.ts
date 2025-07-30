@@ -26,7 +26,7 @@ export const superAdminNavItems = [
       {
         label: 'All Tenants',
         link: '/tenants/list',
-        permission: PERMISSIONS.EMPLOYEES_CREATE,
+        permission: PERMISSIONS.TENANTS_READ,
         allowedRoles: ['SUPER_ADMIN'],
       },
       {
