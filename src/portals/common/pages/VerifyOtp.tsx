@@ -57,28 +57,10 @@ if (!location.latitude || !location.longitude) {
       const refreshToken = res?.data?.refreshToken;
 
       login({ accessToken, refreshToken });
-
-      const payload = JSON.parse(atob(accessToken.split('.')[1]));
-      const staticRole = payload.staticRole;
-
+      // const payload = JSON.parse(atob(accessToken.split('.')[1]));
+      // const staticRole = payload.staticRole;
       notifications.show({ message: 'Login successful', color: 'green' });
       navigate(`${portalPath}/`);
-      // switch (staticRole) {
-      //   case 'SUPER_ADMIN':
-      //     navigate('/super-admin');
-      //     break;
-      //   case 'WL_ADMIN':
-      //     navigate('/wl-admin');
-      //     break;
-      //   case 'SD':
-      //   case 'D':
-      //   case 'R':
-      //   case 'EMPLOYEE':
-      //     navigate('/dashboard');
-      //     break;
-      //   default:
-      //     navigate('/unauthorized');
-      // }
     },
     onError: (err: any) => {
       notifications.show({

@@ -5,9 +5,9 @@ import { usePortal } from './PortalContext';
 import { generateColors } from '@mantine/colors-generator';
 
 export const AppThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { tenant, type } = usePortal();
+  const { tenant } = usePortal();
 
-  const [colorScheme, setColorScheme] = useLocalStorage<'light' | 'dark'>({
+  const [colorScheme] = useLocalStorage<'light' | 'dark'>({
     key: 'color-scheme',
     defaultValue: 'light',
   });

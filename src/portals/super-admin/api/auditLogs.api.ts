@@ -1,4 +1,4 @@
-import axios from '../../../../../api/axios';
+import axios from '../../../api/axios';
 import type { GetAuditLogsResponse } from '../types/auditLog.types';
 
 type Filters = {
