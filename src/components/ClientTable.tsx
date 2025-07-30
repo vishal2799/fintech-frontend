@@ -151,6 +151,7 @@ export function ClientTable<T extends { id: string }>({
 
       {filterControls && <Group mb="md">{filterControls}</Group>}
 
+    <Table.ScrollContainer minWidth={500}>
       <Table striped withTableBorder withColumnBorders layout={'fixed'}>
         <Table.Thead>
           <Table.Tr>
@@ -238,6 +239,7 @@ export function ClientTable<T extends { id: string }>({
           ))}
         </Table.Tbody>
       </Table>
+      </Table.ScrollContainer>
 
       {totalPages > 1 && (
         <Pagination value={page} onChange={setPage} total={totalPages} mt="md" />
