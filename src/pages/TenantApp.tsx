@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { usePortal } from "../context/PortalContext";
 import Unauthorized from "./Unauthorized";
-import Login from "../portals/common/auth/pages/Login";
-import VerifyOtp from "../portals/common/auth/pages/VerifyOtp";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
-import SuperDistributorListPage from "../portals/wl-admin/features/user/pages/SuperDistributorListPage";
-import SuperDistributorFormPage from "../portals/wl-admin/features/user/pages/SuperDistributorFormPage";
-import DistributorListPage from "../portals/wl-admin/features/user/pages/DistributorListPage";
-import DistributorFormPage from "../portals/wl-admin/features/user/pages/DistributorFormPage";
-import RetailerListPage from "../portals/wl-admin/features/user/pages/RetailerListPage";
-import RetailerFormPage from "../portals/wl-admin/features/user/pages/RetailerFormPage";
+import Login from "../portals/common/pages/Login";
+import VerifyOtp from "../portals/common/pages/VerifyOtp";
+import SuperDistributorListPage from "../portals/wl-admin/pages/SuperDistributorListPage";
+import SuperDistributorFormPage from "../portals/wl-admin/pages/SuperDistributorFormPage";
+import DistributorListPage from "../portals/wl-admin/pages/DistributorListPage";
+import DistributorFormPage from "../portals/wl-admin/pages/DistributorFormPage";
+import RetailerListPage from "../portals/wl-admin/pages/RetailerListPage";
+import RetailerFormPage from "../portals/wl-admin/pages/RetailerFormPage";
 
 // const router = createBrowserRouter([
 //   {

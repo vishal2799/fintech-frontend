@@ -125,57 +125,47 @@ export const SidebarNav = ({ staticRole }: { staticRole?: string }) => {
       icon: IconUserShield,
       links: [
         { label: 'All WL-Admins', link: '/wl-admins/list', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['SUPER_ADMIN'] },
-        { label: 'Add WL Admin', link: '/wl-admins/create' },
+        { label: 'Add WL Admin', link: '/wl-admins/create', allowedRoles: ['SUPER_ADMIN'] },
       ],
     },
     {
       label: 'Permissions',
       icon: IconLock,
       links: [
-        { label: 'All Permissions', link: '/permissions/list' },
-        { label: 'Add Permission', link: '/permissions/create' },
+        { label: 'All Permissions', link: '/permissions/list', allowedRoles: ['SUPER_ADMIN'] },
+        { label: 'Add Permission', link: '/permissions/create', allowedRoles: ['SUPER_ADMIN'] },
       ],
-      permission: 'PERMISSIONS_READ',
-      allowedRoles: ['SUPER_ADMIN'],
     },
     {
       label: 'Roles',
       icon: IconSettingsCog,
       links: [
-        { label: 'All Roles', link: '/roles/list' },
-        { label: 'Add Role', link: '/roles/create' },
-      ],
-      permission: 'ROLES_READ',
-      allowedRoles: ['SUPER_ADMIN'],
+        { label: 'All Roles', link: '/roles/list', allowedRoles: ['SUPER_ADMIN'] },
+        { label: 'Add Role', link: '/roles/create', allowedRoles: ['SUPER_ADMIN'] },
+      ]
     },
     {
       label: 'Employees',
       icon: IconUsersGroup,
       links: [
-        { label: 'All Employees', link: '/employees/list' },
-        { label: 'Add Employee', link: '/employees/create' },
-      ],
-      permission: 'EMPLOYEES_READ',
-      allowedRoles: ['SUPER_ADMIN'],
+        { label: 'All Employees', link: '/employees/list', allowedRoles: ['SUPER_ADMIN'] },
+        { label: 'Add Employee', link: '/employees/create', allowedRoles: ['SUPER_ADMIN'] },
+      ]
     },
     {
       label: 'Wallet Management',
       icon: IconWallet,
       links: [
-        { label: 'Tenant List', link: '/wallet/tenant-list' },
-        { label: 'Credit Request', link: '/wallet/credit-requests' },
-      ],
-      permission: 'WALLET_READ',
-      allowedRoles: ['SUPER_ADMIN'],
+        { label: 'Tenant List', link: '/wallet/tenant-list', allowedRoles: ['SUPER_ADMIN'] },
+        { label: 'Credit Request', link: '/wallet/credit-requests', allowedRoles: ['SUPER_ADMIN'] },
+      ]
     },
     {
       label: 'Services',
       icon: IconPackages,
       links: [
-        { label: 'Global Services', link: '/services' },
-      ],
-      permission: 'SERVICES_READ',
-      allowedRoles: ['SUPER_ADMIN'],
+        { label: 'Global Services', link: '/services', allowedRoles: ['SUPER_ADMIN']},
+      ]
     },
     {
       label: 'Audit Logs',

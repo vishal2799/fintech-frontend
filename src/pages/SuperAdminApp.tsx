@@ -1,25 +1,25 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Login from "../portals/common/auth/pages/Login";
-import VerifyOtp from "../portals/common/auth/pages/VerifyOtp";
 import Unauthorized from "./Unauthorized";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
-import TenantListPage from "../portals/super-admin/features/tenants/pages/TenantListPage";
-import TenantFormPage from "../portals/super-admin/features/tenants/pages/TenantFormPage";
-import PermissionListPage from "../portals/super-admin/features/permissions/pages/PermissionListPage";
-import PermissionFormPage from "../portals/super-admin/features/permissions/pages/PermissionFormPage";
-import RoleListPage from "../portals/super-admin/features/roles/pages/RoleListPage";
-import RoleFormPage from "../portals/super-admin/features/roles/pages/RoleFormPage";
-import EmployeeListPage from "../portals/super-admin/features/employee/pages/EmployeeListPage";
-import EmployeeFormPage from "../portals/super-admin/features/employee/pages/EmployeeFormPage";
-import WLAdminListPage from "../portals/super-admin/features/wl-admins/pages/WLAdminListPage";
-import WLAdminFormPage from "../portals/super-admin/features/wl-admins/pages/WLAdminFormPage";
-import TenantWalletListPage from "../portals/super-admin/features/wallet/pages/TenantWalletListPage";
-import CreditRequestListPage from "../portals/super-admin/features/wallet/pages/CreditRequestsPage";
-import AuditLogTable from "../portals/super-admin/features/audit-logs/pages/AuditLogsList";
-import ServiceListPage from "../portals/super-admin/features/services/pages/ServicesListPage";
 import { PermissionGuard } from "../components/PermissionGuard";
 import { PERMISSIONS } from "../constants/permissions";
+import Login from "../portals/common/pages/Login";
+import VerifyOtp from "../portals/common/pages/VerifyOtp";
+import TenantFormPage from "../portals/super-admin/pages/TenantFormPage";
+import TenantListPage from "../portals/super-admin/pages/TenantListPage";
+import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
+import PermissionFormPage from "../portals/super-admin/pages/PermissionFormPage";
+import RoleListPage from "../portals/super-admin/pages/RoleListPage";
+import RoleFormPage from "../portals/super-admin/pages/RoleFormPage";
+import EmployeeListPage from "../portals/super-admin/pages/EmployeeListPage";
+import EmployeeFormPage from "../portals/super-admin/pages/EmployeeFormPage";
+import AuditLogTable from "../portals/super-admin/pages/AuditLogsList";
+import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
+import CreditRequestListPage from "../portals/super-admin/pages/CreditRequestsPage";
+import TenantWalletListPage from "../portals/super-admin/pages/TenantWalletListPage";
+import WLAdminListPage from "../portals/super-admin/pages/WLAdminListPage";
+import WLAdminFormPage from "../portals/super-admin/pages/WLAdminFormPage";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   

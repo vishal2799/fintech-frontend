@@ -20,3 +20,6 @@ export const THEME_COLORS = [
   '#3B82F6', // Sky
   '#10B981', // Emerald
 ];
+
+export const STATUS_OPTIONS = ['ACTIVE', 'DISABLED'] as const;
+export type TenantStatus = typeof STATUS_OPTIONS[number];
