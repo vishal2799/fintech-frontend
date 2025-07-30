@@ -1,37 +1,3 @@
-export const getClientMeta = async (): Promise<{
-  ipAddress?: string;
-  latitude?: string;
-  longitude?: string;
-}> => {
-  let latitude: string | undefined;
-  let longitude: string | undefined;
-  let ipAddress: string | undefined;
-
-  // Get geolocation
-  try {
-    const position = await new Promise<GeolocationPosition>((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        timeout: 3000,
-      })
-    );
-    latitude = position.coords.latitude.toString();
-    longitude = position.coords.longitude.toString();
-  } catch {
-    console.warn('Geolocation access denied or failed.');
-  }
-
-  // Get IP
-  try {
-    const res = await fetch('https://api64.ipify.org?format=json');
-    const json = await res.json();
-    ipAddress = json.ip;
-  } catch {
-    console.warn('Failed to fetch IP address.');
-  }
-
-  return { ipAddress, latitude, longitude };
-};
-
 export type UserLocation = {
   latitude: number;
   longitude: number;

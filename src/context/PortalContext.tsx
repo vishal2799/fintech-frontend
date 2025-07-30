@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getTenantDetails } from './api';
 import { getPortalInfo } from '../utils/getPortalInfo';
+import { getTenantDetails } from '../portals/common/api/tenant.api';
 
 type PortalContextType = {
   type: 'superadmin' | 'tenant' | null;

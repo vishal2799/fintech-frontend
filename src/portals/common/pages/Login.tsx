@@ -17,7 +17,7 @@ import { notifications } from '@mantine/notifications';
 import { useForm } from '@mantine/form';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
 import axios from '../../../api/axios';
-import { getUserLocation } from '../../../utils/clientMeta';
+import { getUserLocation } from '../../../utils/getUserLocation';
 import { usePortal } from '../../../context/PortalContext';
 
 const Login = () => {
