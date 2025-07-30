@@ -18,6 +18,8 @@ import TenantWalletListPage from "../portals/super-admin/features/wallet/pages/T
 import CreditRequestListPage from "../portals/super-admin/features/wallet/pages/CreditRequestsPage";
 import AuditLogTable from "../portals/super-admin/features/audit-logs/pages/AuditLogsList";
 import ServiceListPage from "../portals/super-admin/features/services/pages/ServicesListPage";
+import { PermissionGuard } from "../components/PermissionGuard";
+import { PERMISSIONS } from "../constants/permissions";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -25,11 +27,11 @@ const router = createBrowserRouter([
 { path: '/unauthorized', element: <Unauthorized /> },
   {
     path: "/",
-    element: <ProtectedRoute allowedRoles={['SUPER_ADMIN']}><DynamicLayout /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={['SUPER_ADMIN', 'EMPLOYEE']}><DynamicLayout /></ProtectedRoute>,
     children: [
       {index: true, element: <div>SA Dashboard</div>},
       {path: '/tenants', children: [
-        {path: 'list', element: <TenantListPage />},
+        {path: 'list', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><TenantListPage /></PermissionGuard>},
         {path: 'create', element: <TenantFormPage />},
         {path: 'edit/:id', element: <TenantFormPage />},
       ]},
