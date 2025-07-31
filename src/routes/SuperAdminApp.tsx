@@ -61,8 +61,10 @@ const router = createBrowserRouter([
             { path: "credit-requests", element: <CreditRequestListPage /> },
       ]},
       { path: "/logs" , element: <AuditLogTable />},
-      { path: "/services" , element: <ServiceListPage />},
-      { path: "/tenant-services" , element: <TenantServicesListPage />},
+            {path: '/services', children: [
+      { path: "global" , element: <ServiceListPage />},
+      { path: "tenant-services" , element: <TenantServicesListPage />},
+        ]},
     ]
   },
 ]);

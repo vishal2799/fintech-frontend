@@ -56,7 +56,7 @@ export const TenantServiceModal = ({ tenantId, opened, onClose }: Props) => {
   };
 
   return (
-    <Modal opened={opened} onClose={onClose} title="Configure Services">
+    <Modal opened={opened} onClose={onClose} title="Configure Services" centered>
       {isLoading ? (
         <Group justify="center" py="xl">
           <Loader />
