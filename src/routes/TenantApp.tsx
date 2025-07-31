@@ -11,6 +11,9 @@ import DistributorListPage from "../portals/wl-admin/pages/DistributorListPage";
 import DistributorFormPage from "../portals/wl-admin/pages/DistributorFormPage";
 import RetailerListPage from "../portals/wl-admin/pages/RetailerListPage";
 import RetailerFormPage from "../portals/wl-admin/pages/RetailerFormPage";
+import CreditRequestListPage from "../portals/wl-admin/pages/CreditRequestsList";
+import CreditRequestFormPage from "../portals/wl-admin/pages/CreditRequestFormPage";
+import WalletPage from "../portals/wl-admin/pages/WalletPage";
 
 
 const tenantRouter = createBrowserRouter([
@@ -44,6 +47,11 @@ const tenantRouter = createBrowserRouter([
               {path: 'list', element: <RetailerListPage />},
               {path: 'create', element: <RetailerFormPage />},
               {path: 'edit/:id', element: <RetailerFormPage />},
+      ]},
+      {path: 'wallet', children: [
+              {path: 'credit-requests', element: <CreditRequestListPage />},
+              {path: 'add-fund', element: <CreditRequestFormPage />},
+              {path: 'ledger', element: <WalletPage />},
       ]},
     ]
   },
