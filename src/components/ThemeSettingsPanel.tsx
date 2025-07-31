@@ -54,6 +54,7 @@ const ThemeSettingsPanel = () => {
           swatches={THEME_COLORS}
           swatchesPerRow={6}
           withPicker={false}
+          withEyeDropper={false}
           value={userColor}
           onChange={setUserColor}
           styles={{ input: { cursor: 'pointer' } }}

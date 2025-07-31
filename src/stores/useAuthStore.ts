@@ -50,6 +50,7 @@ export const useAuthStore = create<AuthState>()(
         } catch {
           // ignore failure
         } finally {
+          localStorage.removeItem('user-theme-color');
           set({ accessToken: null, refreshToken: null, user: null });
         }
       },
