@@ -17,19 +17,22 @@ type Props = {
   onClose: () => void;
 };
 
+type LocalService = {
+  serviceId: string;
+  isTenantGloballyEnabled: boolean;
+};
+
 export const TenantServiceModal = ({ tenantId, opened, onClose }: Props) => {
   const { data = [], isLoading } = useTenantServices(tenantId);
   const mutation = useUpdateTenantServices(tenantId);
 
-  const [localState, setLocalState] = useState<
-    { serviceId: string; isEnabled: boolean }[]
-  >([]);
+  const [localState, setLocalState] = useState<LocalService[]>([]);
 
   const handleToggle = (serviceId: string) => {
     setLocalState(prev =>
       prev.map(s =>
         s.serviceId === serviceId
-          ? { ...s, isEnabled: !s.isEnabled }
+          ? { ...s, isTenantGloballyEnabled: !s.isTenantGloballyEnabled }
           : s
       )
     );
@@ -38,10 +41,12 @@ export const TenantServiceModal = ({ tenantId, opened, onClose }: Props) => {
   // Sync local state with fetched data
   useEffect(() => {
     if (data?.length) {
-      setLocalState(data.map(({ id, isEnabled }: {id: any; isEnabled: any}) => ({
-        serviceId: id,
-        isEnabled,
-      })));
+      setLocalState(
+        data.map((svc: any) => ({
+          serviceId: svc.id,
+          isTenantGloballyEnabled: svc.isTenantGloballyEnabled ?? true,
+        }))
+      );
     }
   }, [data]);
 
@@ -63,14 +68,17 @@ export const TenantServiceModal = ({ tenantId, opened, onClose }: Props) => {
         </Group>
       ) : (
         <Stack>
-          {data.map((svc:any) => (
+          {data.map((svc: any) => (
             <Group key={svc.id} justify="space-between">
               <div>
                 <Text size="sm" fw={500}>{svc.name}</Text>
                 <Text size="xs" c="dimmed">{svc.description || svc.code}</Text>
               </div>
               <Switch
-                checked={localState.find(s => s.serviceId === svc.id)?.isEnabled}
+                checked={
+                  localState.find(s => s.serviceId === svc.id)
+                    ?.isTenantGloballyEnabled ?? true
+                }
                 onChange={() => handleToggle(svc.id)}
               />
             </Group>

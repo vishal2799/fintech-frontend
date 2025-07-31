@@ -1,4 +1,4 @@
-import { IconGauge, IconUsers } from "@tabler/icons-react";
+import { IconGauge, IconPackages, IconUsers } from "@tabler/icons-react";
 
 export const wlAdminNavItems = [
   {
@@ -73,4 +73,15 @@ export const wlAdminNavItems = [
       },
     ],
   },
+  {
+    label: 'Services',
+    icon: IconPackages,
+    links: [
+      {
+        label: 'Portal Services',
+        link: 'services/portal-services',
+        allowedRoles: ['WL_ADMIN']
+      }
+    ]
+  }
 ];

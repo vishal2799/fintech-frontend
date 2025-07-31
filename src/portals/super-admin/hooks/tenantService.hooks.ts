@@ -12,7 +12,7 @@ export const useUpdateTenantServices = (tenantId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: { serviceId: string; isEnabled: boolean }[]) =>
+    mutationFn: (payload: { serviceId: string; isTenantGloballyEnabled: boolean }[]) =>
       updateTenantServices(tenantId, payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenant-services', tenantId] });
