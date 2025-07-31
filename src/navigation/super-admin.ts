@@ -92,6 +92,7 @@ export const superAdminNavItems = [
     icon: IconPackages,
     links: [
       { label: 'Global Services', link: '/services', allowedRoles: ['SUPER_ADMIN'] },
+      { label: 'Tenant Services', link: '/tenant-services', allowedRoles: ['SUPER_ADMIN'] },
     ],
   },
   {

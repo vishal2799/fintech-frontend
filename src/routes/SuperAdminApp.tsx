@@ -20,6 +20,7 @@ import CreditRequestListPage from "../portals/super-admin/pages/CreditRequestsPa
 import TenantWalletListPage from "../portals/super-admin/pages/TenantWalletListPage";
 import WLAdminListPage from "../portals/super-admin/pages/WLAdminListPage";
 import WLAdminFormPage from "../portals/super-admin/pages/WLAdminFormPage";
+import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       ]},
       { path: "/logs" , element: <AuditLogTable />},
       { path: "/services" , element: <ServiceListPage />},
+      { path: "/tenant-services" , element: <TenantServicesListPage />},
     ]
   },
 ]);
