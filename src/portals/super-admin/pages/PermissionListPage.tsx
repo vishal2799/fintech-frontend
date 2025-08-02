@@ -24,16 +24,17 @@ export default function PermissionListPage() {
       title="Permissions"
       data={data}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'module', label: 'Module' },
-        { key: 'scope', label: 'Scope' },
-        { key: 'description', label: 'Description' },
+        { key: 'name', label: 'Name', width: 250 },
+        { key: 'module', label: 'Module', width: 250 },
+        { key: 'scope', label: 'Scope', width: 150 },
+        { key: 'description', label: 'Description', width: 300 },
       ]}
       searchFields={['name', 'module', 'description', 'scope']}
       onEdit={(row) => navigate(`/permissions/edit/${row.id}`)}
       onDelete={handleDelete}
       onCreate={() => navigate('/permissions/create')}
       perPage={10}
+      rowActionsWidth={210}
     />
   );
 }

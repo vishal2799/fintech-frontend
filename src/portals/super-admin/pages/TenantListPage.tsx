@@ -19,16 +19,6 @@ export default function TenantListPage() {
 
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
-  // const handleDelete = async (row: Tenant) => {
-  //   if (!confirm('Delete this tenant?')) return;
-  //   try {
-  //     const res = await deleteTenant.mutateAsync(row.id);
-  //     showSuccess(res);
-  //   } catch (err: any) {
-  //     showError(err);
-  //   }
-  // };
-
   const handleStatusChange = async (id: string, status: TenantStatus) => {
   try {
     const res = await updateTenantStatus.mutateAsync({ id, data: { status } });
@@ -108,6 +98,7 @@ export default function TenantListPage() {
       // onDelete={handleDelete}
       onCreate={() => navigate('/tenants/create')}
       perPage={4}
+      rowActionsWidth={120}
     />
   );
 }

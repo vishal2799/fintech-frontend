@@ -78,18 +78,20 @@ export default function TenantWalletListPage() {
         title="Tenant Wallets"
         data={data}
         columns={[
-          { key: 'tenantName', label: 'Tenant' },
+          { key: 'tenantName', label: 'Tenant', width: 200 },
           {
             key: 'balance',
             label: 'Balance',
             render: (row) => <Text fw={500}>₹ {row.balance}</Text>,
             renderExport: (row) => row.balance,
+            width: 150
           },
           {
             key: 'heldAmount',
             label: 'Held Amount',
             render: (row) => <Text fw={500} c="gray">₹ {row.heldAmount}</Text>,
             renderExport: (row) => row.heldAmount,
+            width: 150
           },
         ]}
         searchFields={['tenantName']}
@@ -101,6 +103,7 @@ export default function TenantWalletListPage() {
           <Button size="xs" variant="light" color="green" onClick={() => openModal(row, 'RELEASE')}>Release</Button>,
         ]}
         perPage={5}
+        rowActionsWidth={350}
       />
 
       <Modal

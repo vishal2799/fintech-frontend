@@ -36,6 +36,7 @@ interface Props<T> {
   filterControls?: React.ReactNode;
   filterFn?: (row: T) => boolean;
   rowActions?: (row: T) => React.ReactNode[];
+  rowActionsWidth?: number;
 }
 
 function getNestedValue(obj: any, path: string): string {
@@ -56,6 +57,7 @@ export function ClientTable<T extends { id: string }>({
   filterControls,
   filterFn,
   rowActions,
+  rowActionsWidth
 }: Props<T>) {
   // const theme = useMantineTheme();
 
@@ -146,14 +148,22 @@ export function ClientTable<T extends { id: string }>({
               + Create
             </Button>
           )}
-          <ExportMenu title={title} columns={columns} data={filtered} />
+          <ExportMenu
+  title={title}
+  columns={columns}
+  data={filtered}
+  currentPageData={paginated}
+  allData={data}
+/>
+
+          {/* <ExportMenu title={title} columns={columns} data={filtered} /> */}
         </Group>
       </Group>
 
       {filterControls && <Group mb="md">{filterControls}</Group>}
 
     <Table.ScrollContainer minWidth={500}>
-      <Table striped withTableBorder withColumnBorders layout={'fixed'}>
+      <Table striped withTableBorder withColumnBorders layout='fixed'>
         <Table.Thead>
           <Table.Tr>
             {columns.map((col) => (
@@ -173,7 +183,7 @@ export function ClientTable<T extends { id: string }>({
                 </Group>
               </Table.Th>
             ))}
-            {(onEdit || onDelete || rowActions) && <Table.Th>Actions</Table.Th>}
+            {(onEdit || onDelete || rowActions) && <Table.Th w={rowActionsWidth}>Actions</Table.Th>}
           </Table.Tr>
         </Table.Thead>
 
@@ -208,8 +218,8 @@ export function ClientTable<T extends { id: string }>({
                 </Table.Td>
               ))}
               {(onEdit || onDelete || rowActions) && (
-                <Table.Td>
-                  <Group gap="xs">
+                <Table.Td width={rowActionsWidth}>
+                  <Group gap={'xs'}>
                     {onEdit && (
                       <Button
                         size="xs"
