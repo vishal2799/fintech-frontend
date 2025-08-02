@@ -17,6 +17,7 @@ import { ExportMenu } from './ExportMenu';
 interface Column<T> {
   key: keyof T;
   label: string;
+  width?: string | number;
   type?: 'text' | 'badge' | 'toggle';
   render?: (row: T) => React.ReactNode;
   renderExport?: (row: T) => string;
@@ -160,6 +161,7 @@ export function ClientTable<T extends { id: string }>({
                 key={String(col.key)}
                 onClick={() => toggleSort(col.key)}
                 style={{ cursor: 'pointer' }}
+                w={col.width}
               >
                 <Group justify="space-between">
                   <span>{col.label}</span>
@@ -186,7 +188,7 @@ export function ClientTable<T extends { id: string }>({
           {paginated.map((row) => (
             <Table.Tr key={row.id}>
               {columns.map((col) => (
-                <Table.Td key={String(col.key)}>
+                <Table.Td key={String(col.key)} width={col.width}>
                   {col.render ? (
                     col.render(row)
                   ) : col.type === 'badge' ? (

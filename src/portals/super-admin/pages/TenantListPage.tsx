@@ -44,11 +44,12 @@ export default function TenantListPage() {
       title="Tenants"
       data={data}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'slug', label: 'Slug' },
+        { key: 'name', label: 'Name', width: 200 },
+        { key: 'slug', label: 'Slug', width: 200 },
         {
           key: 'themeColor',
           label: 'Theme',
+          width: 130,
           render: (row) => (
             <div
               className="w-4 h-4 rounded-full border"
@@ -59,6 +60,7 @@ export default function TenantListPage() {
         {
           key: 'status',
           label: 'Status',
+          width: 150,
           render: (row) => (
             <Menu withinPortal position="bottom-start" shadow="md">
               <Menu.Target>

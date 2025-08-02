@@ -58,7 +58,9 @@ export default function ServerTable<T extends object>({
 
   return (
     <Box>
-      <MantineTable striped highlightOnHover withTableBorder>
+      <MantineTable.ScrollContainer minWidth={500}>
+
+      <MantineTable layout={'fixed'} striped highlightOnHover withTableBorder>
         <Table.Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Table.Tr key={headerGroup.id}>
@@ -66,6 +68,7 @@ export default function ServerTable<T extends object>({
                 <Table.Th
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
+                  w={header.column.getSize()}
                   style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
                 >
                   <Group gap="xs">
@@ -73,9 +76,11 @@ export default function ServerTable<T extends object>({
                       {flexRender(header.column.columnDef.header, header.getContext())}
                     </Text>
                     {{
-                      asc: '↑',
-                      desc: '↓',
-                    }[header.column.getIsSorted() as string] ?? null}
+  asc: '↑',
+  desc: '↓',
+  false: '↕',
+}[`${header.column.getIsSorted()}`] ?? '↕'}
+
                   </Group>
                 </Table.Th>
               ))}
@@ -86,7 +91,7 @@ export default function ServerTable<T extends object>({
           {table.getRowModel().rows.map(row => (
             <Table.Tr key={row.id}>
               {row.getVisibleCells().map(cell => (
-                <Table.Td key={cell.id}>
+                <Table.Td key={cell.id} width={cell.column.getSize()}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Table.Td>
               ))}
@@ -94,6 +99,7 @@ export default function ServerTable<T extends object>({
           ))}
         </Table.Tbody>
       </MantineTable>
+      </MantineTable.ScrollContainer>
 
       <Group mt="md" justify="space-between">
         <Group>
@@ -131,7 +137,7 @@ export default function ServerTable<T extends object>({
           Page {pagination.pageIndex + 1} of {table.getPageCount()}
         </Text>
 
-        <Select
+        {/* <Select
           data={['10', '20', '30', '40', '50']}
           value={pagination.pageSize.toString()}
           onChange={value =>
@@ -142,7 +148,7 @@ export default function ServerTable<T extends object>({
           }
           placeholder="Page size"
           maw={100}
-        />
+        /> */}
       </Group>
     </Box>
   )

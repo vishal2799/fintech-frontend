@@ -1,15 +1,16 @@
 import { useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import ServerTable, {
   DEFAULT_PAGE_INDEX,
   DEFAULT_PAGE_SIZE,
 } from '../../../components/ServerTable2'
-import { fetchAuditLogs, type AuditLogFilters } from '../api/auditLogss.api'
+import { AUDIT_LOG_EXPORT_COLUMNS, exportAuditLogs, fetchAuditLogs, type AuditLogFilters } from '../api/auditLogss.api'
 import { useTableFilters } from '../../../hooks/useTableFilters'
 import { sortByToState, stateToSortBy } from '../../../utils/tableSortMapper'
 import { AUDIT_LOG_COLUMNS } from '../../../utils/auditLogColumns'
 import { TextInput, Button, Group } from '@mantine/core'
 import type { SortParams } from '../../../types/types'
+import { ExportMenu } from '../../../components/ExportMenu2'
 
 export default function AuditLogsPage() {
   const { filters, setFilters, resetFilters } = useTableFilters()
@@ -17,7 +18,8 @@ export default function AuditLogsPage() {
   const { data } = useQuery({
     queryKey: ['auditLogs', filters],
     queryFn: () => fetchAuditLogs(filters as AuditLogFilters),
-    placeholderData: { result: [], rowCount: 0 },
+    placeholderData: keepPreviousData
+    // placeholderData: { result: [], rowCount: 0 },
   })
 
   const paginationState = {
@@ -41,6 +43,15 @@ export default function AuditLogsPage() {
         <Button onClick={() => resetFilters()} disabled={Object.keys(filters).length === 0}>
           Reset
         </Button>
+              <ExportMenu
+  title="Audit Logs"
+  columns={AUDIT_LOG_EXPORT_COLUMNS}
+  data={data?.result ?? []}
+  onExportAll={() => exportAuditLogs({ type: 'all' })}
+  onExportFiltered={() =>
+    exportAuditLogs({ type: 'filtered', filters: { ...filters, pageIndex: 0, pageSize: 10000 } })
+  }
+/>
       </Group>
 
       <ServerTable

@@ -6,30 +6,37 @@ export const AUDIT_LOG_COLUMNS: ColumnDef<AuditLog, any>[] = [
     accessorKey: 'createdAt',
     header: 'Time',
     cell: info => new Date(info.getValue() as string).toLocaleString(),
+    size: 200,
   },
   {
     accessorKey: 'activity',
     header: 'Activity',
+    size: 220,
   },
   {
     accessorKey: 'module',
     header: 'Module',
+    size: 200,
   },
   {
     accessorKey: 'method',
     header: 'Method',
+    size: 100,
   },
   {
     accessorKey: 'url',
     header: 'URL',
+    size: 270,
   },
   {
     accessorKey: 'actorType',
     header: 'Actor Type',
+    size: 150,
   },
   {
     accessorKey: 'actorId',
     header: 'Actor ID',
+    size: 380,
   },
 ]
 
