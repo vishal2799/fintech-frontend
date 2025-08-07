@@ -26,14 +26,15 @@ export default function EmployeeListPage() {
       title="Employees"
       data={employees}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'email', label: 'Email' },
-        { key: 'mobile', label: 'Mobile' },
+        { key: 'name', label: 'Name', width: 150 },
+        { key: 'email', label: 'Email', width: 200 },
+        { key: 'mobile', label: 'Mobile', width: 130 },
         {
           key: 'role',
           label: 'Role',
           render: (row: Employee) => row.role?.name || '-',
-          renderExport: (row: Employee) => row.role?.name || '', // 👈 Fix export
+          renderExport: (row: Employee) => row.role?.name || '',
+          width: 120
         },
       ]}
       searchFields={['name', 'email', 'mobile', 'role.name']}
@@ -42,6 +43,7 @@ export default function EmployeeListPage() {
       }
       onDelete={handleDelete}
       onCreate={() => navigate('/employees/create')}
+      rowActionsWidth={200}
     />
   );
 }

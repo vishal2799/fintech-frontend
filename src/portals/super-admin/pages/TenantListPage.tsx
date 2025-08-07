@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   useTenants,
   // useDeleteTenant,
   useUpdateTenantStatus,
 } from '../hooks/tenants.hooks';
-import { Select, Menu, Badge } from '@mantine/core';
+import { Menu, Badge } from '@mantine/core';
 import { IconChevronDown, IconCheck } from '@tabler/icons-react';
 import { ClientTable } from '../../../components/ClientTable';
 import { STATUS_OPTIONS, type TenantStatus } from '../../../constants/constants';
@@ -17,7 +16,7 @@ export default function TenantListPage() {
   // const deleteTenant = useDeleteTenant();
   const updateTenantStatus = useUpdateTenantStatus();
 
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  // const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const handleStatusChange = async (id: string, status: TenantStatus) => {
   try {
@@ -80,20 +79,20 @@ export default function TenantListPage() {
           ),
         },
       ]}
-      searchFields={['name', 'slug']}
-      filterControls={
-        <Select
-          placeholder="Filter by status"
-          data={STATUS_OPTIONS.map((x) => ({
-            label: x,
-            value: x,
-          }))}
-          value={statusFilter}
-          onChange={setStatusFilter}
-          clearable
-        />
-      }
-      filterFn={(row) => !statusFilter || row.status === statusFilter}
+      searchFields={['name', 'slug', 'status']}
+      // filterControls={
+      //   <Select
+      //     placeholder="Filter by status"
+      //     data={STATUS_OPTIONS.map((x) => ({
+      //       label: x,
+      //       value: x,
+      //     }))}
+      //     value={statusFilter}
+      //     onChange={setStatusFilter}
+      //     clearable
+      //   />
+      // }
+      // filterFn={(row) => !statusFilter || row.status === statusFilter}
       onEdit={(row) => navigate(`/tenants/edit/${row.id}`)}
       // onDelete={handleDelete}
       onCreate={() => navigate('/tenants/create')}

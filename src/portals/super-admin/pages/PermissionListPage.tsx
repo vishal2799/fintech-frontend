@@ -27,9 +27,9 @@ export default function PermissionListPage() {
         { key: 'name', label: 'Name', width: 250 },
         { key: 'module', label: 'Module', width: 250 },
         { key: 'scope', label: 'Scope', width: 150 },
-        { key: 'description', label: 'Description', width: 300 },
+        // { key: 'description', label: 'Description', width: 300 },
       ]}
-      searchFields={['name', 'module', 'description', 'scope']}
+      searchFields={['name', 'module', 'scope']}
       onEdit={(row) => navigate(`/permissions/edit/${row.id}`)}
       onDelete={handleDelete}
       onCreate={() => navigate('/permissions/create')}

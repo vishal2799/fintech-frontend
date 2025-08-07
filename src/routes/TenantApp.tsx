@@ -15,6 +15,11 @@ import CreditRequestListPage from "../portals/wl-admin/pages/CreditRequestsList"
 import CreditRequestFormPage from "../portals/wl-admin/pages/CreditRequestFormPage";
 import WalletPage from "../portals/wl-admin/pages/WalletPage";
 import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPage";
+import TicketListPage from "../portals/retailer/pages/TicketListPage";
+import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
+import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
+import DistributorTicketDetail from "../portals/distributor/pages/TicketDetailsPage";
+import DistributorTicketTable from "../portals/distributor/pages/TicketListPage";
 
 
 const tenantRouter = createBrowserRouter([
@@ -23,6 +28,8 @@ const tenantRouter = createBrowserRouter([
   { path: '/admin/verify-otp', element: <VerifyOtp /> },
   { path: '/retailer/login', element: <Login /> },
   { path: '/retailer/verify-otp', element: <VerifyOtp /> },
+    { path: '/distributor/login', element: <Login /> },
+  { path: '/distributor/verify-otp', element: <VerifyOtp /> },
   { path: '/unauthorized', element: <Unauthorized /> },
 
   {
@@ -70,7 +77,26 @@ const tenantRouter = createBrowserRouter([
     ),
     children: [
       { index: true, element: <div>Retailer Dashboard</div> },
-      // other retailer routes...
+      {path: 'support-ticket', children: [
+              {path: 'list', element: <TicketListPage />},
+              {path: 'create', element: <CreateTicketPage />},
+              {path: 'list/:id', element: <TicketDetailPage />},
+      ]},
+    ]
+  },
+    {
+    path: '/distributor',
+    element: (
+      <ProtectedRoute allowedRoles={['R', 'SD', 'D', 'EMPLOYEE']}>
+        <DynamicLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { index: true, element: <div>Distributor Dashboard</div> },
+      {path: 'support-ticket', children: [
+              {path: 'list', element: <DistributorTicketTable/>},
+              {path: 'list/:id', element: <DistributorTicketDetail />},
+      ]},
     ]
   },
   {

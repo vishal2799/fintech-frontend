@@ -5,8 +5,13 @@ import { useState } from 'react';
 import { ClientTable } from '../../../components/ClientTable';
 import { getTenants } from '../api/tenants.api';
 import { TenantServiceModal } from '../components/TenantServiceModal';
+import { PERMISSIONS } from '../../../constants/permissions';
+import { checkAccess } from '../../../utils/checkAccess';
+import { useAuthStore } from '../../../stores/useAuthStore';
 
 export const TenantServicesListPage = () => {
+      const { user } = useAuthStore();
+  
   const { data = [] } = useQuery({
     queryKey: ['tenants'],
     queryFn: getTenants,
@@ -31,17 +36,25 @@ export const TenantServicesListPage = () => {
             // { key: 'code', label: 'Code' },
             { key: 'status', label: 'Status', type: 'badge' },
           ]}
-          rowActions={(row) => [
-            // <PermissionGuard permission={PERMISSIONS.TENANTS_UPDATE} key="configure">
-              <Button
-                size="xs"
-                variant="light"
-                onClick={() => handleOpenModal(row.id)}
-              >
-                Configure Services
-              </Button>
-            // </PermissionGuard>,
-          ]}
+          rowActions={(row) => {
+  const actions = [];
+
+  if (checkAccess(user, PERMISSIONS.TENANTS_DELETE, ['SUPER_ADMIN'])) {
+    actions.push(
+      <Button
+        size="xs"
+        variant="light"
+        onClick={() => handleOpenModal(row.id)}
+        key="configure"
+      >
+        Configure Services
+      </Button>
+    );
+  }
+
+  return actions;
+}}
+
         />
 
       {selectedTenantId && (

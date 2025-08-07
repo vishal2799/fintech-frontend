@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
   useWLAdmins,
   useUpdateWLAdminStatus,
   useDeleteWLAdmin,
 } from '../hooks/wl-admins.hooks';
-import { Select, Menu, Badge } from '@mantine/core';
+import { Menu, Badge } from '@mantine/core';
 import { IconChevronDown, IconCheck } from '@tabler/icons-react';
 import { ClientTable } from '../../../components/ClientTable';
 import { WL_ADMIN_STATUSES, statusColorMap } from '../../../constants/constants';
@@ -18,7 +17,7 @@ export default function WLAdminListPage() {
   const updateStatus = useUpdateWLAdminStatus();
   const deleteWLAdmin = useDeleteWLAdmin();
 
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  // const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const handleStatusChange = async (id: string, status: WLAdminStatus) => {
     try {
@@ -44,11 +43,12 @@ export default function WLAdminListPage() {
       title="WL Admins"
       data={data}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'email', label: 'Email' },
+        { key: 'name', label: 'Name', width: 200 },
+        { key: 'email', label: 'Email', width: 250 },
         {
           key: 'status',
           label: 'Status',
+          width: 150,
           render: (row) => (
             <Menu withinPortal position="bottom-start" shadow="md">
               <Menu.Target>
@@ -76,24 +76,25 @@ export default function WLAdminListPage() {
           ),
         },
       ]}
-      searchFields={['name', 'email']}
-      filterControls={
-        <Select
-          placeholder="Filter by status"
-          data={WL_ADMIN_STATUSES.map((x) => ({
-            label: x,
-            value: x,
-          }))}
-          value={statusFilter}
-          onChange={setStatusFilter}
-          clearable
-        />
-      }
-      filterFn={(row) => !statusFilter || row.status === statusFilter}
+      searchFields={['name', 'email', 'status']}
+      // filterControls={
+      //   <Select
+      //     placeholder="Filter by status"
+      //     data={WL_ADMIN_STATUSES.map((x) => ({
+      //       label: x,
+      //       value: x,
+      //     }))}
+      //     value={statusFilter}
+      //     onChange={setStatusFilter}
+      //     clearable
+      //   />
+      // }
+      // filterFn={(row) => !statusFilter || row.status === statusFilter}
       onEdit={(row) => navigate(`/wl-admins/edit/${row?.id}`)}
       onDelete={handleDelete}
       onCreate={() => navigate('/wl-admins/create')}
       perPage={5}
+      rowActionsWidth={200}
     />
   );
 }

@@ -22,8 +22,13 @@ import {
 import { notifications } from '@mantine/notifications';
 import { IconPlus } from '@tabler/icons-react';
 import type { Service } from '../types/services.types';
+import { PERMISSIONS } from '../../../constants/permissions';
+import { useAuthStore } from '../../../stores/useAuthStore';
+import { checkAccess } from '../../../utils/checkAccess';
 
 export default function ServiceListPage() {
+    const { user } = useAuthStore();
+  
   const { data: services = [], isLoading } = useServices();
   const createService = useCreateService();
   const updateService = useUpdateService();
@@ -122,9 +127,15 @@ export default function ServiceListPage() {
               </Table.Td>
               <Table.Td>
                 <Group gap="xs">
-                  <Button size="xs" variant="light" onClick={() => handleOpenEdit(svc)}>
-                    Edit
-                  </Button>
+                  {checkAccess(user, PERMISSIONS.TENANTS_CREATE, ['SUPER_ADMIN']) && (
+  <Button
+    size="xs"
+    variant="light"
+    onClick={() => handleOpenEdit(svc)}
+  >
+    Edit
+  </Button>
+)}
                   <Button size="xs" variant="light" color="red" onClick={() => handleDelete(svc.id)}>
                     Delete
                   </Button>

@@ -24,15 +24,16 @@ export default function RoleListPage() {
       title="Roles"
       data={data}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'description', label: 'Description' },
-        { key: 'scope', label: 'Scope' },
+        { key: 'name', label: 'Name', width: 160 },
+        { key: 'description', label: 'Description', width: 200 },
+        { key: 'scope', label: 'Scope', width: 150 },
       ]}
       searchFields={['name', 'description', 'scope']}
       onEdit={(row) => navigate(`/roles/edit/${row.id}`)}
       onDelete={handleDelete}
       onCreate={() => navigate('/roles/create')}
       perPage={5}
+      rowActionsWidth={200}
     />
   );
 }
