@@ -21,12 +21,16 @@ export default function TenantFormPage() {
     return <Loader />;
   }
 
+  // pass initialValues only when ready (pass undefined for create)
   return (
     <Container size={'lg'}>
       <Title order={2} mb="md">
         {isEdit ? 'Edit Tenant' : 'Create Tenant'}
       </Title>
-      <TenantForm mode={isEdit ? 'edit' : 'create'} initialValues={initialValues || {}} />
+      <TenantForm
+        mode={isEdit ? 'edit' : 'create'}
+        initialValues={isEdit ? initialValues : undefined}
+      />
     </Container>
   );
 }

@@ -35,3 +35,36 @@ export const deleteTenant = async (id: string) => {
   const res = await axios.delete(`${baseURL}/${id}`);
   return res.data;
 };
+
+export const getTenantLogoUploadUrl = async (tenantId: string, fileName: string, mimeType: string) => {
+  const { data } = await axios.post(baseURL + '/logo/upload-url', { tenantId, fileName, mimeType });
+  return data.data; // { uploadUrl, fileKey }
+};
+
+export const updateTenantLogoKey = async (tenantId: string, fileKey: string) => {
+  const { data } = await axios.post(baseURL + '/logo/update', { tenantId, fileKey });
+  return data;
+};
+
+export const getTenantLogoDownloadUrl = async (tenantId: string) => {
+  const { data } = await axios.get(baseURL + `/logo/${tenantId}`);
+  return data.data; // { downloadUrl, fileKey }
+};
+
+// export const getTenantLogoUploadUrl = async (tenantId: string, fileName: string, mimeType: string) => {
+//   const { data } = await axios.post(baseURL + '/logo/upload-url', {
+//     tenantId,
+//     fileName,
+//     mimeType
+//   });
+//   return data.data;
+// };
+
+// export const updateTenantLogoUrl = async (tenantId: string, fileKey: string) => {
+//   const { data } = await axios.post(baseURL + '/logo/update', {
+//     tenantId,
+//     fileKey
+//   });
+//   return data;
+// };
+

@@ -3,10 +3,7 @@ import { z } from 'zod';
 export const createTenantSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   slug: z.string().min(1, 'Slug is required').transform((val) => val.toLowerCase()),
-  logoUrl: z
-    .url('Logo URL must be a valid URL')
-    .optional()
-    .or(z.literal('')),
+  logoUrl: z.string().optional(),
   themeColor: z.string().optional(),
 });
 
