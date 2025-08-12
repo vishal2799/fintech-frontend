@@ -8,6 +8,7 @@ import { SidebarNav } from "../components/SidebarNav";
 // import DarkModeToggle from "../components/DarkModeToggle";
 import { IconPalette } from "@tabler/icons-react";
 import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
+import ThemeSettingsModalTrigger from "../components/ThemeSettingsModal";
 // import type { Scope, StaticRole } from "../navigation";
 
 const DynamicLayout = () => {
@@ -34,7 +35,8 @@ const DynamicLayout = () => {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Title order={3}>{title}</Title>
           <Group>
-            <Popover>
+            <ThemeSettingsModalTrigger />
+            {/* <Popover>
   <Popover.Target>
     <ActionIcon variant="light" title="Theme Settings">
       <IconPalette size={20} />
@@ -43,7 +45,7 @@ const DynamicLayout = () => {
   <Popover.Dropdown>
     <ThemeSettingsPanel />
   </Popover.Dropdown>
-</Popover>
+</Popover> */}
             {/* <DarkModeToggle /> */}
           <UserAvatarMenu />
           </Group>
