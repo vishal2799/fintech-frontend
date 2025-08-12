@@ -42,7 +42,6 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
       mobile: "",
       password: "",
       tenantId: "",
-      // status: "ACTIVE",
       ...initialValues,
     },
     validate: zod4Resolver(schema),
@@ -58,12 +57,11 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
           id: initialValues.id,
           data: {
             ...values,
-            // status: values.status as 'ACTIVE' | 'LOCKED' | 'BLOCKED',
           }
         });
         showSuccess(res);
       }
-      navigate("/super-admin/wl-admins/list");
+      navigate("/wl-admins/list");
     } catch (err) {
       showError(err);
     }
@@ -86,17 +84,6 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
           {...form.getInputProps("tenantId")}
           disabled={mode === "edit"}
         />
-
-        {/* {mode === "edit" && (
-          <Select
-            label="Status"
-            data={["ACTIVE", "LOCKED", "BLOCKED"].map((s) => ({
-              label: s,
-              value: s,
-            }))}
-            {...form.getInputProps("status")}
-          />
-        )} */}
 
         <Group mt="md">
           <Button type="submit" loading={create.isPending || update.isPending}>
