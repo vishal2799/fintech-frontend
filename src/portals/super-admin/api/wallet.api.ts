@@ -39,6 +39,11 @@ export const getAllCreditRequests = async (): Promise<CreditRequest[]> => {
   return res.data.data;
 };
 
+export const getPendingCreditRequests = async (): Promise<CreditRequest[]> => {
+  const res = await axios.get(`${BASE_URL}/pending-credit-requests`);
+  return res.data.data;
+};
+
 export const approveCreditRequest = async (id: string) => {
   const res = await axios.post(`${BASE_URL}/approve/${id}`, {});
   return res.data;

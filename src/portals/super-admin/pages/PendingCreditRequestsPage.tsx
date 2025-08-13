@@ -1,27 +1,56 @@
 import {
-  Badge,
   Button,
+  Group,
   Modal,
+  Stack,
+  Text,
+  TextInput,
 } from '@mantine/core';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { ClientTable } from '../../../components/ClientTable';
 import {
-  useAllCreditRequests,
+  useApproveCreditRequest,
+  usePendingCreditRequests,
+  useRejectCreditRequest,
 } from '../hooks/wallet.hooks';
+import { showSuccess, showError } from '../../../utils/notifications';
 import type { CreditRequest } from '../types/wallet.types';
 
-export default function CreditRequestListPage() {
-  const { data = [] } = useAllCreditRequests();
+export default function PendingCreditRequestListPage() {
+  const { data = [] } = usePendingCreditRequests();
+  const approve = useApproveCreditRequest();
+  const reject = useRejectCreditRequest();
 
   const [selected, setSelected] = useState<CreditRequest | null>(null);
+  const [remarks, setRemarks] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
 
-  const handleProofClick = (request: CreditRequest) => {
+  const handleRejectClick = (request: CreditRequest) => {
     setSelected(request);
+    setRemarks('');
     open();
   };
 
+  const confirmReject = async () => {
+    if (!selected) return;
+    try {
+      await reject.mutateAsync({ id: selected.id, remarks });
+      showSuccess('Request rejected');
+      close();
+    } catch (err) {
+      showError(err);
+    }
+  };
+
+  const handleApprove = async (id: string) => {
+    try {
+      await approve.mutateAsync(id);
+      showSuccess('Request approved');
+    } catch (err) {
+      showError(err);
+    }
+  };
 
   return (
     <>
@@ -33,30 +62,38 @@ export default function CreditRequestListPage() {
           { key: 'amount', label: 'Amount', width: 120, render: (r) => `₹ ${r.amount}` },
           { key: 'requestedByUserName', label: 'Requested By', width: 160 },
           { key: 'remarks', label: 'Remarks', width: 160 },
-          {
-            key: 'status',
-            label: 'Status',
-            width: 130,
-            render: (row) => (
-              <Badge color={getStatusColor(row.status)}>{row.status}</Badge>
-            ),
-          },
+        //   {
+        //     key: 'status',
+        //     label: 'Status',
+        //     width: 130,
+        //     render: (row) => (
+        //       <Badge color={getStatusColor(row.status)}>{row.status}</Badge>
+        //     ),
+        //   },
         ]}
         rowActions={(row) =>
-          row.status !== 'PENDING'
+          row.status === 'PENDING'
             ? [
                 <Button
                   size="xs"
                   variant="light"
-                  color="red"
-                  onClick={() => handleProofClick(row)}
+                  onClick={() => handleApprove(row.id)}
+                  loading={approve.isPending}
                 >
-                  View Proof
+                  Approve
+                </Button>,
+                <Button
+                  size="xs"
+                  variant="light"
+                  color="red"
+                  onClick={() => handleRejectClick(row)}
+                >
+                  Reject
                 </Button>,
               ]
             : []
         }
-        rowActionsWidth={120}
+        rowActionsWidth={200}
         searchFields={['tenantName', 'requestedByUserName', 'remarks']}
         perPage={5}
       />
@@ -64,10 +101,10 @@ export default function CreditRequestListPage() {
       <Modal
         opened={opened}
         onClose={close}
-        title="Credit Request Proof"
+        title="Reject Credit Request"
         centered
       >
-        {/* <Stack>
+        <Stack>
           <Text>
             Rejecting credit request of{' '}
             <strong>{selected?.tenantName}</strong> for amount ₹
@@ -88,21 +125,21 @@ export default function CreditRequestListPage() {
               Reject
             </Button>
           </Group>
-        </Stack> */}
+        </Stack>
       </Modal>
     </>
   );
 }
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'PENDING':
-      return 'yellow';
-    case 'APPROVED':
-      return 'green';
-    case 'REJECTED':
-      return 'red';
-    default:
-      return 'gray';
-  }
-};
+// const getStatusColor = (status: string) => {
+//   switch (status) {
+//     case 'PENDING':
+//       return 'yellow';
+//     case 'APPROVED':
+//       return 'green';
+//     case 'REJECTED':
+//       return 'red';
+//     default:
+//       return 'gray';
+//   }
+// };

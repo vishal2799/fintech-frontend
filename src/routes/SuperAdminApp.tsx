@@ -14,7 +14,7 @@ import RoleListPage from "../portals/super-admin/pages/RoleListPage";
 import RoleFormPage from "../portals/super-admin/pages/RoleFormPage";
 import EmployeeListPage from "../portals/super-admin/pages/EmployeeListPage";
 import EmployeeFormPage from "../portals/super-admin/pages/EmployeeFormPage";
-import AuditLogTable from "../portals/super-admin/pages/AuditLogsList";
+// import AuditLogTable from "../portals/super-admin/pages/AuditLogsList";
 import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import CreditRequestListPage from "../portals/super-admin/pages/CreditRequestsPage";
 import TenantWalletListPage from "../portals/super-admin/pages/TenantWalletListPage";
@@ -22,6 +22,9 @@ import WLAdminListPage from "../portals/super-admin/pages/WLAdminListPage";
 import WLAdminFormPage from "../portals/super-admin/pages/WLAdminFormPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import AuditLogsPage from "../portals/super-admin/pages/AuditLogsPage";
+import PendingCreditRequestListPage from "../portals/super-admin/pages/PendingCreditRequestsPage";
+import BankAccountsListPage from "../portals/super-admin/pages/BankAccountsListPage";
+import BankAccountFormPage from "../portals/super-admin/pages/BankAccountFormPage";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -59,6 +62,7 @@ const router = createBrowserRouter([
       ]},
       {path: '/wallet', children: [
                 { path: "tenant-list", element: <TenantWalletListPage /> },
+              { path: "pending-credit-requests", element: <PendingCreditRequestListPage /> },
             { path: "credit-requests", element: <CreditRequestListPage /> },
       ]},
       { path: "/logs" , element: <AuditLogsPage />},
@@ -67,6 +71,13 @@ const router = createBrowserRouter([
       {path: 'global', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><ServiceListPage /></PermissionGuard>},
       { path: 'tenant-services', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><TenantServicesListPage /></PermissionGuard>},
         ]},
+      {
+        path: '/settings', children: [
+          {path: 'banks', element: <BankAccountsListPage />},
+          {path: 'add-bank', element: <BankAccountFormPage />},
+          {path: 'edit-bank/:id', element: <BankAccountFormPage />}
+        ]
+      }  
     ]
   },
 ]);

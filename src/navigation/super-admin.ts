@@ -84,6 +84,7 @@ export const superAdminNavItems = [
     icon: IconWallet,
     links: [
       { label: 'Tenant List', link: '/wallet/tenant-list', allowedRoles: ['SUPER_ADMIN'] },
+            { label: 'Pending Credit Request', link: '/wallet/pending-credit-requests', allowedRoles: ['SUPER_ADMIN'] },
       { label: 'Credit Request', link: '/wallet/credit-requests', allowedRoles: ['SUPER_ADMIN'] },
     ],
   },
@@ -104,4 +105,12 @@ export const superAdminNavItems = [
     permission: PERMISSIONS.TENANTS_CREATE,
     allowedRoles: ['SUPER_ADMIN'],
   },
+  {
+    label: 'Settings',
+    icon: IconSettingsCog,
+    links: [
+      {label: 'Company Banks', link: '/settings/banks', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['SUPER_ADMIN']},
+      {label: 'Add Company Bank', link: '/settings/add-bank', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['SUPER_ADMIN']}
+    ]
+  }
 ];

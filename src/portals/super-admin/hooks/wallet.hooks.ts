@@ -61,6 +61,13 @@ export const useAllCreditRequests = () =>
     queryFn: api.getAllCreditRequests,
   });
 
+
+export const usePendingCreditRequests = () =>
+  useQuery<CreditRequest[]>({
+    queryKey: ['credit-requests'],
+    queryFn: api.getPendingCreditRequests,
+  });  
+
 export const useApproveCreditRequest = () => {
   const qc = useQueryClient();
   return useMutation({

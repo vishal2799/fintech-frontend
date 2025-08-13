@@ -4,6 +4,8 @@ import {
   UnstyledButton,
   Group,
   Divider,
+  useMantineTheme,
+  // useMantineColorScheme,
 } from '@mantine/core';
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons-react';
 import { useNavigate } from 'react-router';
@@ -12,6 +14,10 @@ import { notifications } from '@mantine/notifications';
 
 export default function UserAvatarMenu() {
   const navigate = useNavigate();
+  const theme = useMantineTheme();
+  // const { colorScheme } = useMantineColorScheme();
+  
+    const primaryColor = theme.colors[theme.primaryColor][3];
 
 const user = useAuthStore((state) => state.user);
 const logout = useAuthStore((state) => state.logout);
@@ -30,7 +36,7 @@ const logout = useAuthStore((state) => state.logout);
       <Menu.Target>
         <UnstyledButton>
           <Group>
-            <Avatar radius="xl" color="blue">
+            <Avatar radius="xl" color={primaryColor}>
               {initials}
             </Avatar>
             {/* <Text size="sm">{user?.name || 'User'}</Text> */}
