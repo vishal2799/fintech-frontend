@@ -8,6 +8,7 @@ import {
   IconWallet,
   IconPackages,
   IconPresentationAnalytics,
+  IconLockAccess,
 } from '@tabler/icons-react';
 import { PERMISSIONS } from '../constants/permissions';
 
@@ -107,7 +108,7 @@ export const superAdminNavItems = [
   },
     {
     label: 'Auth Logs',
-    icon: IconPresentationAnalytics,
+    icon: IconLockAccess,
     link: '/auth-logs',
     permission: PERMISSIONS.TENANTS_CREATE,
     allowedRoles: ['SUPER_ADMIN'],

@@ -1,34 +1,75 @@
 import { useAuthLogins } from "../hooks/authLogins.hooks";
 import { ClientTable } from "../../../components/ClientTable";
+import type { AuthLogin } from "../types/authLogs.types";
+import { Button, Modal } from "@mantine/core";
+import { useState } from "react";
+import { IconEye } from "@tabler/icons-react";
 
 export default function AuthLoginsPage() {
-  const { data, isLoading } = useAuthLogins();
+  const { data = [] } = useAuthLogins();
+const [selectedLog, setSelectedLog] = useState<AuthLogin>(null);
+  const [opened, setOpened] = useState(false);
 
   return (
-    <ClientTable
+    <>
+    <ClientTable<AuthLogin>
       title="Auth Logins"
       data={data || []}
-      loading={isLoading}
+    //   loading={isLoading}
       columns={[
         { key: 'email', label: 'Email', width: 250 },
         { key: 'status', label: 'Status', width: 120 },
-        { key: 'reason', label: 'Reason', width: 300 },
         { key: 'ipAddress', label: 'IP Address', width: 150 },
-        { key: 'latitude', label: 'Latitude', width: 120 },
-        { key: 'longitude', label: 'Longitude', width: 130 },
-        { key: 'accuracy', label: 'Accuracy', width: 120 },
-        { key: 'userAgent', label: 'User Agent', width: 300 },
         { key: 'createdAt', label: 'Login Time', width: 200 },
       ]}
       searchFields={[
         'email',
         'status',
-        'reason',
         'ipAddress',
         'userAgent',
       ]}
-      perPage={10}
-      rowActionsWidth={0} // no actions for now
+      rowActions={(row) => [<Button
+                  size="xs"
+                  variant="light"
+                  onClick={() => {
+            const url = `https://www.google.com/maps?q=${row.latitude},${row.longitude}`;
+            window.open(url, '_blank');
+          }}
+                >
+                            View Location
+                </Button>, <Button
+                size="xs"
+                variant="light"
+                onClick={() => {
+                  setSelectedLog(row);
+                  setOpened(true);
+                }}
+              >
+                <IconEye size={16} />
+              </Button>]}
+      perPage={5}
+      rowActionsWidth={180}
     />
+    <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        centered
+        title="Auth Log Details"
+        size="lg"
+      >
+        {selectedLog && (
+          <div className="space-y-2">
+            <div><strong>User:</strong> {selectedLog.email}</div>
+            <div><strong>IP Address:</strong> {selectedLog.ipAddress}</div>
+            <div><strong>Login Time:</strong> {selectedLog.createdAt}</div>
+            <div><strong>User Agent:</strong> {selectedLog.userAgent || 'N/A'}</div>
+            <div><strong>Accuracy:</strong> {selectedLog.accuracy || 'N/A'}</div>
+            <div><strong>Latitude:</strong> {selectedLog.latitude}</div>
+            <div><strong>Longitude:</strong> {selectedLog.longitude}</div>
+            <div><strong>Raw Data:</strong> {JSON.stringify(selectedLog, null, 2)}</div>
+          </div>
+        )}
+      </Modal>
+      </>
   );
 }

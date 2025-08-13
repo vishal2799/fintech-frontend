@@ -5,6 +5,7 @@ import {
 } from '../hooks/bankAccounts.hooks';
 import { ClientTable } from '../../../components/ClientTable';
 import { showError, showSuccess } from '../../../utils/notifications';
+import type { BankAccount } from '../schema/bankAccount.schema';
 
 export default function BankAccountsListPage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function BankAccountsListPage() {
   };
 
   return (
-    <ClientTable
+    <ClientTable<BankAccount>
       title="Bank Accounts"
       data={data}
       columns={[
