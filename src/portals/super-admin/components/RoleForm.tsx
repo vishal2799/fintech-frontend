@@ -99,7 +99,7 @@ export default function RoleForm({ mode, initialValues }: Props) {
           {...form.getInputProps('description')}
         />
 
-        <Select
+        {/* <Select
           label="Scope"
           withAsterisk
           data={[
@@ -108,7 +108,7 @@ export default function RoleForm({ mode, initialValues }: Props) {
           ]}
           {...form.getInputProps('scope')}
           disabled
-        />
+        /> */}
 
         <MultiSelect
           label="Permissions"

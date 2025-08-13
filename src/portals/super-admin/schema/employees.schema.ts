@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const createEmployeeSchema = z.object({
   name: z.string().min(2, 'Name is required'),
-  email: z.string().email('Invalid email'),
+  email: z.email('Invalid email'),
   mobile: z.string().min(10, 'Mobile number is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   roleId: z.string().uuid('Role is required'),

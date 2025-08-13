@@ -80,6 +80,7 @@ export default function WLAdminForm({ mode, initialValues }: Props) {
 
         <Select
           label="Tenant"
+          withAsterisk
           data={tenants.map((t: any) => ({ label: t.name, value: t.id }))}
           {...form.getInputProps("tenantId")}
           disabled={mode === "edit"}

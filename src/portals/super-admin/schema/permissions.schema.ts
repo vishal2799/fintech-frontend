@@ -9,6 +9,7 @@ export const createPermissionSchema = z.object({
   }),
 });
 
+
 export const updatePermissionSchema = createPermissionSchema.partial();
 
 export type CreatePermissionInput = z.infer<typeof createPermissionSchema>;

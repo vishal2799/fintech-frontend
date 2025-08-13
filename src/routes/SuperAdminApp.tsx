@@ -22,8 +22,6 @@ import WLAdminListPage from "../portals/super-admin/pages/WLAdminListPage";
 import WLAdminFormPage from "../portals/super-admin/pages/WLAdminFormPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import AuditLogsPage from "../portals/super-admin/pages/AuditLogsPage";
-import { UploadDocument } from "../portals/super-admin/pages/UploadDoc";
-import { SignedViewer } from "../portals/super-admin/pages/SignedViewer";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -68,7 +66,6 @@ const router = createBrowserRouter([
             {path: '/services', children: [
       {path: 'global', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><ServiceListPage /></PermissionGuard>},
       { path: 'tenant-services', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><TenantServicesListPage /></PermissionGuard>},
-      { path: "upload" , element: <UploadDocument />},
         ]},
     ]
   },

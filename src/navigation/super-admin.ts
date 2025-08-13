@@ -95,7 +95,6 @@ export const superAdminNavItems = [
         allowedRoles: ['SUPER_ADMIN'], },
       { label: 'Tenant Services', link: '/services/tenant-services', permission: PERMISSIONS.TENANTS_READ,
         allowedRoles: ['SUPER_ADMIN'], },
-      { label: 'Upload', link: '/services/upload', allowedRoles: ['SUPER_ADMIN'] },
     ],
   },
   {

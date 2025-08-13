@@ -54,17 +54,17 @@ export default function TenantWalletListPage() {
 
     try {
       if (action === 'CREDIT') {
-        await credit.mutateAsync(basePayload);
-        showSuccess('Debited successfully');
+        const res = await credit.mutateAsync(basePayload);
+        showSuccess(res);
       } else if (action === 'DEBIT') {
-        await debit.mutateAsync(basePayload);
-        showSuccess('Debited successfully');
+        const res = await debit.mutateAsync(basePayload);
+        showSuccess(res);
       } else if (action === 'HOLD') {
-        await hold.mutateAsync(basePayload);
-        showSuccess('Held amount successfully');
+        const res = await hold.mutateAsync(basePayload);
+        showSuccess(res);
       } else if (action === 'RELEASE') {
-        await release.mutateAsync({ tenantId: basePayload.tenantId, amount });
-        showSuccess('Released held amount');
+        const res = await release.mutateAsync({ tenantId: basePayload.tenantId, amount });
+        showSuccess(res);
       }
       close();
     } catch (err: any) {
