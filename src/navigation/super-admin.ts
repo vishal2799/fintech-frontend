@@ -105,6 +105,13 @@ export const superAdminNavItems = [
     permission: PERMISSIONS.TENANTS_CREATE,
     allowedRoles: ['SUPER_ADMIN'],
   },
+    {
+    label: 'Auth Logs',
+    icon: IconPresentationAnalytics,
+    link: '/auth-logs',
+    permission: PERMISSIONS.TENANTS_CREATE,
+    allowedRoles: ['SUPER_ADMIN'],
+  },
   {
     label: 'Settings',
     icon: IconSettingsCog,
