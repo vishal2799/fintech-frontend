@@ -4,10 +4,11 @@ import type { AuthLogin } from "../types/authLogs.types";
 import { Button, Modal } from "@mantine/core";
 import { useState } from "react";
 import { IconEye } from "@tabler/icons-react";
+import dayjs from "dayjs";
 
 export default function AuthLoginsPage() {
   const { data = [] } = useAuthLogins();
-const [selectedLog, setSelectedLog] = useState<AuthLogin>(null);
+const [selectedLog, setSelectedLog] = useState<AuthLogin>();
   const [opened, setOpened] = useState(false);
 
   return (
@@ -20,7 +21,8 @@ const [selectedLog, setSelectedLog] = useState<AuthLogin>(null);
         { key: 'email', label: 'Email', width: 250 },
         { key: 'status', label: 'Status', width: 120 },
         { key: 'ipAddress', label: 'IP Address', width: 150 },
-        { key: 'createdAt', label: 'Login Time', width: 200 },
+        
+        { key: 'createdAt', label: 'Login Time',   render: (row) => dayjs(row.createdAt).format("DD MMM YYYY, h:mm A"), width: 200 },
       ]}
       searchFields={[
         'email',
@@ -60,8 +62,9 @@ const [selectedLog, setSelectedLog] = useState<AuthLogin>(null);
         {selectedLog && (
           <div className="space-y-2">
             <div><strong>User:</strong> {selectedLog.email}</div>
+            <div><strong>Status:</strong> {selectedLog.status}</div>
             <div><strong>IP Address:</strong> {selectedLog.ipAddress}</div>
-            <div><strong>Login Time:</strong> {selectedLog.createdAt}</div>
+            <div><strong>Login Time:</strong> {dayjs(selectedLog.createdAt).format("DD MMM YYYY, h:mm A")}</div>
             <div><strong>User Agent:</strong> {selectedLog.userAgent || 'N/A'}</div>
             <div><strong>Accuracy:</strong> {selectedLog.accuracy || 'N/A'}</div>
             <div><strong>Latitude:</strong> {selectedLog.latitude}</div>

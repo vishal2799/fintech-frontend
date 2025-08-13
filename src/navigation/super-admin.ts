@@ -100,18 +100,22 @@ export const superAdminNavItems = [
     ],
   },
   {
-    label: 'Audit Logs',
+    label: 'Logs',
     icon: IconPresentationAnalytics,
+    links: [
+        {
+    label: 'Audit Logs',
     link: '/logs',
     permission: PERMISSIONS.TENANTS_CREATE,
     allowedRoles: ['SUPER_ADMIN'],
   },
     {
-    label: 'Auth Logs',
-    icon: IconLockAccess,
+    label: 'Login Logs',
     link: '/auth-logs',
     permission: PERMISSIONS.TENANTS_CREATE,
     allowedRoles: ['SUPER_ADMIN'],
+  },
+    ]
   },
   {
     label: 'Settings',

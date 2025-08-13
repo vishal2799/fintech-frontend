@@ -37,7 +37,7 @@ export default function BankAccountsListPage() {
       onDelete={(row) => handleDelete(row.id)}
       onCreate={() => navigate('/settings/add-bank')}
       perPage={5}
-      rowActionsWidth={120}
+      rowActionsWidth={200}
     />
   );
 }
