@@ -26,6 +26,7 @@ import PendingCreditRequestListPage from "../portals/super-admin/pages/PendingCr
 import BankAccountsListPage from "../portals/super-admin/pages/BankAccountsListPage";
 import BankAccountFormPage from "../portals/super-admin/pages/BankAccountFormPage";
 import AuthLoginsPage from "../portals/super-admin/pages/AuthLoginsPage";
+import ClientAuditLogsPage from "../portals/super-admin/pages/ClientAuditLogsPage";
 
 const router = createBrowserRouter([
   {path: '/login', element: <Login />},   
@@ -66,8 +67,9 @@ const router = createBrowserRouter([
               { path: "pending-credit-requests", element: <PendingCreditRequestListPage /> },
             { path: "credit-requests", element: <CreditRequestListPage /> },
       ]},
-      { path: "/logs" , element: <AuditLogsPage />},
+      { path: "/logs" , element: <ClientAuditLogsPage />},
       { path: "/auth-logs" , element: <AuthLoginsPage />},
+      // { path: "/auth-logs" , element: <AuthLoginsPage />},
       // { path: "/logs" , element: <AuditLogTable />},
             {path: '/services', children: [
       {path: 'global', element:  <PermissionGuard allowedRoles={['SUPER_ADMIN']} permission={PERMISSIONS.TENANTS_READ}><ServiceListPage /></PermissionGuard>},
