@@ -22,6 +22,21 @@ export const getCreditRequests = async (): Promise<CreditRequest[]> => {
   return res.data.data;
 };
 
+export const getProofUploadUrl = async (creditRequestId: string, fileName: string, mimeType: string) => {
+  const { data } = await API.post('/wallet/proof/upload-url', { creditRequestId, fileName, mimeType });
+  return data.data; // { uploadUrl, fileKey }
+};
+
+export const updateProofKey = async (creditRequestId: string, fileKey: string) => {
+  const { data } = await API.post('/wallet/proof/update', { creditRequestId, fileKey });
+  return data;
+};
+
+export const getProofDownloadUrl = async (creditRequestId: string) => {
+  const { data } = await API.get(`/wallet/proof/${creditRequestId}`);
+  return data.data; // { downloadUrl, fileKey }
+};
+
 
 // import axios from '../../../../../api/axios';
 // import type { WalletBalance, WalletTransaction } from '../types/wallet.types';

@@ -54,6 +54,11 @@ export const rejectCreditRequest = async(params: { id: string; remarks?: string 
   return res.data;
 };
 
+export const getProofDownloadUrl = async (creditRequestId: string) => {
+  const { data } = await axios.get(`/wallet/proof/${creditRequestId}`);
+  return data.data; // { downloadUrl, fileKey }
+};
+
 // import axios from '../../../../../api/axios';
 // import type {
 //   ManualTopupInput,

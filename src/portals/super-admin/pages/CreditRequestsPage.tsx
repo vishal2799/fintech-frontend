@@ -1,7 +1,9 @@
 import {
   Badge,
   Button,
+  Image,
   Modal,
+  Text,
 } from '@mantine/core';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
@@ -10,15 +12,29 @@ import {
   useAllCreditRequests,
 } from '../hooks/wallet.hooks';
 import type { CreditRequest } from '../types/wallet.types';
+import { getProofDownloadUrl } from '../api/wallet.api';
 
 export default function CreditRequestListPage() {
   const { data = [] } = useAllCreditRequests();
 
   const [selected, setSelected] = useState<CreditRequest | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
+const [proofImageUrl, setProofImageUrl] = useState<string | null>(null);
 
-  const handleProofClick = (request: CreditRequest) => {
+  const handleProofClick = async (request: CreditRequest) => {
     setSelected(request);
+    try {
+        // 🔹 Fetch image download URL for this proof
+        const res = await getProofDownloadUrl(request.id); // similar to your getTenantLogoDownloadUrl
+        if (res?.downloadUrl) {
+          setProofImageUrl(res.downloadUrl);
+        } else {
+          setProofImageUrl('');
+          console.warn('No proof image found for this log.');
+        }
+      } catch (err) {
+        console.error('Error fetching proof image:', err);
+      }
     open();
   };
 
@@ -66,7 +82,18 @@ export default function CreditRequestListPage() {
         onClose={close}
         title="Credit Request Proof"
         centered
+        size={'md'}
       >
+        {proofImageUrl ? (
+            <Image
+              src={proofImageUrl}
+              alt="Proof"
+              radius="md"
+              fit="contain"
+            />
+          ) : (
+            <Text size="sm" c="dimmed">No proof available</Text>
+           )}
         {/* <Stack>
           <Text>
             Rejecting credit request of{' '}

@@ -1,6 +1,8 @@
 import {
+  ActionIcon,
   Button,
   Group,
+  Image,
   Modal,
   Stack,
   Text,
@@ -16,6 +18,8 @@ import {
 } from '../hooks/wallet.hooks';
 import { showSuccess, showError } from '../../../utils/notifications';
 import type { CreditRequest } from '../types/wallet.types';
+import { getProofDownloadUrl } from '../api/wallet.api';
+import { IconEye } from '@tabler/icons-react';
 
 export default function PendingCreditRequestListPage() {
   const { data = [] } = usePendingCreditRequests();
@@ -25,6 +29,27 @@ export default function PendingCreditRequestListPage() {
   const [selected, setSelected] = useState<CreditRequest | null>(null);
   const [remarks, setRemarks] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
+  const [proofOpened, { open: openProof, close: closeProof }] = useDisclosure(false);
+const [proofImageUrl, setProofImageUrl] = useState<string | null>(null);
+
+const handleViewProof = async (logId: string) => {
+  try {
+    // 🔹 Fetch image download URL for this proof
+    const res = await getProofDownloadUrl(logId); // similar to your getTenantLogoDownloadUrl
+    if (res?.downloadUrl) {
+      setProofImageUrl(res.downloadUrl);
+      openProof();
+    } else {
+      setProofImageUrl('');
+      openProof()
+      console.warn('No proof image found for this log.');
+    }
+  } catch (err) {
+    console.error('Error fetching proof image:', err);
+  }
+};
+
+
 
   const handleRejectClick = (request: CreditRequest) => {
     setSelected(request);
@@ -77,6 +102,7 @@ export default function PendingCreditRequestListPage() {
                 <Button
                   size="xs"
                   variant="light"
+                  color='green'
                   onClick={() => handleApprove(row.id)}
                   loading={approve.isPending}
                 >
@@ -90,10 +116,14 @@ export default function PendingCreditRequestListPage() {
                 >
                   Reject
                 </Button>,
+                <Button variant="light" size='xs' onClick={() => handleViewProof(row.id)}>
+  View Proof
+</Button>
+
               ]
             : []
         }
-        rowActionsWidth={200}
+        rowActionsWidth={270}
         searchFields={['tenantName', 'requestedByUserName', 'remarks']}
         perPage={5}
       />
@@ -127,6 +157,18 @@ export default function PendingCreditRequestListPage() {
           </Group>
         </Stack>
       </Modal>
+      <Modal opened={proofOpened} onClose={closeProof}        
+       title="Credit Request Proof" size={'md'}>
+        {proofImageUrl ? (
+    <Image
+      src={proofImageUrl}
+      alt="Proof"
+      radius="md"
+      fit="contain"
+    />
+  ) : (
+    <Text size="sm" c="dimmed">No proof available</Text>
+   )} </Modal>
     </>
   );
 }

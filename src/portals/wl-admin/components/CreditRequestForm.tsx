@@ -4,6 +4,7 @@ import {
   Stack,
   Textarea,
   Group,
+  FileInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
@@ -13,26 +14,71 @@ import {
   creditRequestSchema,
   type CreditRequestInput,
 } from '../schema/wallet.schema';
+import { useState } from 'react';
+import { getProofUploadUrl, updateProofKey } from '../api/wallet.api';
+import { showError } from '../../../utils/notifications';
 
 export default function WalletRequestForm() {
   const creditRequest = useCreditRequest();
+  const [proofFile, setProofFile] = useState<File | null>(null);
+    const [uploading, setUploading] = useState(false);
+    // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const form = useForm<CreditRequestInput>({
     initialValues: {
       amount: 0,
       remarks: '',
+      proofUrl: '',
     },
     validate: zod4Resolver(creditRequestSchema),
   });
 
+    const handleProofUpload = async (creditRequestId: string) => {
+      if (!proofFile) return null;
+      try {
+        setUploading(true);
+        const { uploadUrl, fileKey } = await getProofUploadUrl(
+          creditRequestId,
+          proofFile.name,
+          proofFile.type
+        );
+  
+        const uploadRes = await fetch(uploadUrl, {
+          method: 'PUT',
+          headers: { 'Content-Type': proofFile.type },
+          body: proofFile
+        });
+  
+        if (!uploadRes.ok) throw new Error('Upload failed');
+  
+        await updateProofKey(creditRequestId, fileKey);
+  
+        // const { downloadUrl } = await getProofDownloadUrl(creditRequestId);
+        // setPreviewUrl(downloadUrl);
+        form.setFieldValue('logoUrl', fileKey);
+        return fileKey;
+      } catch (err) {
+        showError(err);
+        throw err;
+      } finally {
+        setUploading(false);
+      }
+    };
+
+
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      await creditRequest.mutateAsync(values);
+      const res = await creditRequest.mutateAsync(values);
+      let creditRequestId = res?.data?.data?.id;
+      if (creditRequestId && proofFile) {
+        await handleProofUpload(creditRequestId);
+      }
       notifications.show({
         message: 'Credit request submitted',
         color: 'green',
       });
       form.reset();
+      setProofFile(null);
     } catch (err: any) {
       notifications.show({
         message: err?.response?.data?.message || 'Submission failed',
@@ -42,6 +88,7 @@ export default function WalletRequestForm() {
   });
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <Stack>
         <NumberInput
@@ -50,6 +97,15 @@ export default function WalletRequestForm() {
           min={1}
           {...form.getInputProps('amount')}
         />
+        
+                <FileInput
+                  label={'Upload Proof'}
+                  placeholder={proofFile ? proofFile.name : 'Choose Proof file'}
+                  accept="image/png,image/jpeg,image/svg+xml"
+                  value={proofFile}
+                  onChange={setProofFile}
+                  clearable
+                />
 
         <Textarea
           label="Remarks"
@@ -60,12 +116,13 @@ export default function WalletRequestForm() {
         />
 
         <Group mt="md">
-          <Button type="submit" loading={creditRequest.isPending}>
+          <Button type="submit" loading={creditRequest.isPending || uploading}>
             Submit Request
           </Button>
         </Group>
       </Stack>
     </form>
+    </>
   );
 }
 

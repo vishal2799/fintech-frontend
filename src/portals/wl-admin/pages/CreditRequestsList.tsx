@@ -1,15 +1,36 @@
-import { useNavigate } from 'react-router';
 import { useCreditRequests } from '../hooks/wallet.hooks';
 // import { formatDateTime } from '../../../../../utils/formatters';
 import { ClientTable } from '../../../components/ClientTable';
 import type { CreditRequest } from '../types/wallet.types';
-import { Badge } from '@mantine/core';
+import { Badge, Button, Image, Modal, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { useState } from 'react';
+import { getProofDownloadUrl } from '../api/wallet.api';
 
 export default function CreditRequestListPage() {
   const { data = [] } = useCreditRequests();
-  const navigate = useNavigate();
+    const [opened, { open, close }] = useDisclosure(false);
+  const [proofImageUrl, setProofImageUrl] = useState<string | null>(null);
+  // const navigate = useNavigate();
+
+    const handleProofClick = async (request: CreditRequest) => {
+      try {
+          // 🔹 Fetch image download URL for this proof
+          const res = await getProofDownloadUrl(request.id); // similar to your getTenantLogoDownloadUrl
+          if (res?.downloadUrl) {
+            setProofImageUrl(res.downloadUrl);
+          } else {
+            setProofImageUrl('');
+            console.warn('No proof image found for this log.');
+          }
+        } catch (err) {
+          console.error('Error fetching proof image:', err);
+        }
+      open();
+    };
 
   return (
+    <>
     <ClientTable
       title="Credit Requests"
       data={data}
@@ -48,9 +69,60 @@ export default function CreditRequestListPage() {
         //     row.status === 'APPROVED' ? formatDateTime(row.updatedAt) : '-',
         // },
       ]}
+      rowActions={(row) => [
+                      <Button
+                        size="xs"
+                        variant="light"
+                        color="green"
+                        onClick={() => handleProofClick(row)}
+                      >
+                        View Proof
+                      </Button>,
+                    ]}
       perPage={10}
-      onCreate={() => navigate('/wl-admin/wallet/request')}
+      // onCreate={() => navigate('/wl-admin/wallet/request')}
     />
+          <Modal
+            opened={opened}
+            onClose={close}
+            title="Credit Request Proof"
+            centered
+            size={'md'}
+          >
+            {proofImageUrl ? (
+                <Image
+                  src={proofImageUrl}
+                  alt="Proof"
+                  radius="md"
+                  fit="contain"
+                />
+              ) : (
+                <Text size="sm" c="dimmed">No proof available</Text>
+               )}
+            {/* <Stack>
+              <Text>
+                Rejecting credit request of{' '}
+                <strong>{selected?.tenantName}</strong> for amount ₹
+                {selected?.amount}
+              </Text>
+    
+              <TextInput
+                label="Remarks (optional)"
+                value={remarks}
+                onChange={(e) => setRemarks(e.currentTarget.value)}
+              />
+    
+              <Group justify="flex-end" mt="md">
+                <Button variant="light" onClick={close}>
+                  Cancel
+                </Button>
+                <Button color="red" onClick={confirmReject} loading={reject.isPending}>
+                  Reject
+                </Button>
+              </Group>
+            </Stack> */}
+          </Modal>
+          </>
   );
 }
 
