@@ -1,4 +1,4 @@
-import { Loader, Select } from '@mantine/core';
+import { Loader } from '@mantine/core';
 import { useNavigate } from 'react-router';
 import {
   useSuperDistributors,
@@ -6,14 +6,14 @@ import {
 } from '../hooks/superDistributors.hooks';
 import { showError, showSuccess } from '../../../utils/notifications';
 import { ClientTable } from '../../../components/ClientTable';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function SuperDistributorListPage() {
   const navigate = useNavigate();
   const { data = [], isLoading } = useSuperDistributors();
   const deleteMutation = useDeleteSuperDistributor();
 
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  // const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const handleDelete = async (row: any) => {
     if (!confirm('Are you sure you want to delete this user?')) return;
@@ -32,13 +32,14 @@ export default function SuperDistributorListPage() {
       title="Super Distributors"
       data={data}
       columns={[
-        { key: 'name', label: 'Name' },
-        { key: 'email', label: 'Email' },
-        { key: 'mobile', label: 'Mobile' },
+        { key: 'name', label: 'Name', width: 150 },
+        { key: 'email', label: 'Email', width: 160 },
+        { key: 'mobile', label: 'Mobile', width: 120 },
         {
           key: 'status',
           label: 'Status',
           type: 'badge',
+          width: 120,
           render: (row) => (
             <span
               className="capitalize"
@@ -56,22 +57,23 @@ export default function SuperDistributorListPage() {
         },
       ]}
       searchFields={['name', 'email', 'mobile']}
-      filterControls={
-        <Select
-          placeholder="Filter by status"
-          data={['ACTIVE', 'DISABLED', 'SUSPENDED'].map((s) => ({
-            label: s,
-            value: s,
-          }))}
-          value={statusFilter}
-          onChange={setStatusFilter}
-          clearable
-        />
-      }
-      filterFn={(row) => !statusFilter || row.status === statusFilter}
+      // filterControls={
+      //   <Select
+      //     placeholder="Filter by status"
+      //     data={['ACTIVE', 'DISABLED', 'SUSPENDED'].map((s) => ({
+      //       label: s,
+      //       value: s,
+      //     }))}
+      //     value={statusFilter}
+      //     onChange={setStatusFilter}
+      //     clearable
+      //   />
+      // }
+      // filterFn={(row) => !statusFilter || row.status === statusFilter}
       onEdit={(row) => navigate(`/admin/super-distributors/edit/${row.id}`)}
       onCreate={() => navigate('/admin/super-distributors/create')}
       onDelete={handleDelete}
+      rowActionsWidth={140}
     />
   );
 }
