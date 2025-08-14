@@ -48,6 +48,7 @@ const [proofImageUrl, setProofImageUrl] = useState<string | null>(null);
           { key: 'tenantName', label: 'Tenant', width: 200 },
           { key: 'amount', label: 'Amount', width: 120, render: (r) => `₹ ${r.amount}` },
           { key: 'requestedByUserName', label: 'Requested By', width: 160 },
+          {key: 'bankName', label: 'Bank', width: 180},
           { key: 'remarks', label: 'Remarks', width: 160 },
           {
             key: 'status',

@@ -5,6 +5,7 @@ import {
   Textarea,
   Group,
   FileInput,
+  Select,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { zod4Resolver } from 'mantine-form-zod-resolver';
@@ -17,18 +18,21 @@ import {
 import { useState } from 'react';
 import { getProofUploadUrl, updateProofKey } from '../api/wallet.api';
 import { showError } from '../../../utils/notifications';
+import { useBankAccounts } from '../../super-admin/hooks/bankAccounts.hooks';
 
 export default function WalletRequestForm() {
   const creditRequest = useCreditRequest();
+    const { data: banks = [] } = useBankAccounts();
+  
   const [proofFile, setProofFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
-    // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const form = useForm<CreditRequestInput>({
     initialValues: {
       amount: 0,
       remarks: '',
       proofUrl: '',
+      bankId: ''
     },
     validate: zod4Resolver(creditRequestSchema),
   });
@@ -53,8 +57,6 @@ export default function WalletRequestForm() {
   
         await updateProofKey(creditRequestId, fileKey);
   
-        // const { downloadUrl } = await getProofDownloadUrl(creditRequestId);
-        // setPreviewUrl(downloadUrl);
         form.setFieldValue('logoUrl', fileKey);
         return fileKey;
       } catch (err) {
@@ -91,6 +93,12 @@ export default function WalletRequestForm() {
     <>
     <form onSubmit={handleSubmit}>
       <Stack>
+        <Select
+          label="Company Accounts"
+          withAsterisk
+          data={banks.map((t: any) => ({ label: t.bankName, value: t.id }))}
+          {...form.getInputProps("bankId")}
+        />
         <NumberInput
           label="Amount"
           withAsterisk
@@ -125,59 +133,3 @@ export default function WalletRequestForm() {
     </>
   );
 }
-
-
-// import { Button, Stack, Textarea, NumberInput, Group } from '@mantine/core';
-// import { useForm } from '@mantine/form';
-// import { useNavigate } from 'react-router';
-// import { useRequestWalletCredit } from '../api/wallet.hooks';
-// import { notifications } from '@mantine/notifications';
-
-// export default function CreditRequestForm() {
-//   const navigate = useNavigate();
-//   const form = useForm({
-//     initialValues: {
-//       amount: 0,
-//       remarks: '',
-//     },
-//     validate: {
-//       amount: (val) => (val <= 0 ? 'Amount must be greater than 0' : null),
-//     },
-//   });
-
-//   const mutation = useRequestWalletCredit();
-
-//   const handleSubmit = form.onSubmit(async (values) => {
-//     try {
-//       await mutation.mutateAsync(values);
-//       notifications.show({ message: 'Credit request sent', color: 'green' });
-//       navigate(-1);
-//     } catch (err: any) {
-//       notifications.show({ message: err.message || 'Error', color: 'red' });
-//     }
-//   });
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <Stack>
-//         <NumberInput
-//           label="Amount"
-//           withAsterisk
-//           {...form.getInputProps('amount')}
-//         />
-//         <Textarea
-//           label="Remarks"
-//           placeholder="Reason for credit request"
-//           {...form.getInputProps('remarks')}
-//         />
-
-//         <Group mt="md">
-//           <Button type="submit" loading={mutation.isPending}>
-//             Submit Request
-//           </Button>
-//           <Button variant="light" onClick={() => navigate(-1)}>Cancel</Button>
-//         </Group>
-//       </Stack>
-//     </form>
-//   );
-// }

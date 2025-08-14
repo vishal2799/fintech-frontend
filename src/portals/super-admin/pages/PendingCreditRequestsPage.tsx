@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   Button,
   Group,
   Image,
@@ -19,7 +18,6 @@ import {
 import { showSuccess, showError } from '../../../utils/notifications';
 import type { CreditRequest } from '../types/wallet.types';
 import { getProofDownloadUrl } from '../api/wallet.api';
-import { IconEye } from '@tabler/icons-react';
 
 export default function PendingCreditRequestListPage() {
   const { data = [] } = usePendingCreditRequests();
@@ -86,15 +84,8 @@ const handleViewProof = async (logId: string) => {
           { key: 'tenantName', label: 'Tenant', width: 200 },
           { key: 'amount', label: 'Amount', width: 120, render: (r) => `₹ ${r.amount}` },
           { key: 'requestedByUserName', label: 'Requested By', width: 160 },
-          { key: 'remarks', label: 'Remarks', width: 160 },
-        //   {
-        //     key: 'status',
-        //     label: 'Status',
-        //     width: 130,
-        //     render: (row) => (
-        //       <Badge color={getStatusColor(row.status)}>{row.status}</Badge>
-        //     ),
-        //   },
+          {key: 'bankName', label: 'Bank', width: 170},
+          { key: 'remarks', label: 'Remarks', width: 160 }
         ]}
         rowActions={(row) =>
           row.status === 'PENDING'
@@ -123,7 +114,7 @@ const handleViewProof = async (logId: string) => {
               ]
             : []
         }
-        rowActionsWidth={270}
+        rowActionsWidth={300}
         searchFields={['tenantName', 'requestedByUserName', 'remarks']}
         perPage={5}
       />
@@ -173,15 +164,3 @@ const handleViewProof = async (logId: string) => {
   );
 }
 
-// const getStatusColor = (status: string) => {
-//   switch (status) {
-//     case 'PENDING':
-//       return 'yellow';
-//     case 'APPROVED':
-//       return 'green';
-//     case 'REJECTED':
-//       return 'red';
-//     default:
-//       return 'gray';
-//   }
-// };

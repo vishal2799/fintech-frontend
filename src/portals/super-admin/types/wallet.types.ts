@@ -11,6 +11,7 @@ export interface CreditRequest {
   fromTenantId: string;
   tenantName: string;
   amount: number;
+  bankName: string;
   requestedByUserId: string;
   requestedByUserName: string;
   approvedByUserId?: string;
