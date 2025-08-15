@@ -9,9 +9,35 @@ export const getPortalInfo = () => {
   let portalSlug = '';
   let portalPath = '';
 
-  if (isLocal) {
-    // --- Dev mode: detect from path ---
-    const segments = pathname.split('/').filter(Boolean); // remove empty
+  // if (isLocal) {
+  //   // --- Dev mode: detect from path ---
+  //   const segments = pathname.split('/').filter(Boolean); // remove empty
+  //   if (segments[0] === 'super-admin') {
+  //     type = 'superadmin';
+  //   } else if (segments[0] === 'tenants' && segments[1]) {
+  //     type = 'tenant';
+  //     subdomain = segments[1]; // using tenantId as "subdomain"
+  //     portalSlug = segments[2] || '';
+  //   }
+  // } else {
+  //   // --- Production: detect from subdomain ---
+  //   const parts = host.split('.');
+  //   subdomain = parts.length > (isLocal ? 1 : 2) ? parts[0] : null;
+
+  //   if (subdomain === 'superadmin') {
+  //     type = 'superadmin';
+  //   } else if (subdomain) {
+  //     type = 'tenant';
+  //   } else {
+  //     type = 'tenant'; // custom domain fallback
+  //   }
+
+  //   if (type === 'tenant') {
+  //     portalSlug = pathname.split('/')[1] || '';
+  //   }
+  // }
+
+      const segments = pathname.split('/').filter(Boolean); // remove empty
     if (segments[0] === 'super-admin') {
       type = 'superadmin';
     } else if (segments[0] === 'tenants' && segments[1]) {
@@ -19,23 +45,6 @@ export const getPortalInfo = () => {
       subdomain = segments[1]; // using tenantId as "subdomain"
       portalSlug = segments[2] || '';
     }
-  } else {
-    // --- Production: detect from subdomain ---
-    const parts = host.split('.');
-    subdomain = parts.length > (isLocal ? 1 : 2) ? parts[0] : null;
-
-    if (subdomain === 'superadmin') {
-      type = 'superadmin';
-    } else if (subdomain) {
-      type = 'tenant';
-    } else {
-      type = 'tenant'; // custom domain fallback
-    }
-
-    if (type === 'tenant') {
-      portalSlug = pathname.split('/')[1] || '';
-    }
-  }
 
   portalPath = portalSlug ? `/${portalSlug}` : '';
   return { subdomain, type, portalSlug, portalPath };
