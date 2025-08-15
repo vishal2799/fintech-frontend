@@ -1,8 +1,6 @@
-import { Navigate, useLocation } from "react-router";
+import { Navigate } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
-import { useEffect, useState } from "react";
 import { usePortal } from "../context/PortalContext";
-import { Center, Loader } from "@mantine/core";
 
 interface Props {
   children: React.ReactNode;
@@ -12,8 +10,8 @@ interface Props {
 const ProtectedRoute = ({ children, allowedRoles }: Props) => {
   const { portalPath } = usePortal();
   const { accessToken, user } = useAuthStore();
-  const location = useLocation();
-  const [hydrated, setHydrated] = useState(false);
+  // const location = useLocation();
+  // const [hydrated, setHydrated] = useState(false);
 
 //   // Wait for zustand persist hydration
 //   useEffect(() => {

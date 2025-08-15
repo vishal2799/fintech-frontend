@@ -11,7 +11,6 @@ import {
   Table as MantineTable,
   Text,
   Button,
-  Select,
   Group,
   Box,
   Table,

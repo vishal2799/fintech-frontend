@@ -17,12 +17,12 @@ import { getProofDownloadUrl } from '../api/wallet.api';
 export default function CreditRequestListPage() {
   const { data = [] } = useAllCreditRequests();
 
-  const [selected, setSelected] = useState<CreditRequest | null>(null);
+  // const [selected, setSelected] = useState<CreditRequest | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
 const [proofImageUrl, setProofImageUrl] = useState<string | null>(null);
 
   const handleProofClick = async (request: CreditRequest) => {
-    setSelected(request);
+    // setSelected(request);
     try {
         // 🔹 Fetch image download URL for this proof
         const res = await getProofDownloadUrl(request.id); // similar to your getTenantLogoDownloadUrl

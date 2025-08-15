@@ -1,4 +1,3 @@
-import { useRoutes } from 'react-router';
 import {SuperAdminApp} from './routes/SuperAdminApp';
 import TenantApp from './routes/TenantApp';
 import { usePortal } from './context/PortalContext';

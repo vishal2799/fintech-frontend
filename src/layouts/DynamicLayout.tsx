@@ -1,4 +1,4 @@
-import { ActionIcon, AppShell, Burger, Group, Popover, Title } from "@mantine/core";
+import { AppShell, Burger, Group, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Outlet, Navigate } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
@@ -6,8 +6,8 @@ import { usePortal } from "../context/PortalContext";
 import UserAvatarMenu from "../components/UserAvatarMenu";
 import { SidebarNav } from "../components/SidebarNav";
 // import DarkModeToggle from "../components/DarkModeToggle";
-import { IconPalette } from "@tabler/icons-react";
-import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
+// import { IconPalette } from "@tabler/icons-react";
+// import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
 import ThemeSettingsModalTrigger from "../components/ThemeSettingsModal";
 // import type { Scope, StaticRole } from "../navigation";
 

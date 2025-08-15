@@ -4,7 +4,6 @@ import {
   MultiSelect,
   Stack,
   TextInput,
-  Select,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router';
