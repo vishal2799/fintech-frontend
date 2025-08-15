@@ -63,7 +63,7 @@ export default function SuperDistributorFormPage() {
   if (isEdit && (isLoading || !formValues.name)) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Super Distributor' : 'Create Super Distributor'}
       </Title>

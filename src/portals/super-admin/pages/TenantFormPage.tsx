@@ -23,7 +23,7 @@ export default function TenantFormPage() {
 
   // pass initialValues only when ready (pass undefined for create)
   return (
-    <Container size={'lg'}>
+    <Container fluid size={'lg'}>
       <Title order={2} mb="md">
         {isEdit ? 'Edit Tenant' : 'Create Tenant'}
       </Title>

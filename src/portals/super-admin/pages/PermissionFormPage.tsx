@@ -22,7 +22,7 @@ export default function PermissionFormPage() {
   if (isEdit && (isLoading || !initialValues)) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Permission' : 'Create Permission'}
       </Title>

@@ -10,7 +10,7 @@ export default function WalletPage() {
   if (loadingBalance || loadingLedger) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Stack gap="md">
         <Group justify="space-between">
           <Title order={2}>Wallet Overview</Title>

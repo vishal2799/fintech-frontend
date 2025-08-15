@@ -32,7 +32,7 @@ export default function EmployeeFormPage() {
   }
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Employee' : 'Create Employee'}
       </Title>

@@ -12,7 +12,7 @@ export default function WLAdminFormPage() {
   if (isEdit && isLoading) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit WL Admin' : 'Create WL Admin'}
       </Title>

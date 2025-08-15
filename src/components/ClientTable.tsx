@@ -131,7 +131,7 @@ export function ClientTable<T extends { id: string }>({
   };
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Group justify="space-between" mb="md">
         <h2 className="text-xl font-semibold">{title}</h2>
         <Group>

@@ -90,7 +90,7 @@ export default function ServiceListPage() {
   if (isLoading) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Group justify="space-between" mb="md">
         <Title order={2}>Services</Title>
         <Button leftSection={<IconPlus size={16} />} onClick={handleOpenCreate}>
@@ -149,6 +149,7 @@ export default function ServiceListPage() {
       <Modal
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
+        centered
         title={editId ? 'Edit Service' : 'Create Service'}
       >
         <Stack>

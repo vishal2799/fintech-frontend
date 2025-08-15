@@ -3,7 +3,7 @@ import CreditRequestForm from '../components/CreditRequestForm';
 
 export default function CreditRequestFormPage() {
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">Request Wallet Credit</Title>
       <CreditRequestForm />
     </Container>

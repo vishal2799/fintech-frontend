@@ -68,7 +68,7 @@ export default function DistributorFormPage() {
   if (isEdit && (isLoading || !formValues.name)) return <Loader />;
 
   return (
-    <Container size="lg">
+    <Container fluid size="lg">
       <Title order={2} mb="md">
         {isEdit ? 'Edit Distributor' : 'Create Distributor'}
       </Title>

@@ -1,15 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { logoutAPI } from '../portals/common/api/auth.api';
+import { getTenantKey } from '../utils/getTenantKey';
 
 interface UserPayload {
   name: string;
   email: string;
   staticRole?: string;
-  roleNames: string[]; // dynamic roles (for employees)
+  roleNames: string[];
   tenantId?: string;
   permissions: string[];
-  scope: string
+  scope: string;
 }
 
 interface AuthState {
@@ -56,7 +57,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'auth-storage',
+      name: `auth-storage-${getTenantKey()}`, // tenant-specific key
       partialize: (state) => ({
         accessToken: state.accessToken,
         refreshToken: state.refreshToken,
@@ -65,3 +66,72 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+
+// import { create } from 'zustand';
+// import { persist } from 'zustand/middleware';
+// import { logoutAPI } from '../portals/common/api/auth.api';
+
+// interface UserPayload {
+//   name: string;
+//   email: string;
+//   staticRole?: string;
+//   roleNames: string[]; // dynamic roles (for employees)
+//   tenantId?: string;
+//   permissions: string[];
+//   scope: string
+// }
+
+// interface AuthState {
+//   accessToken: string | null;
+//   refreshToken: string | null;
+//   user: UserPayload | null;
+//   login: (tokens: { accessToken: string; refreshToken: string }) => void;
+//   logout: () => Promise<void>;
+// }
+
+// export const useAuthStore = create<AuthState>()(
+//   persist(
+//     (set) => ({
+//       accessToken: null,
+//       refreshToken: null,
+//       user: null,
+
+//       login: ({ accessToken, refreshToken }) => {
+//         const payload = JSON.parse(atob(accessToken.split('.')[1]));
+//         set({
+//           accessToken,
+//           refreshToken,
+//           user: {
+//             name: payload.name,
+//             email: payload.email,
+//             tenantId: payload.tenantId || undefined,
+//             staticRole: payload.staticRole || undefined,
+//             roleNames: payload.roleNames || [],
+//             permissions: payload.permissions || [],
+//             scope: payload.scope
+//           },
+//         });
+//       },
+
+//       logout: async () => {
+//         try {
+//           await logoutAPI();
+//         } catch {
+//           // ignore failure
+//         } finally {
+//           localStorage.removeItem('user-theme-color');
+//           set({ accessToken: null, refreshToken: null, user: null });
+//         }
+//       },
+//     }),
+//     {
+//       name: 'auth-storage',
+//       partialize: (state) => ({
+//         accessToken: state.accessToken,
+//         refreshToken: state.refreshToken,
+//         user: state.user,
+//       }),
+//     }
+//   )
+// );
