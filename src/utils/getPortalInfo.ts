@@ -1,8 +1,8 @@
 export const getPortalInfo = () => {
-  const host = window.location.hostname;
+  // const host = window.location.hostname;
   const pathname = window.location.pathname;
   // const isLocal = host.includes('localhost');
-  const isLocal = true;
+  // const isLocal = true;
 
   let subdomain: string | null = null;
   let type: 'superadmin' | 'tenant' | null = null;
