@@ -8,7 +8,6 @@ import {
   IconWallet,
   IconPackages,
   IconPresentationAnalytics,
-  IconLockAccess,
 } from '@tabler/icons-react';
 import { PERMISSIONS } from '../constants/permissions';
 
