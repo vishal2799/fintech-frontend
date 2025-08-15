@@ -15,11 +15,11 @@ import CreditRequestListPage from "../portals/wl-admin/pages/CreditRequestsList"
 import CreditRequestFormPage from "../portals/wl-admin/pages/CreditRequestFormPage";
 import WalletPage from "../portals/wl-admin/pages/WalletPage";
 import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPage";
-import TicketListPage from "../portals/retailer/pages/TicketListPage";
-import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
-import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
-import DistributorTicketDetail from "../portals/distributor/pages/TicketDetailsPage";
-import DistributorTicketTable from "../portals/distributor/pages/TicketListPage";
+// import TicketListPage from "../portals/retailer/pages/TicketListPage";
+// import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
+// import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
+// import DistributorTicketDetail from "../portals/distributor/pages/TicketDetailsPage";
+// import DistributorTicketTable from "../portals/distributor/pages/TicketListPage";
 
 // const getTenantRouter = (basename: string) =>
 //   createBrowserRouter(
@@ -214,14 +214,14 @@ export const TenantApp = () => {
         ),
         children: [
           { index: true, element: <div>Retailer Dashboard</div> },
-          {
-            path: "support-ticket",
-            children: [
-              { path: "list", element: <TicketListPage /> },
-              { path: "create", element: <CreateTicketPage /> },
-              { path: "list/:id", element: <TicketDetailPage /> },
-            ],
-          },
+          // {
+          //   path: "support-ticket",
+          //   children: [
+          //     { path: "list", element: <TicketListPage /> },
+          //     { path: "create", element: <CreateTicketPage /> },
+          //     { path: "list/:id", element: <TicketDetailPage /> },
+          //   ],
+          // },
         ],
       },
 
@@ -235,13 +235,13 @@ export const TenantApp = () => {
         ),
         children: [
           { index: true, element: <div>Distributor Dashboard</div> },
-          {
-            path: "support-ticket",
-            children: [
-              { path: "list", element: <DistributorTicketTable /> },
-              { path: "list/:id", element: <DistributorTicketDetail /> },
-            ],
-          },
+          // {
+          //   path: "support-ticket",
+          //   children: [
+          //     { path: "list", element: <DistributorTicketTable /> },
+          //     { path: "list/:id", element: <DistributorTicketDetail /> },
+          //   ],
+          // },
         ],
       },
 
