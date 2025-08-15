@@ -109,7 +109,10 @@ export const SuperAdminApp = () => {
     {
       // In dev path mode: /super-admin
       // In prod: ""
-      basename: type === "superadmin" && window.location.hostname.includes("localhost")
+      // basename: type === "superadmin" && window.location.hostname.includes("localhost")
+      //   ? "/super-admin"
+      //   : "/",
+      basename: type === "superadmin" && true
         ? "/super-admin"
         : "/",
     }

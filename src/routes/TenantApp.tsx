@@ -135,7 +135,8 @@ import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPa
 export const TenantApp = () => {
   const { type, subdomain } = usePortal();
 
-  const isLocal = window.location.hostname.includes("localhost");
+  // const isLocal = window.location.hostname.includes("localhost");
+  const isLocal = true;
 
   const basename =
     type !== "superadmin" && isLocal
