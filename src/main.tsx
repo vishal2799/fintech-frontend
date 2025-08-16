@@ -4,6 +4,7 @@ import './index.css'
 import App from "./App2";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PortalProvider } from './context/PortalContext';
+import { AppThemeProvider } from './context/AppThemeProvider';
 
 const queryClient = new QueryClient();
 
@@ -12,9 +13,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
     {/* <App /> */}
-    <PortalProvider>
+    <AppThemeProvider>
+    <PortalProvider>      
     <App />
     </PortalProvider>
+        </AppThemeProvider>
     </QueryClientProvider>
   </StrictMode>,
 )
