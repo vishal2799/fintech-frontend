@@ -90,7 +90,7 @@ export default function TenantForm({ mode, initialValues }: Props) {
     if (!logoFile) return null;
     try {
       setUploading(true);
-      const { uploadUrl, fileKey } = await getTenantLogoUploadUrl(
+      const { uploadUrl, fileKey, publicUrl } = await getTenantLogoUploadUrl(
         tenantId,
         logoFile.name,
         logoFile.type
@@ -104,7 +104,7 @@ export default function TenantForm({ mode, initialValues }: Props) {
 
       if (!uploadRes.ok) throw new Error('Upload failed');
 
-      await updateTenantLogoKey(tenantId, fileKey);
+      await updateTenantLogoKey(tenantId, publicUrl);
 
       const { downloadUrl } = await getTenantLogoDownloadUrl(tenantId);
       setPreviewUrl(downloadUrl);

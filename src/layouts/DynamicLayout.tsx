@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, Title } from "@mantine/core";
+import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Outlet, Navigate } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
@@ -10,15 +10,19 @@ import { SidebarNav } from "../components/SidebarNav";
 // import ThemeSettingsPanel from "../components/ThemeSettingsPanel";
 import ThemeSettingsModalTrigger from "../components/ThemeSettingsModal";
 // import type { Scope, StaticRole } from "../navigation";
+// import logo from '../assets/logo.png';
+import { TenantLogo } from "../components/TenantLogo";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();
   const { accessToken, user } = useAuthStore();
-  const { type, tenant } = usePortal();
+  const { tenant } = usePortal();
 
   if (!accessToken || !user) return <Navigate to="/login" />;
 
-  const title = type === 'superadmin' ? 'VMudra SuperAdmin' : tenant?.name || 'Tenant';
+
+  // const title = type === 'superadmin' ? 'SuperAdmin' : tenant?.name || 'Tenant';
+  const title = tenant?.name || 'VMudra';
 
   return (
     <AppShell
@@ -33,7 +37,8 @@ const DynamicLayout = () => {
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Title order={3}>{title}</Title>
+           <TenantLogo title={title} />
+          {/* <Title order={3}>{title}</Title> */}
           <Group>
             <ThemeSettingsModalTrigger />
             {/* <Popover>
