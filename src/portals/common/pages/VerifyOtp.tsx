@@ -20,7 +20,7 @@ import { usePortal } from '../../../context/PortalContext';
 import { getPathByRole } from '../../../utils/common';
 
 export default function VerifyOtp() {
-       const { portalPath, type } = usePortal();
+       const { type } = usePortal();
   
   const navigate = useNavigate();
   const { login } = useAuthStore();
