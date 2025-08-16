@@ -27,8 +27,17 @@ import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
 
+
+
 export const SuperAdminApp = () => {
   const { type } = usePortal();
+  const host = window.location.hostname;
+
+    // ✅ Feature flag from env (VITE_ENABLE_LOCALHOST_ROUTING=true)
+  const enableLocalRouting = import.meta.env.VITE_ENABLE_LOCALHOST_ROUTING === 'true';
+
+  // Treat both localhost and "flag-enabled staging" the same way
+  const isLocalLike = host.includes('localhost') || enableLocalRouting;
 
   const router = createBrowserRouter(
     [
@@ -112,7 +121,7 @@ export const SuperAdminApp = () => {
       // basename: type === "superadmin" && window.location.hostname.includes("localhost")
       //   ? "/super-admin"
       //   : "/",
-      basename: type === "superadmin" && true
+      basename: type === "superadmin" && isLocalLike
         ? "/super-admin"
         : "/",
     }

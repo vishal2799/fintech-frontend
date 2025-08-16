@@ -30,3 +30,20 @@ export const THEME_COLORS = [
 
 export const STATUS_OPTIONS = ['ACTIVE', 'DISABLED'] as const;
 export type TenantStatus = typeof STATUS_OPTIONS[number];
+
+
+// constants/roles.ts
+
+export const StaticRoles = {
+  R: 'R',
+  SD: 'SD',
+  D: 'D',
+  WL_ADMIN: 'WL_ADMIN',
+} as const;
+
+export const RolePaths: { role: string; path: string }[] = [
+  { role: StaticRoles.R, path: '/retailer' },
+  { role: StaticRoles.SD, path: '/sub-distributor' },
+  { role: StaticRoles.D, path: '/distributor' },
+  { role: StaticRoles.WL_ADMIN, path: '/admin' },
+];

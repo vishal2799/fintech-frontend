@@ -21,7 +21,7 @@ import { getUserLocation } from '../../../utils/getUserLocation';
 import { usePortal } from '../../../context/PortalContext';
 
 const Login = () => {
-     const { portalPath, tenant, type } = usePortal();
+     const { tenant, type } = usePortal();
 
   const navigate = useNavigate();
 
@@ -42,7 +42,8 @@ const Login = () => {
     onSuccess: (_res, variables) => {
       sessionStorage.setItem('otpEmail', variables.email);
       notifications.show({ message: 'OTP sent to your email', color: 'green' });
-      navigate(`${portalPath}/verify-otp`);
+      // navigate(`${portalPath}/verify-otp`);
+      navigate(`/verify-otp`);
     },
     onError: (err: any) => {
       notifications.show({

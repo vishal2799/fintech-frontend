@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { usePortal } from "../context/PortalContext";
-import Unauthorized from "../portals/common/pages/Unauthorized";
+// import Unauthorized from "../portals/common/pages/Unauthorized";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DynamicLayout from "../layouts/DynamicLayout";
 import Login from "../portals/common/pages/Login";
@@ -134,25 +134,37 @@ import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPa
 
 export const TenantApp = () => {
   const { type, subdomain } = usePortal();
+  const host = window.location.hostname;
 
   // const isLocal = window.location.hostname.includes("localhost");
-  const isLocal = true;
+
+   // ✅ Feature flag from env (VITE_ENABLE_LOCALHOST_ROUTING=true)
+  const enableLocalRouting = import.meta.env.VITE_ENABLE_LOCALHOST_ROUTING === 'true';
+
+  // Treat both localhost and "flag-enabled staging" the same way
+  const isLocalLike = host.includes('localhost') || enableLocalRouting;
+  // const isLocal = true;
+
+  // const basename =
+  //   type !== "superadmin" && isLocal
+  //     ? `/tenants/${subdomain}` // this covers wl1, wl2, etc
+  //     : "/";
 
   const basename =
-    type !== "superadmin" && isLocal
+    type !== "superadmin" && isLocalLike
       ? `/tenants/${subdomain}` // this covers wl1, wl2, etc
       : "/";
 
   const router = createBrowserRouter(
     [
       // Public auth routes
-      { path: "admin/login", element: <Login /> },
-      { path: "admin/verify-otp", element: <VerifyOtp /> },
-      { path: "retailer/login", element: <Login /> },
-      { path: "retailer/verify-otp", element: <VerifyOtp /> },
-      { path: "distributor/login", element: <Login /> },
-      { path: "distributor/verify-otp", element: <VerifyOtp /> },
-      { path: "unauthorized", element: <Unauthorized /> },
+      { path: "login", element: <Login /> },
+      { path: "verify-otp", element: <VerifyOtp /> },
+      // { path: "retailer/login", element: <Login /> },
+      // { path: "retailer/verify-otp", element: <VerifyOtp /> },
+      // { path: "distributor/login", element: <Login /> },
+      // { path: "distributor/verify-otp", element: <VerifyOtp /> },
+      // { path: "unauthorized", element: <Unauthorized /> },
 
       // Admin section
       {
@@ -247,7 +259,7 @@ export const TenantApp = () => {
       },
 
       // Fallback
-      { path: "*", element: <div>Not Found</div> },
+      { path: "*", element: <div>Not Found here</div> },
     ],
     { basename }
   );

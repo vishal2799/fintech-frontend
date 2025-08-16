@@ -17,9 +17,10 @@ import axios from '../../../api/axios';
 import { otpLoginSchema as verifyOtpSchema, type OtpLoginInput as VerifyOtpInput } from '../schema/auth.schema';
 import { useAuthStore } from '../../../stores/useAuthStore';
 import { usePortal } from '../../../context/PortalContext';
+import { getPathByRole } from '../../../utils/common';
 
 export default function VerifyOtp() {
-       const { portalPath } = usePortal();
+       const { portalPath, type } = usePortal();
   
   const navigate = useNavigate();
   const { login } = useAuthStore();
@@ -57,10 +58,12 @@ if (!location.latitude || !location.longitude) {
       const refreshToken = res?.data?.refreshToken;
 
       login({ accessToken, refreshToken });
-      // const payload = JSON.parse(atob(accessToken.split('.')[1]));
-      // const staticRole = payload.staticRole;
+      const payload = JSON.parse(atob(accessToken.split('.')[1]));
+      const staticRole = payload.staticRole;
       notifications.show({ message: 'Login successful', color: 'green' });
-      navigate(`${portalPath}/`);
+      let path = type === 'superadmin' ? '/' : `/${getPathByRole(staticRole)}`
+      navigate(path);
+                  // navigate(`${portalPath}/`);
     },
     onError: (err: any) => {
       notifications.show({
