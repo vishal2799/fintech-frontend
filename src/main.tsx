@@ -5,6 +5,8 @@ import App from "./App2";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PortalProvider } from './context/PortalContext';
 import { AppThemeProvider } from './context/AppThemeProvider';
+import '@mantine/dates/styles.css';
+import '@mantine/notifications/styles.css';
 
 const queryClient = new QueryClient();
 

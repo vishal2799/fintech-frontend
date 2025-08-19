@@ -19,6 +19,7 @@ import { zod4Resolver } from 'mantine-form-zod-resolver';
 import axios from '../../../api/axios';
 import { getUserLocation } from '../../../utils/getUserLocation';
 import { usePortal } from '../../../context/PortalContext';
+import { showError } from '../../../utils/notifications';
 
 const Login = () => {
      const { tenant, type } = usePortal();
@@ -46,10 +47,11 @@ const Login = () => {
       navigate(`/verify-otp`);
     },
     onError: (err: any) => {
-      notifications.show({
-        message: err?.response?.data?.message || 'Login failed',
-        color: 'red',
-      });
+      showError(err);
+      // notifications.show({
+      //   message: err?.response?.data?.message || 'Login failed',
+      //   color: 'red',
+      // });
     },
   });
 
