@@ -23,7 +23,8 @@ export const PortalProvider = ({ children }: { children: React.ReactNode }) => {
   const [tenant, setTenant] = useState(null);
 
   useEffect(() => {
-    if (info.type === 'tenant' && info.subdomain) {
+    // if (info.type === 'tenant' && info.subdomain) {
+      if (info.type === 'tenant' && info.subdomain) {
       // In dev: subdomain is actually tenantId from path
       // In prod: subdomain is actual subdomain
       getTenantDetails(info.subdomain)

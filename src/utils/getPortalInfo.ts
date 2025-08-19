@@ -18,6 +18,7 @@ export const getPortalInfo = () => {
     const segments = pathname.split('/').filter(Boolean);
     if (segments[0] === 'super-admin') {
       type = 'superadmin';
+      // subdomain = 'super-admin'
     } else if (segments[0] === 'tenants' && segments[1]) {
       type = 'tenant';
       subdomain = segments[1]; // tenantId as "subdomain"
