@@ -99,6 +99,15 @@ export const superAdminNavItems = [
     ],
   },
   {
+    label: 'Commission',
+    icon: IconPackages,
+    links: [
+      {label: 'Service Rule Types', link: '/commission/service-rule-type', permission: PERMISSIONS.TENANTS_READ,
+        allowedRoles: ['SUPER_ADMIN']
+      }
+    ]
+  },
+  {
     label: 'Logs',
     icon: IconPresentationAnalytics,
     links: [

@@ -26,6 +26,7 @@ import PendingCreditRequestListPage from "../portals/super-admin/pages/PendingCr
 import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
+import { ServiceRuleTypesTable } from "../portals/super-admin/pages/ServiceRuleTypeList";
 
 
 
@@ -95,6 +96,9 @@ export const SuperAdminApp = () => {
                 { path: "tenant-list", element: <TenantWalletListPage /> },
               { path: "pending-credit-requests", element: <PendingCreditRequestListPage /> },
             { path: "credit-requests", element: <CreditRequestListPage /> },
+      ]},
+      {path: '/commission', children: [
+        {path: 'service-rule-type', element: <ServiceRuleTypesTable />},
       ]},
       { path: "/logs" , element: <ClientAuditLogsPage />},
       { path: "/auth-logs" , element: <AuthLoginsPage />},
