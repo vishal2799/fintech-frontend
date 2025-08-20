@@ -22,7 +22,7 @@ import { usePortal } from '../../../context/PortalContext';
 import { showError } from '../../../utils/notifications';
 
 const Login = () => {
-     const { tenant, type } = usePortal();
+     const { tenantDetails, type } = usePortal();
 
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ sessionStorage.setItem('userLocation', JSON.stringify({ latitude, longitude, acc
           ) : (
             <>
               <Group justify="center" mb="xs">
-                <Title order={2} ta="center">{tenant?.name || 'Tenant'}</Title>
+                <Title order={2} ta="center">{tenantDetails?.name || 'Tenant'}</Title>
               </Group>
               <Title order={3} ta="center" c="dimmed">
                 Welcome back!

@@ -2,13 +2,6 @@ import axios, { AxiosError } from 'axios';
 import { useAuthStore } from '../stores/useAuthStore';
 import { getPortalInfo } from '../utils/getPortalInfo';
 
-// const port = 4000;
-// ✅ Feature flag from env (VITE_ENABLE_LOCALHOST_ROUTING=true)
-const enableLocalRouting = import.meta.env.VITE_ENABLE_LOCALHOST_ROUTING === 'true';
-
-// Treat both localhost and "flag-enabled staging" the same way
-const host = window.location.hostname;
-const isLocalLike = host.includes('localhost') || enableLocalRouting;
 
 const tenant = getPortalInfo(); // e.g. "wl1"
 // const baseApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
@@ -19,10 +12,10 @@ const tenant = getPortalInfo(); // e.g. "wl1"
 
 export const baseURL =import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
 
-let tenantName = tenant.type === 'superadmin' ? 'super-admin' : `${tenant.subdomain}`
+let tenantName = tenant.type === 'superadmin' ? 'super-admin' : `${tenant.tenantId}`
 
 const API = axios.create({
-  baseURL: isLocalLike ? `${baseURL}/${tenantName}` : '/api',
+  baseURL: `${baseURL}/${tenantName}`,
   withCredentials: false, // cookies not used; JWT in header
 });
 
