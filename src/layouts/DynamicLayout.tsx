@@ -1,7 +1,7 @@
 import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Outlet, Navigate } from "react-router";
-import { useAuthStore } from "../stores/useAuthStore";
+import { Outlet } from "react-router";
+// import { useAuthStore } from "../stores/useAuthStore";
 import { usePortal } from "../context/PortalContext";
 import UserAvatarMenu from "../components/UserAvatarMenu";
 import { SidebarNav } from "../components/SidebarNav";
@@ -15,10 +15,10 @@ import { TenantLogo } from "../components/TenantLogo";
 
 const DynamicLayout = () => {
   const [opened, { toggle }] = useDisclosure();
-  const { accessToken, user } = useAuthStore();
+  // const { accessToken, user } = useAuthStore();
   const { tenant } = usePortal();
 
-  if (!accessToken || !user) return <Navigate to="/login" />;
+  // if (!accessToken || !user) return <Navigate to="/login" />;
 
 
   // const title = type === 'superadmin' ? 'SuperAdmin' : tenant?.name || 'Tenant';
