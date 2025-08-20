@@ -19,7 +19,7 @@ export function getTenantKey() {
     return hostParts[0]; // subdomain
   }
 
-  return "global"; // fallback
+  return "superadmin"; // fallback
 }
 
 // // utils/getTenantKey.ts

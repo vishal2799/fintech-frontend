@@ -27,6 +27,7 @@ import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
 import { ServiceRuleTypesTable } from "../portals/super-admin/pages/ServiceRuleTypeList";
+import ServiceOperatorListPage from "../portals/super-admin/pages/ServiceOperatorsList";
 
 
 
@@ -99,6 +100,7 @@ export const SuperAdminApp = () => {
       ]},
       {path: '/commission', children: [
         {path: 'service-rule-type', element: <ServiceRuleTypesTable />},
+        {path: 'service-operators', element: <ServiceOperatorListPage />},
       ]},
       { path: "/logs" , element: <ClientAuditLogsPage />},
       { path: "/auth-logs" , element: <AuthLoginsPage />},

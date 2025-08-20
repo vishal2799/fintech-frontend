@@ -8,6 +8,7 @@ import {
   IconWallet,
   IconPackages,
   IconPresentationAnalytics,
+  IconDiscount2,
 } from '@tabler/icons-react';
 import { PERMISSIONS } from '../constants/permissions';
 
@@ -100,9 +101,12 @@ export const superAdminNavItems = [
   },
   {
     label: 'Commission',
-    icon: IconPackages,
+    icon: IconDiscount2,
     links: [
       {label: 'Service Rule Types', link: '/commission/service-rule-type', permission: PERMISSIONS.TENANTS_READ,
+        allowedRoles: ['SUPER_ADMIN']
+      },
+      {label: 'Service Operators', link: '/commission/service-operators', permission: PERMISSIONS.TENANTS_READ,
         allowedRoles: ['SUPER_ADMIN']
       }
     ]
