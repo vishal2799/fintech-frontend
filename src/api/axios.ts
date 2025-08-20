@@ -39,7 +39,7 @@ API.interceptors.response.use(
       originalRequest._retry = true
 
       try {
-        const res = await axios.post(`${baseURL}/auth/refresh`, { token: refreshToken })
+        const res = await axios.post(`${baseURL}/${tenantSegment}/auth/refresh`, { token: refreshToken })
         const newAccessToken: string = res.data.data.accessToken
 
         // update Zustand store
@@ -50,11 +50,11 @@ API.interceptors.response.use(
       } catch {
         // logout and redirect to appropriate login path
         logout()
-        const loginPath =
-          portal.type === 'superadmin'
-            ? '/super-admin/login'
-            : `/tenants/${portal.tenantId}/login`
-        window.location.href = loginPath
+        // const loginPath =
+        //   portal.type === 'superadmin'
+        //     ? '/super-admin/login'
+        //     : `/tenants/${portal.tenantId}/login`
+        // window.location.href = loginPath
         return Promise.reject(error)
       }
     }

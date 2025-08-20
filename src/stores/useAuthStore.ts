@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { logoutAPI } from '../portals/common/api/auth.api'
-import { getTenantKey } from '../utils/getTenantKey'
+import { getPortalInfo } from '../utils/getPortalInfo'
 
 interface UserPayload {
   name: string
@@ -23,8 +23,8 @@ interface AuthState {
   logout: () => Promise<void>
 }
 
-const tenantKey = getTenantKey()
-console.log('[AuthStore] Using tenant key:', tenantKey)
+const portal = getPortalInfo()
+console.log('[AuthStore] Using tenant key:', portal.tenantId)
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -59,13 +59,18 @@ export const useAuthStore = create<AuthState>()(
         } catch {
           // ignore errors
         } finally {
+          const loginPath =
+          portal.type === 'superadmin'
+            ? '/super-admin/login'
+            : `/tenants/${portal.tenantId}/login`
+        window.location.href = loginPath
           localStorage.removeItem('user-theme-color')
           set({ accessToken: null, refreshToken: null, user: null })
         }
       },
     }),
     {
-      name: `auth-storage-${tenantKey}`,
+      name: `auth-storage-${portal.tenantId}`,
       partialize: (state) => ({
         accessToken: state.accessToken,
         refreshToken: state.refreshToken,
