@@ -13,7 +13,7 @@ export const createServiceOperator = async (data: CreateServiceOperatorInput) =>
 
 export const getServiceOperators = async (serviceId?: string) => {
   return axios
-    .get<ServiceOperator[]>(BASE_URL, { params: { serviceId } })
+    .get(BASE_URL, { params: { serviceId } })
     .then((res) => res.data.data);
 };
 
