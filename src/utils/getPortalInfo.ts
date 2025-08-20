@@ -39,7 +39,7 @@ export const getPortalInfo = (): PortalInfo => {
   }
 
   const portalPath = portalSlug ? `/${portalSlug}` : '';
-  const loginPath = `${basename}/login`;
+  const loginPath = `/login`;
   const fullPath = pathname;
 
   return {
