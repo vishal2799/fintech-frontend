@@ -22,6 +22,7 @@ export const getPortalInfo = (): PortalInfo => {
   // /super-admin/* → superadmin mode, basename /super-admin
   if (segments[0] === 'super-admin') {
     type = 'superadmin';
+    tenantId = 'super-admin'
     portalSlug = segments[1] || null;
     basename = '/super-admin';
   }

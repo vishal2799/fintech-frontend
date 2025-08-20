@@ -28,7 +28,8 @@ export const PortalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   // fetch tenant details (if we are in tenant mode)
   const fetchTenantDetails = async () => {
-    if (portalInfo.type !== 'tenant' || !portalInfo.tenantId) {
+    // if (portalInfo.type !== 'tenant' || !portalInfo.tenantId) {
+    if (!portalInfo.tenantId) {
       setTenantDetails(null);
       setLoading(false);
       return;
