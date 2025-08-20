@@ -15,6 +15,7 @@ import CreditRequestListPage from "../portals/wl-admin/pages/CreditRequestsList"
 import CreditRequestFormPage from "../portals/wl-admin/pages/CreditRequestFormPage";
 import WalletPage from "../portals/wl-admin/pages/WalletPage";
 import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPage";
+import { TenantDefaultRedirect } from "../components/TenantDefaultRedirect";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -139,6 +140,8 @@ export const TenantApp = () => {
       // Public auth routes
       { path: "login", element: <Login /> },
       { path: "verify-otp", element: <VerifyOtp /> },
+
+      { path: "", element: <TenantDefaultRedirect /> },
 
       // Admin section
       {

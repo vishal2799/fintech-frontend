@@ -1,9 +1,12 @@
 import { SuperAdminApp } from './routes/SuperAdminApp';
 import TenantApp from './routes/TenantApp';
 import { usePortal } from './context/PortalContext';
+import { LandingPage } from './components/LandingPage';
 
 export default function AppRouter() {
-  const { type } = usePortal();
+  const { type, fullPath } = usePortal();
+
+  if (fullPath === "/") return <LandingPage />;
 
   if (!type) return <div>Invalid or loading portal...</div>;
 
