@@ -10,7 +10,7 @@ interface AppThemeProviderProps {
 }
 
 export const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
-  const { tenant } = usePortal();
+  const { tenantDetails } = usePortal();
 
   const [colorScheme] = useLocalStorage<'light' | 'dark'>({
     key: 'color-scheme',
@@ -27,7 +27,7 @@ export const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
   // const primaryColor = type === 'superadmin'
   // ? userColor || tenant?.themeColor || '#1D4ED8'
   // : tenant?.themeColor || '#1D4ED8';
-  const primaryColor = userColor || tenant?.themeColor || '#1D4ED8';
+  const primaryColor = userColor || tenantDetails?.themeColor || '#1D4ED8';
 
   const theme: MantineThemeOverride = useMemo(() => {
     return {

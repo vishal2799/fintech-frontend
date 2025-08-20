@@ -32,14 +32,7 @@ import ServiceOperatorListPage from "../portals/super-admin/pages/ServiceOperato
 
 
 export const SuperAdminApp = () => {
-  const { type } = usePortal();
-  const host = window.location.hostname;
-
-    // ✅ Feature flag from env (VITE_ENABLE_LOCALHOST_ROUTING=true)
-  const enableLocalRouting = import.meta.env.VITE_ENABLE_LOCALHOST_ROUTING === 'true';
-
-  // Treat both localhost and "flag-enabled staging" the same way
-  const isLocalLike = host.includes('localhost') || enableLocalRouting;
+  const { basename } = usePortal();
 
   const router = createBrowserRouter(
     [
@@ -122,14 +115,7 @@ export const SuperAdminApp = () => {
       },
     ],
     {
-      // In dev path mode: /super-admin
-      // In prod: ""
-      // basename: type === "superadmin" && window.location.hostname.includes("localhost")
-      //   ? "/super-admin"
-      //   : "/",
-      basename: type === "superadmin" && isLocalLike
-        ? "/super-admin"
-        : "/",
+      basename: basename
     }
   );
 

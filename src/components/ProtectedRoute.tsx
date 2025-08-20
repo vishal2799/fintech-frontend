@@ -2,6 +2,7 @@ import { Navigate } from "react-router";
 import { useAuthStore } from "../stores/useAuthStore";
 // import { usePortal } from "../context/PortalContext";
 import { Center, Loader } from "@mantine/core";
+import { usePortal } from "../context/PortalContext";
 
 interface Props {
   children: React.ReactNode;
@@ -9,9 +10,9 @@ interface Props {
 }
 
 const ProtectedRoute = ({ children, allowedRoles }: Props) => {
-  // const { portalPath } = usePortal();
+  const { loginPath } = usePortal();
   const { accessToken, user, _hasHydrated } = useAuthStore();
-
+  
   console.log("[ProtectedRoute] State:", { _hasHydrated, accessToken, user });
 
 if (!_hasHydrated) {
@@ -21,9 +22,6 @@ if (!_hasHydrated) {
     </Center>
   )
 }
-
-  // const loginPath = portalPath ? `${portalPath}/login` : "/login";
-  const loginPath = "/login";
 
   console.log(loginPath)
 
