@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const serviceCommissionSchema = z.object({
   id: z.string().optional(),
   serviceId: z.string(),
-  operatorId: z.string().optional(),
+  operatorId: z.string().nullable().optional(),
   level: z.enum(['TENANT', 'SUPER_DISTRIBUTOR', 'DISTRIBUTOR', 'RETAILER']),
   value: z.string(),
   valueType: z.enum(['PERCENTAGE', 'FIXED']),
