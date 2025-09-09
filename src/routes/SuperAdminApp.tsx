@@ -20,7 +20,7 @@ import BankAccountsListPage from "../portals/super-admin/pages/BankAccountsListP
 import BankAccountFormPage from "../portals/super-admin/pages/BankAccountFormPage";
 import AuthLoginsPage from "../portals/super-admin/pages/AuthLoginsPage";
 import ClientAuditLogsPage from "../portals/super-admin/pages/ClientAuditLogsPage";
-import CreditRequestListPage from "../portals/wl-admin/pages/CreditRequestsList";
+import CreditRequestListPage from "../portals/super-admin/pages/CreditRequestsPage";
 import TenantWalletListPage from "../portals/super-admin/pages/TenantWalletListPage";
 import PendingCreditRequestListPage from "../portals/super-admin/pages/PendingCreditRequestsPage";
 import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
