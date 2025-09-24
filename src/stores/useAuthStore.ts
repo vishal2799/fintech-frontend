@@ -4,6 +4,7 @@ import { logoutAPI } from '../portals/common/api/auth.api'
 import { getPortalInfo } from '../utils/getPortalInfo'
 
 interface UserPayload {
+  id: string
   name: string
   email: string
   staticRole?: string
@@ -42,6 +43,7 @@ export const useAuthStore = create<AuthState>()(
           accessToken,
           refreshToken,
           user: {
+            id: payload.id,
             name: payload.name,
             email: payload.email,
             tenantId: payload.tenantId || undefined,

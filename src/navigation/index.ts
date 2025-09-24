@@ -1,6 +1,7 @@
 import { distributorNavItems } from "./distributor";
 import { retailerNavItems } from "./retailer";
 import { superAdminNavItems } from "./super-admin";
+import { sdNavItems } from "./super-distributor";
 import { wlAdminNavItems } from "./wl-admin";
 
 export type StaticRole =
@@ -9,7 +10,7 @@ export type StaticRole =
   | 'EMPLOYEE'
   | 'R'
   | 'D'
-  | 'SUPER_DISTRIBUTOR';
+  | 'SD';
 
 export type Scope = 'PLATFORM' | 'TENANT';
 
@@ -29,6 +30,8 @@ export const getNavItems = ({
       return superAdminNavItems;
     case 'WL_ADMIN':
       return wlAdminNavItems;
+    case 'SD':
+      return sdNavItems;  
     case 'R':
       return retailerNavItems;  
     case 'D':

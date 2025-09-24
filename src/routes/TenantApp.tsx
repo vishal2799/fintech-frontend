@@ -16,6 +16,8 @@ import CreditRequestFormPage from "../portals/wl-admin/pages/CreditRequestFormPa
 import WalletPage from "../portals/wl-admin/pages/WalletPage";
 import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPage";
 import { TenantDefaultRedirect } from "../components/TenantDefaultRedirect";
+import DistributorListPage2 from "../portals/super-distributor/pages/DistributorListPage";
+import DistributorFormPage2 from "../portals/super-distributor/pages/DistributorFormPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -192,6 +194,27 @@ export const TenantApp = () => {
             ],
           },
         ],
+      },
+
+      // Super Distributor section
+      {
+        path: "super-distributor",
+        element: (
+          <ProtectedRoute allowedRoles={["SD"]}>
+            <DynamicLayout />
+          </ProtectedRoute>
+        ),
+        children: [
+          { index: true, element: <div>Super Distributor Dashboard</div> },
+          {
+            path: "distributors",
+            children: [
+              { path: "list", element: <DistributorListPage2 /> },
+              { path: "create", element: <DistributorFormPage2 /> },
+              { path: "edit/:id", element: <DistributorFormPage2 /> },
+            ],
+          },
+        ]
       },
 
       // Retailer section

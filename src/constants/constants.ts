@@ -43,7 +43,7 @@ export const StaticRoles = {
 
 export const RolePaths: { role: string; path: string }[] = [
   { role: StaticRoles.R, path: '/retailer' },
-  { role: StaticRoles.SD, path: '/sub-distributor' },
+  { role: StaticRoles.SD, path: '/super-distributor' },
   { role: StaticRoles.D, path: '/distributor' },
   { role: StaticRoles.WL_ADMIN, path: '/admin' },
 ];
