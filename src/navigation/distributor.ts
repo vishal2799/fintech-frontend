@@ -7,6 +7,24 @@ export const distributorNavItems = [
     icon: IconGauge,
     allowedRoles: ['D'],
   },
+     {
+    label: 'Members',
+    icon: IconUsers,
+    links: [
+      {
+        label: 'Retailers List',
+        link: 'retailers/list',
+        allowedRoles: ['D'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Create Retailer',
+        link: 'retailers/create',
+        allowedRoles: ['D'],
+        permission: 'MEMBERS_READ',
+      },
+    ],
+  },
   {
     label: 'Support Ticket',
     icon: IconUsers,

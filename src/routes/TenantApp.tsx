@@ -18,6 +18,8 @@ import WLServiceSettingsPage from "../portals/wl-admin/pages/WLServiceSettingsPa
 import { TenantDefaultRedirect } from "../components/TenantDefaultRedirect";
 import DistributorListPage2 from "../portals/super-distributor/pages/DistributorListPage";
 import DistributorFormPage2 from "../portals/super-distributor/pages/DistributorFormPage";
+import RetailerListPage2 from "../portals/distributor/pages/RetailerListPage";
+import RetailerFormPage2 from "../portals/distributor/pages/RetailerFormPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -240,6 +242,14 @@ export const TenantApp = () => {
         ),
         children: [
           { index: true, element: <div>Distributor Dashboard</div> },
+          {
+            path: "retailers",
+            children: [
+              { path: "list", element: <RetailerListPage2 /> },
+              { path: "create", element: <RetailerFormPage2 /> },
+              { path: "edit/:id", element: <RetailerFormPage2 /> },
+            ],
+          },
         ],
       },
 
