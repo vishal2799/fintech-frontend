@@ -24,6 +24,8 @@ import RetailerListPageSD from "../portals/super-distributor/pages/RetailerListP
 import RetailerFormPageSD from "../portals/super-distributor/pages/RetailerFormPage";
 import RoleListPageWL from "../portals/wl-admin/pages/RolesListPage";
 import RoleFormPageWL from "../portals/wl-admin/pages/RoleFormPage";
+import EmployeeListPageWL from "../portals/wl-admin/pages/EmployeeListPage";
+import EmployeeFormPageWL from "../portals/wl-admin/pages/EmployeeFormPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -205,6 +207,11 @@ export const TenantApp = () => {
                      { path: "create", element: <RoleFormPageWL /> },
                       { path: "edit/:id", element: <RoleFormPageWL /> },
           ]},
+           {path: 'employees', children: [
+                        {path: "list", element: <EmployeeListPageWL /> },
+                     { path: "create", element: <EmployeeFormPageWL /> },
+                      { path: "edit/:id", element: <EmployeeFormPageWL /> },
+                ]},
         ],
       },
 
