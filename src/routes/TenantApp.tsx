@@ -20,6 +20,8 @@ import DistributorListPage2 from "../portals/super-distributor/pages/Distributor
 import DistributorFormPage2 from "../portals/super-distributor/pages/DistributorFormPage";
 import RetailerListPage2 from "../portals/distributor/pages/RetailerListPage";
 import RetailerFormPage2 from "../portals/distributor/pages/RetailerFormPage";
+import RetailerListPageSD from "../portals/super-distributor/pages/RetailerListPage";
+import RetailerFormPageSD from "../portals/super-distributor/pages/RetailerFormPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -214,6 +216,14 @@ export const TenantApp = () => {
               { path: "list", element: <DistributorListPage2 /> },
               { path: "create", element: <DistributorFormPage2 /> },
               { path: "edit/:id", element: <DistributorFormPage2 /> },
+            ],
+          },
+          {
+            path: "retailers",
+            children: [
+              { path: "list", element: <RetailerListPageSD /> },
+              { path: "create", element: <RetailerFormPageSD /> },
+              { path: "edit/:id", element: <RetailerFormPageSD /> },
             ],
           },
         ]
