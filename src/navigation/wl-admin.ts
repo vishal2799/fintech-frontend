@@ -1,4 +1,4 @@
-import { IconGauge, IconPackages, IconUsers } from "@tabler/icons-react";
+import { IconGauge, IconPackages, IconSettingsCog, IconUsers, IconUsersGroup } from "@tabler/icons-react";
 
 export const wlAdminNavItems = [
   {
@@ -47,6 +47,22 @@ export const wlAdminNavItems = [
         allowedRoles: ['WL_ADMIN'],
         permission: 'MEMBERS_READ',
       },
+    ],
+  },
+    {
+    label: 'Roles',
+    icon: IconSettingsCog,
+    links: [
+      { label: 'All Roles', link: 'roles/list', allowedRoles: ['WL_ADMIN'] },
+      { label: 'Add Role', link: 'roles/create', allowedRoles: ['WL_ADMIN'] },
+    ],
+  },
+    {
+    label: 'Employees',
+    icon: IconUsersGroup,
+    links: [
+      { label: 'All Employees', link: 'employees/list', allowedRoles: ['WL_ADMIN'] },
+      { label: 'Add Employee', link: 'employees/create', allowedRoles: ['WL_ADMIN'] },
     ],
   },
   {

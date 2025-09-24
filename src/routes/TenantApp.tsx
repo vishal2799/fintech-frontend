@@ -22,6 +22,8 @@ import RetailerListPage2 from "../portals/distributor/pages/RetailerListPage";
 import RetailerFormPage2 from "../portals/distributor/pages/RetailerFormPage";
 import RetailerListPageSD from "../portals/super-distributor/pages/RetailerListPage";
 import RetailerFormPageSD from "../portals/super-distributor/pages/RetailerFormPage";
+import RoleListPageWL from "../portals/wl-admin/pages/RolesListPage";
+import RoleFormPageWL from "../portals/wl-admin/pages/RoleFormPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -158,7 +160,7 @@ export const TenantApp = () => {
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <div>Admin Dashboard</div> },
+          { index: true, element: <div>Admin Dashboard</div> },          
           {
             path: "super-distributors",
             children: [
@@ -197,6 +199,12 @@ export const TenantApp = () => {
               { path: "portal-services", element: <WLServiceSettingsPage /> },
             ],
           },
+          {path: 'roles', 
+            children: [
+                       {path: "list", element: <RoleListPageWL /> },
+                     { path: "create", element: <RoleFormPageWL /> },
+                      { path: "edit/:id", element: <RoleFormPageWL /> },
+          ]},
         ],
       },
 
