@@ -405,6 +405,38 @@ issue, technical issue, etc.), provide description. They can see responses in th
               { path: "edit/:id", element: <RetailerFormPage2 /> },
             ],
           },
+          {path: "profile", element: <div>KYC: Ensure their Retailers have submitted KYC, perhaps do initial verification or
+simply remind and track status.</div>},
+{
+  path: "wallet", element: <div>Wallet Management:<br/> • View and manage their wallet balance: they get balance from Super Distributor, then
+allocate to their Retailers.<br/>
+• Credit/Debit to Retailers: Increase a retailer’s balance (which decreases distributor’s
+own), etc. or withdraw back if retailer pays them back offline.<br/>
+• Hold/Unhold Retailer funds: as a risk mechanism at their level.</div>
+},
+{
+  path: "report", element: <div>Reports: See all transactions done by their retailers and by themselves, commissions
+earned on each.</div>
+},
+{
+  path: "support-ticket", element: <div>Tickets: Serve as first point for retailer issues; can see tickets from their retailers,
+answer them or escalate to Super Distributor/Company.</div>
+},
+{path: "scope", element: <div><p> Distributor Module: (Mid-level partner, under Super Distributor, above Retailers.)<br/>
+• Many features similar to Super Distributor, but scope limited to their network:<br/>
+• Onboard/manage their Retailers (create retailer accounts, perhaps pending approval).<br/>
+• View and manage their wallet balance: they get balance from Super Distributor, then
+allocate to their Retailers.<br/>
+• Credit/Debit to Retailers: Increase a retailer’s balance (which decreases distributor’s
+own), etc. or withdraw back if retailer pays them back offline.<br/>
+• Hold/Unhold Retailer funds: as a risk mechanism at their level.<br/>
+• Reports: See all transactions done by their retailers and by themselves, commissions
+earned on each.<br/>
+• KYC: Ensure their Retailers have submitted KYC, perhaps do initial verification or
+simply remind and track status.<br/>
+• Dashboard: summary of number of retailers, daily volume, etc.<br/>
+• Tickets: Serve as first point for retailer issues; can see tickets from their retailers,
+answer them or escalate to Super Distributor/Company.</p></div>}
         ],
       },
 
