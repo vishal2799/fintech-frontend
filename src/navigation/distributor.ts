@@ -25,16 +25,4 @@ export const distributorNavItems = [
       },
     ],
   },
-  {
-    label: 'Support Ticket',
-    icon: IconUsers,
-    links: [
-      {
-        label: 'Support Ticket List',
-        link: 'support-ticket/list',
-        allowedRoles: ['D'],
-        // permission: 'MEMBERS_READ',
-      },
-    ],
-  },
 ];

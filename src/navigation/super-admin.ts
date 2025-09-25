@@ -103,13 +103,7 @@ export const superAdminNavItems = [
     label: 'Commission',
     icon: IconDiscount2,
     links: [
-      // {label: 'Service Rule Types', link: '/commission/service-rule-type', permission: PERMISSIONS.TENANTS_READ,
-      //   allowedRoles: ['SUPER_ADMIN']
-      // },
       {label: 'Service Operators', link: '/commission/service-operators', permission: PERMISSIONS.TENANTS_READ,
-        allowedRoles: ['SUPER_ADMIN']
-      },
-      {label: 'Service Commission List', link: '/commission/list', permission: PERMISSIONS.TENANTS_READ,
         allowedRoles: ['SUPER_ADMIN']
       }
     ]

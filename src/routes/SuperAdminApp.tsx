@@ -26,10 +26,7 @@ import PendingCreditRequestListPage from "../portals/super-admin/pages/PendingCr
 import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
-import { ServiceRuleTypesTable } from "../portals/super-admin/pages/ServiceRuleTypeList";
 import ServiceOperatorListPage from "../portals/super-admin/pages/ServiceOperatorsList";
-import ServiceCommissionListPage from "../portals/super-admin/pages/ServiceCommissionListPage";
-import ServiceCommissionFormPage from "../portals/super-admin/pages/ServiceCommissionFormPage";
 
 
 
@@ -94,11 +91,7 @@ export const SuperAdminApp = () => {
             { path: "credit-requests", element: <CreditRequestListPage /> },
       ]},
       {path: '/commission', children: [
-        {path: 'service-rule-type', element: <ServiceRuleTypesTable />},
         {path: 'service-operators', element: <ServiceOperatorListPage />},
-        {path: 'list', element: <ServiceCommissionListPage />},
-        {path: 'create', element: <ServiceCommissionFormPage />},
-        {path: 'edit/:id', element: <ServiceCommissionFormPage />},
       ]},
       { path: "/logs" , element: <ClientAuditLogsPage />},
       { path: "/auth-logs" , element: <AuthLoginsPage />},

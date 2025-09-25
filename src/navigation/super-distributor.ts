@@ -37,22 +37,4 @@ export const sdNavItems = [
       },
     ],
   },
-  {
-    label: 'Support Ticket',
-    icon: IconUsers,
-    links: [
-      {
-        label: 'Support Ticket List',
-        link: 'support-ticket/list',
-        allowedRoles: ['SD'],
-        // permission: 'MEMBERS_READ',
-      },
-      {
-        label: 'Create Support Ticket',
-        link: 'support-ticket/create',
-        allowedRoles: ['SD'],
-        // permission: 'MEMBERS_READ',
-      },
-    ],
-  },
 ];
