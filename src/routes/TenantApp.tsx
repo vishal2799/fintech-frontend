@@ -262,7 +262,66 @@ export const TenantApp = () => {
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <div>Retailer Dashboard</div> },
+          { index: true, element: <div>Retailer Dashboard - <p>• Perform Transactions: This is critical — the retailer’s interface allows them to initiate
+various services:<br />
+o Domestic Money Transfer: send money to customers’ beneficiaries via IMPS/NEFT;
+requires entering details and processing via integrated payment API.<br/>
+o Bill Payments: Electricity, gas, etc. via integrated APIs (BBPS likely).<br/>
+o Mobile/DTH Recharges: Input number, select plan, integrate with provider API.<br/>
+o AEPS (Aadhaar Enabled Payment System): if applicable, the retailer uses a fingerprint
+device to allow withdrawals from bank accounts (integration with NPCI’s AEPS via an
+API).<br/>
+o Other fintech services: The list can include micro-ATM cash withdrawal, insurance
+sale, etc., but specifics depend on business and as provided by the Client. For scope
+clarity, let’s assume at least money transfer and utility payments.<br/>
+• Balance Check: Retailer sees their current balance (this is their prepaid amount with
+which they can do transactions; each transaction deducts relevant amount).<br/>
+• Add Money Request: Retailer should request their Distributor to top-up their balance
+when low (maybe by raising a request in system or just offline).<br/>
+• Transaction History: Detailed list of all transactions they did, with status (success,
+pending, failed), reference IDs, etc. Should be searchable by date range, type,
+customer reference.<br/>
+• Receipts: Ability to print or SMS or Whatsapp or email receipts for transactions to
+customers as per the facilities and enablement’s done by the Client.<br/>
+• Commission View: For each transaction, the retailer sees what commission or fee
+they earned (some may be commission, some they might collect fee from customer).<br/>
+• Profile/KYC: Retailer can upload their documents for KYC (if initially not fully verified)
+and see verification status. They should update their profile details if needed (address,
+contact).<br/>
+• Support Ticket: Raise support tickets for issues (e.g., a transaction stuck in
+processing, customer didn’t get credit, etc.). They can select category (transaction
+issue, technical issue, etc.), provide description. They can see responses in the portal.<br/>
+• Notification Centre: Any notifications from Distributor or Company (maintenance
+downtime announcements, new service launched, etc.).<br/>
+• Possibly a simplified UI since retailers might not be highly tech-savvy; emphasis on
+easy transaction flows.</p></div> },
+          {path: "profile", element: <div>Profile/KYC: Retailer can upload their documents for KYC (if initially not fully verified)
+and see verification status. They should update their profile details if needed (address,
+contact).</div>},
+{
+  path: "wallet", element: <div>Wallet Management - • Balance Check: Retailer sees their current balance (this is their prepaid amount with
+which they can do transactions; each transaction deducts relevant amount).
+• Add Money Request: Retailer should request their Distributor to top-up their balance
+when low (maybe by raising a request in system or just offline).</div>
+},
+{
+  path: "transactions", element: <div>Transaction History: Detailed list of all transactions they did, with status (success,
+pending, failed), reference IDs, etc. Should be searchable by date range, type,
+customer reference.</div>
+},
+{
+  path: "commissions", element: <div>Commission View: For each transaction, the retailer sees what commission or fee
+they earned (some may be commission, some they might collect fee from customer).</div>
+},
+{
+  path: "notifications", element: <div>Notification Centre: Any notifications from Distributor or Company (maintenance
+downtime announcements, new service launched, etc.).</div>
+},
+{
+  path: "support-ticket", element: <div>Support Ticket: Raise support tickets for issues (e.g., a transaction stuck in
+processing, customer didn’t get credit, etc.). They can select category (transaction
+issue, technical issue, etc.), provide description. They can see responses in the portal.</div>
+}
         ],
       },
 
