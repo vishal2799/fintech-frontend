@@ -28,6 +28,7 @@ import EmployeeListPageWL from "../portals/wl-admin/pages/EmployeeListPage";
 import EmployeeFormPageWL from "../portals/wl-admin/pages/EmployeeFormPage";
 import BankAccountsListPage from "../portals/super-admin/pages/BankAccountsListPage";
 import BankAccountFormPage from "../portals/super-admin/pages/BankAccountFormPage";
+import TenantAuditLogsPage from "../portals/wl-admin/pages/AuditLogs";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -221,6 +222,7 @@ export const TenantApp = () => {
                      {path: 'edit-bank/:id', element: <BankAccountFormPage />}
                    ]
                  },
+                 { path: "logs", element: <TenantAuditLogsPage /> },
                  {path: "profile", element: <div>KYC Management: Oversee the KYC verification process of all users (especially
 Retailers). The WL Admin can see all pending KYC submissions, verify documents,
 approve or reject KYC applications, or escalate issues to compliance team.</div>},
@@ -239,10 +241,6 @@ commissions should be complaint with GST and TDS Laws.<br/>
 partner. For instance, Retailer ABC can be given a special commission rate for money
 transfers, higher than the default, as an incentive. The system should allow these
 exceptions and ensure calculations pick the correct values.</div>
-},
-{
-  path: "logs", element: <div>Audit Logs: Every action by WL Admin or any admin needs to be logged (who did what
-and when, like changing commissions, editing user details), for audit and compliance.</div>
 },
 {
   path: "support-ticket", element: <div>Ticket Oversight: The WL Admin can see all support tickets, even those handled by
