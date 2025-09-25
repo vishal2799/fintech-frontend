@@ -1,5 +1,19 @@
-import { IconGauge, IconPackages, IconSettingsCog, IconUsers, IconUsersGroup } from "@tabler/icons-react";
+import {
+  IconGauge,
+  IconLifebuoy,
+  IconPackages,
+  IconSettingsCog,
+  IconUsers,
+  IconUsersGroup,
+  IconWallet,
+  IconListDetails,
+  IconReportAnalytics,
+  IconIdBadge2,
+  IconPercentage,
+  IconAdjustments,
+} from "@tabler/icons-react";
 import { PERMISSIONS } from "../constants/permissions";
+
 
 export const wlAdminNavItems = [
   {
@@ -67,8 +81,8 @@ export const wlAdminNavItems = [
     ],
   },
   {
-    label: 'Wallet',
-    icon: IconUsers,
+    label: 'Wallet Management',
+    icon: IconWallet,
     links: [
       {
         label: 'Ledger',
@@ -108,5 +122,47 @@ export const wlAdminNavItems = [
         {label: 'Company Banks', link: 'settings/banks', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['WL_ADMIN']},
         {label: 'Add Company Bank', link: 'settings/add-bank', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['WL_ADMIN']}
       ]
-    }
+    },
+        {
+    label: 'Logs',
+    link: 'logs',
+    icon: IconListDetails,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+      {
+    label: 'Reports',
+    link: 'report',
+    icon: IconReportAnalytics,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+      {
+    label: 'KYC Management',
+    link: 'profile',
+    icon: IconIdBadge2,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+     {
+    label: 'Commissions',
+    link: 'commissions',
+    icon: IconPercentage,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+     {
+    label: 'Support Ticket',
+    link: 'support-ticket',
+    icon: IconLifebuoy,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+    {
+    label: 'Scope',
+    link: 'scope',
+    icon: IconAdjustments,
+    allowedRoles: ['WL_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
 ];

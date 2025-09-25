@@ -220,6 +220,81 @@ export const TenantApp = () => {
                      {path: 'add-bank', element: <BankAccountFormPage />},
                      {path: 'edit-bank/:id', element: <BankAccountFormPage />}
                    ]
+                 },
+                 {path: "profile", element: <div>KYC Management: Oversee the KYC verification process of all users (especially
+Retailers). The WL Admin can see all pending KYC submissions, verify documents,
+approve or reject KYC applications, or escalate issues to compliance team.</div>},
+{
+  path: "report", element: <div>Reports: Comprehensive reports accessible to WL Admin (see Reporting section
+below for details).</div>
+},
+{
+  path: "commissions", element: <div>• Commission & Commercials Setup: Define default commission rates or fees for each
+service at each level (Super Distributor, Distributor, Retailer). For example, for a
+particular service, the Super Distributor gets 1%, Distributor 0.5%, Retailer 0.5%. Or
+define fixed fee per transaction. This should be flexible, including tiered commissions
+or slabs if needed (e.g., different commission for different volume of transactions). The
+commissions should be complaint with GST and TDS Laws.<br/>
+• Custom Commercials: Ability to override the default commission for a specific
+partner. For instance, Retailer ABC can be given a special commission rate for money
+transfers, higher than the default, as an incentive. The system should allow these
+exceptions and ensure calculations pick the correct values.</div>
+},
+{
+  path: "logs", element: <div>Audit Logs: Every action by WL Admin or any admin needs to be logged (who did what
+and when, like changing commissions, editing user details), for audit and compliance.</div>
+},
+{
+  path: "support-ticket", element: <div>Ticket Oversight: The WL Admin can see all support tickets, even those handled by
+employees, to ensure SLA compliance on responses.</div>
+},
+                 {
+                  path: 'scope', element: <div><p>
+                    White Label Admin Module: (This is the top-level administrative interface for the
+company using the portal as SaaS.) The WL Admin should have full control over the WL
+system.<br/>
+Features include:<br/>
+• User Management: Create, read, update, delete (CRUD) for all lower-tier users: Super
+Distributors, Distributors, Retailers, and internal Employees. Assign these users to
+hierarchy as needed (e.g., a Distributor is under a particular Super Distributor, etc.).
+Reset passwords or unlock accounts.<br/>
+• KYC Management: Oversee the KYC verification process of all users (especially
+Retailers). The WL Admin can see all pending KYC submissions, verify documents,
+approve or reject KYC applications, or escalate issues to compliance team.<br/>
+• Service Configuration: Enable/disable specific services or products in the portal, e.g.,
+enabling domestic money transfer, bill pay, etc., depending on regulatory compliance
+or business strategy.<br/>
+• Commission & Commercials Setup: Define default commission rates or fees for each
+service at each level (Super Distributor, Distributor, Retailer). For example, for a
+particular service, the Super Distributor gets 1%, Distributor 0.5%, Retailer 0.5%. Or
+define fixed fee per transaction. This should be flexible, including tiered commissions
+or slabs if needed (e.g., different commission for different volume of transactions). The
+commissions should be complaint with GST and TDS Laws.<br/>
+• Custom Commercials: Ability to override the default commission for a specific
+partner. For instance, Retailer ABC can be given a special commission rate for money
+transfers, higher than the default, as an incentive. The system should allow these
+exceptions and ensure calculations pick the correct values.<br/>
+• Transaction Monitoring: Real-time view of transactions happening in the system, with
+filters by date, type, status, user, etc. For security and support, WL Admin can drill
+down into a particular transaction’s details (amount, time, status, any error codes).<br/>
+• Hold/Unhold Funds: If a Distributor is doing suspicious activity or exceeds risk
+thresholds, the Super Distributor might want to hold their ability to use funds (freeze).
+The module allows to put a hold on some amount or the entire balance of a Distributor
+or Retailer in their network. Unhold releases it. (This ensures risk control; e.g., if a
+retailer should not use ₹5000 of their ₹10000 balance, hold ₹5000.)• Approve
+Holds/Adjust Balance: If a distributor requests additional credit or to hold funds of a
+retailer (explained later), the WL Admin might have to approve or effectuate these
+changes. Also, manage any global limits on credit.<br/>
+• System Configuration: Manage settings like portal announcements (notices shown to
+all users), content management for certain pages, FAQ entries, support contact info,
+etc.<br/>
+• Audit Logs: Every action by WL Admin or any admin needs to be logged (who did what
+and when, like changing commissions, editing user details), for audit and compliance.<br/>
+• Reports: Comprehensive reports accessible to WL Admin (see Reporting section
+below for details).<br/>
+• Ticket Oversight: The Super Admin can see all support tickets, even those handled by
+employees, to ensure SLA compliance on responses.
+                    </p></div>
                  }       
         ],
       },
