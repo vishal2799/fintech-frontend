@@ -58,5 +58,12 @@ export const retailerNavItems = [
     allowedRoles: ['R'],
     permission: PERMISSIONS.TENANTS_CREATE,
   },
+  {
+    label: 'Scope',
+    link: 'scope',
+    icon: IconLifebuoy,
+    allowedRoles: ['R'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
 ];
 

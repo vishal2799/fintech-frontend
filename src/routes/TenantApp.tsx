@@ -233,7 +233,40 @@ export const TenantApp = () => {
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <div>Super Distributor Dashboard</div> },
+          {index: true, element: <div><strong>Super Distributor Dashboard</strong></div>},
+          { path: "scope", element: <div><p>Super Distributor Module: (This user is a high-level business partner, managing a
+network of Distributors and Retailers.)<br/>
+• Dashboard: A summary view of their downline performance: total number of
+distributors, retailers, last login info, today’s transactions volume, earnings
+(commission) summary, pending KYC of downline, etc.<br/>
+• Distributor Management: Can onboard new Distributors under them (enter their
+details to create account, perhaps subject to approval by WL Admin). View list of their
+distributors and key info. Reset distributor credentials if needed, or request KYC for
+them.<br/>
+• Retailer Management: Possibly the Super Distributor can also directly onboard
+Retailers under any of their Distributors (or assign a retailer to a distributor).<br/>
+• Wallet/Account Management: Each Super Distributor likely has a wallet (ledger)
+showing balance of funds they have in the system to allocate to their network. They can
+purchase credit from the company (WL Admin) which increases their balance (this
+would be offline or via payment). Then they distribute this balance to their Distributors.
+They should be able to credit or debit their Distributors’ accounts. For example, when a
+Super Distributor gives Rs. 10000 to a Distributor, the Super Distributor’s balance
+reduces by that and the Distributor’s increases.<br/>
+• Hold/Unhold Funds: If a Distributor is doing suspicious activity or exceeds risk
+thresholds, the Super Distributor might want to hold their ability to use funds (freeze).
+The module allows to put a hold on some amount or the entire balance of a Distributor
+or Retailer in their network. Unhold releases it. (This ensures risk control; e.g., if a
+retailer should not use ₹5000 of their ₹10000 balance, hold ₹5000.)<br/>
+• Reports: Super Distributor can see consolidated reports for their whole downline or
+filtered by each Distributor. This includes transaction statements, commission earned
+by each level, etc.<br/>
+• KYC: They can see which of their Distributors or Retailers need KYC approval. Perhaps
+they do a preliminary check and then forward to WL Admin for final approval (depending
+on workflow design).<br/>
+• Support Tickets: View tickets raised by their Distributors/Retailers. Possibly they
+areexpected to resolve first-level issues from their network, and can escalate to
+thecompany’s support if needed. The module might allow adding notes or responses to
+tickets.</p></div> },
           {
             path: "distributors",
             children: [
@@ -250,6 +283,34 @@ export const TenantApp = () => {
               { path: "edit/:id", element: <RetailerFormPageSD /> },
             ],
           },
+           {path: "profile", element: <div> KYC: They can see which of their Distributors or Retailers need KYC approval. Perhaps
+they do a preliminary check and then forward to WL Admin for final approval (depending
+on workflow design).</div>},
+{
+  path: "wallet", element: <div>Wallet/Account Management: Each Super Distributor likely has a wallet (ledger)
+showing balance of funds they have in the system to allocate to their network. They can
+purchase credit from the company (WL Admin) which increases their balance (this
+would be offline or via payment). Then they distribute this balance to their Distributors.
+They should be able to credit or debit their Distributors’ accounts. For example, when a
+Super Distributor gives Rs. 10000 to a Distributor, the Super Distributor’s balance
+reduces by that and the Distributor’s increases.<br/>
+• Hold/Unhold Funds: If a Distributor is doing suspicious activity or exceeds risk
+thresholds, the Super Distributor might want to hold their ability to use funds (freeze).
+The module allows to put a hold on some amount or the entire balance of a Distributor
+or Retailer in their network. Unhold releases it. (This ensures risk control; e.g., if a
+retailer should not use ₹5000 of their ₹10000 balance, hold ₹5000.)</div>
+},
+{
+  path: "report", element: <div>Reports: Super Distributor can see consolidated reports for their whole downline or
+filtered by each Distributor. This includes transaction statements, commission earned
+by each level, etc.</div>
+},
+{
+  path: "support-ticket", element: <div>Support Tickets: View tickets raised by their Distributors/Retailers. Possibly they
+areexpected to resolve first-level issues from their network, and can escalate to
+thecompany’s support if needed. The module might allow adding notes or responses to
+tickets.</div>
+}
         ]
       },
 
@@ -262,7 +323,8 @@ export const TenantApp = () => {
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <div>Retailer Dashboard - <p>• Perform Transactions: This is critical — the retailer’s interface allows them to initiate
+          {index: true, element: <div>Retailer Dashboard</div>},
+          { path: "scope", element: <div><strong>Retailer Module: (The end agent who serves customers.)</strong><br/><br/><p>• Perform Transactions: This is critical — the retailer’s interface allows them to initiate
 various services:<br />
 o Domestic Money Transfer: send money to customers’ beneficiaries via IMPS/NEFT;
 requires entering details and processing via integrated payment API.<br/>
