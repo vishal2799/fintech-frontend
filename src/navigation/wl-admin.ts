@@ -1,4 +1,5 @@
 import { IconGauge, IconPackages, IconSettingsCog, IconUsers, IconUsersGroup } from "@tabler/icons-react";
+import { PERMISSIONS } from "../constants/permissions";
 
 export const wlAdminNavItems = [
   {
@@ -99,5 +100,13 @@ export const wlAdminNavItems = [
         allowedRoles: ['WL_ADMIN']
       }
     ]
-  }
+  },
+  {
+      label: 'Settings',
+      icon: IconSettingsCog,
+      links: [
+        {label: 'Company Banks', link: 'settings/banks', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['WL_ADMIN']},
+        {label: 'Add Company Bank', link: 'settings/add-bank', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['WL_ADMIN']}
+      ]
+    }
 ];
