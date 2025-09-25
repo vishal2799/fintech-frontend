@@ -107,7 +107,63 @@ export const SuperAdminApp = () => {
           {path: 'add-bank', element: <BankAccountFormPage />},
           {path: 'edit-bank/:id', element: <BankAccountFormPage />}
         ]
-      }  
+      },
+                       {path: "/profile", element: <div>KYC Management: Oversee the KYC verification process of all W/l Admins.</div>},
+{
+  path: "/report", element: <div> Reports: Comprehensive reports accessible to
+Super Admin (see Reporting section below for details). Transaction Monitoring: Real-time view of transactions happening in the system, with
+filters by date, type, status, user, etc. For security and support, Super Admin can drill
+down into a particular transaction’s details (amount, time, status, any error codes).</div>
+},
+{
+  path: "/api-user", element: <div>API User Management: If external APIs are offered, Super Admin can manage API
+clients: generate API keys, monitor usage, set rate limits.</div>
+},
+{
+  path: "/support-ticket", element: <div> Ticket Oversight: The Super Admin can see all support tickets, even those handled by
+employees, to ensure SLA compliance on responses.</div>
+},  
+{
+  path: "/scope", element: <div>
+    Super Admin Module: This is the top-level administrative interface with control over
+the entire system and all white-label partners. Capabilities:<br/>
+• White Label Management: Create/manage White-Label Partners, WL Admins,
+Configure branding (logos, domain, theme, contact info), Enable/disable modules per
+WL Admin, Assign user limits, service access, Set up commission templates or slabs
+per WL Admin<br/>
+• API User Management: If external APIs are offered, Super Admin can manage API
+clients: generate API keys, monitor usage, set rate limits.<br/>
+• KYC Management: Oversee the KYC verification process of all W/l Admins.<br/>
+• Service Configuration: Enable/disable specific services or products in the portal, e.g.,
+enabling domestic money transfer, bill pay, etc., depending on regulatory compliance
+or business strategy.<br/>
+• System Configuration: Manage settings like portal announcements (notices shown to
+all users), content management for certain pages, FAQ entries, support contact info,
+etc.<br/>
+• Wallet Management: A module b/w Super Admin and Admin to work on the currency
+and coin distribution from supper admin to W/l (Admin).<br/>
+• Commission & Commercials Setup: Define default commission rates or fees for each
+service at w/l Level. The commissions should be complaint with GST and TDS Laws.<br/>
+• Transaction Monitoring: Real-time view of transactions happening in the system, with
+filters by date, type, status, user, etc. For security and support, Super Admin can drill
+down into a particular transaction’s details (amount, time, status, any error codes).<br/>
+• Hold / Unhold Funds: If a node is doing suspicious activity or exceeds risk thresholds,
+the Super Admin might want to hold their ability to use funds (freeze). The module
+allows to put a hold on some amount or the entire balance of any Node in entire
+network. Unhold releases it. (This ensures risk control; e.g., if a retailer should not use
+₹5000 of their ₹10000 balance, hold ₹5000.)<br/>
+• Employee management: Create, read, update, delete (CRUD) internal Employees and
+setoff their roles and responsibilities.<br/>
+• Reports: Comprehensive reports accessible to Super Admin (see Reporting section below for details).<br/>
+• Transaction Monitoring: Real-time view of transactions happening in the system, with
+filters by date, type, status, user, etc. For security and support, Super Admin can drill
+down into a particular transaction’s details (amount, time, status, any error codes).<br/>
+• Audit Logs: Every action by any Node/ User needs to be logged (who did what and
+when, like changing commissions, editing user details), for audit and compliance.<br/>
+• Ticket Oversight: The Super Admin can see all support tickets, even those handled by
+employees, to ensure SLA compliance on responses.
+  </div>
+}
           // ... rest of your routes
         ],
       },

@@ -9,6 +9,11 @@ import {
   IconPackages,
   IconPresentationAnalytics,
   IconDiscount2,
+  IconAdjustments,
+  IconLifebuoy,
+  IconPercentage,
+  IconIdBadge2,
+  IconReportAnalytics,
 } from '@tabler/icons-react';
 import { PERMISSIONS } from '../constants/permissions';
 
@@ -133,5 +138,40 @@ export const superAdminNavItems = [
       {label: 'Company Banks', link: '/settings/banks', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['SUPER_ADMIN']},
       {label: 'Add Company Bank', link: '/settings/add-bank', permission: PERMISSIONS.TENANTS_CREATE, allowedRoles: ['SUPER_ADMIN']}
     ]
-  }
+  },
+        {
+    label: 'Reports',
+    link: 'report',
+    icon: IconReportAnalytics,
+    allowedRoles: ['SUPER_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+      {
+    label: 'KYC Management',
+    link: 'profile',
+    icon: IconIdBadge2,
+    allowedRoles: ['SUPER_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+     {
+    label: 'API User',
+    link: 'api-user',
+    icon: IconPercentage,
+    allowedRoles: ['SUPER_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+     {
+    label: 'Support Ticket',
+    link: 'support-ticket',
+    icon: IconLifebuoy,
+    allowedRoles: ['SUPER_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
+    {
+    label: 'Scope',
+    link: 'scope',
+    icon: IconAdjustments,
+    allowedRoles: ['SUPER_ADMIN'],
+    permission: PERMISSIONS.TENANTS_CREATE,
+  },
 ];
