@@ -32,6 +32,8 @@ import TenantAuditLogsPage from "../portals/wl-admin/pages/AuditLogs";
 import CreditRequestFormPageRetailer from "../portals/retailer/pages/CreditRequestPage";
 import CreditRequestListPageRetailer from "../portals/retailer/pages/CreditRequestList";
 import RetailerLedger from "../portals/retailer/pages/RetailerLedger";
+import CreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLCreditRequestsPage";
+import InternalPendingCreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLPendingCreditRequests";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -200,6 +202,13 @@ export const TenantApp = () => {
               { path: "add-fund", element: <CreditRequestFormPage /> },
               { path: "ledger", element: <WalletPage /> },
             ],
+          },
+          {
+            path: "internal-wallet",
+            children: [
+              { path: "pending-credit-requests", element: <InternalPendingCreditRequestListPageWL /> },
+              { path: "credit-requests", element: <CreditRequestListPageWL /> },
+            ]
           },
           {
             path: "services",

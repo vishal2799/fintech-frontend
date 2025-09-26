@@ -11,6 +11,7 @@ import {
   IconIdBadge2,
   IconPercentage,
   IconAdjustments,
+  IconMoneybag,
 } from "@tabler/icons-react";
 import { PERMISSIONS } from "../constants/permissions";
 
@@ -103,6 +104,20 @@ export const wlAdminNavItems = [
         permission: 'MEMBERS_READ',
       },
     ],
+  },
+  {
+    label: 'Internal Wallet',
+    icon: IconMoneybag,
+    links: [
+      {
+        label: 'Credit requests',
+        link: 'internal-wallet/credit-requests',
+        allowedRoles: ['WL_ADMIN']
+      },
+      { 
+        label: 'Pending Credit Request', 
+        link: 'internal-wallet/pending-credit-requests', allowedRoles: ['WL_ADMIN'] },
+    ]
   },
   {
     label: 'Services',
