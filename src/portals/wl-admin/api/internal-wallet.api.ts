@@ -55,6 +55,6 @@ export const rejectCreditRequest = async(params: { id: string; remarks?: string 
 };
 
 export const getProofDownloadUrl = async (creditRequestId: string) => {
-  const { data } = await axios.get(`/wallet/proof/${creditRequestId}`);
+  const { data } = await axios.get(`/user-wallet/proof/${creditRequestId}`);
   return data.data; // { downloadUrl, fileKey }
 };
