@@ -23,13 +23,37 @@ export const retailerNavItems = [
     allowedRoles: ['R'],
     permission: PERMISSIONS.TENANTS_CREATE,
   },
-  {
+    {
     label: 'Wallet Management',
-    link: 'wallet',
     icon: IconWallet,
-    allowedRoles: ['R'],
-    permission: PERMISSIONS.TENANTS_CREATE,
+    links: [
+      {
+        label: 'Ledger',
+        link: 'wallet/ledger',
+        allowedRoles: ['R'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Add Fund',
+        link: 'wallet/add-fund',
+        allowedRoles: ['R'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Credit Requests',
+        link: 'wallet/credit-requests',
+        allowedRoles: ['R'],
+        permission: 'MEMBERS_READ',
+      },
+    ],
   },
+  // {
+  //   label: 'Wallet Management',
+  //   link: 'wallet',
+  //   icon: IconWallet,
+  //   allowedRoles: ['R'],
+  //   permission: PERMISSIONS.TENANTS_CREATE,
+  // },
   {
     label: 'Transactions',
     link: 'transactions',

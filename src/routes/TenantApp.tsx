@@ -29,6 +29,9 @@ import EmployeeFormPageWL from "../portals/wl-admin/pages/EmployeeFormPage";
 import BankAccountsListPage from "../portals/super-admin/pages/BankAccountsListPage";
 import BankAccountFormPage from "../portals/super-admin/pages/BankAccountFormPage";
 import TenantAuditLogsPage from "../portals/wl-admin/pages/AuditLogs";
+import CreditRequestFormPageRetailer from "../portals/retailer/pages/CreditRequestPage";
+import CreditRequestListPageRetailer from "../portals/retailer/pages/CreditRequestList";
+import RetailerLedger from "../portals/retailer/pages/RetailerLedger";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -397,6 +400,14 @@ tickets.</div>
         ),
         children: [
           {index: true, element: <div>Retailer Dashboard</div>},
+          {
+            path: "wallet",
+            children: [
+              { path: "credit-requests", element: <CreditRequestListPageRetailer /> },
+              { path: "add-fund", element: <CreditRequestFormPageRetailer /> },
+              { path: "ledger", element: <RetailerLedger /> },
+            ],
+          },
           { path: "scope", element: <div><strong>Retailer Module: (The end agent who serves customers.)</strong><br/><br/><p>• Perform Transactions: This is critical — the retailer’s interface allows them to initiate
 various services:<br />
 o Domestic Money Transfer: send money to customers’ beneficiaries via IMPS/NEFT;
