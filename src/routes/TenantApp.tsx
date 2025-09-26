@@ -368,23 +368,31 @@ tickets.</p></div> },
               { path: "edit/:id", element: <RetailerFormPageSD /> },
             ],
           },
+          {
+            path: "wallet",
+            children: [
+              { path: "credit-requests", element: <CreditRequestListPageRetailer /> },
+              { path: "add-fund", element: <CreditRequestFormPageRetailer /> },
+              { path: "ledger", element: <RetailerLedger /> },
+            ],
+          },
            {path: "profile", element: <div> KYC: They can see which of their Distributors or Retailers need KYC approval. Perhaps
 they do a preliminary check and then forward to WL Admin for final approval (depending
 on workflow design).</div>},
-{
-  path: "wallet", element: <div>Wallet/Account Management: Each Super Distributor likely has a wallet (ledger)
-showing balance of funds they have in the system to allocate to their network. They can
-purchase credit from the company (WL Admin) which increases their balance (this
-would be offline or via payment). Then they distribute this balance to their Distributors.
-They should be able to credit or debit their Distributors’ accounts. For example, when a
-Super Distributor gives Rs. 10000 to a Distributor, the Super Distributor’s balance
-reduces by that and the Distributor’s increases.<br/>
-• Hold/Unhold Funds: If a Distributor is doing suspicious activity or exceeds risk
-thresholds, the Super Distributor might want to hold their ability to use funds (freeze).
-The module allows to put a hold on some amount or the entire balance of a Distributor
-or Retailer in their network. Unhold releases it. (This ensures risk control; e.g., if a
-retailer should not use ₹5000 of their ₹10000 balance, hold ₹5000.)</div>
-},
+// {
+//   path: "wallet", element: <div>Wallet/Account Management: Each Super Distributor likely has a wallet (ledger)
+// showing balance of funds they have in the system to allocate to their network. They can
+// purchase credit from the company (WL Admin) which increases their balance (this
+// would be offline or via payment). Then they distribute this balance to their Distributors.
+// They should be able to credit or debit their Distributors’ accounts. For example, when a
+// Super Distributor gives Rs. 10000 to a Distributor, the Super Distributor’s balance
+// reduces by that and the Distributor’s increases.<br/>
+// • Hold/Unhold Funds: If a Distributor is doing suspicious activity or exceeds risk
+// thresholds, the Super Distributor might want to hold their ability to use funds (freeze).
+// The module allows to put a hold on some amount or the entire balance of a Distributor
+// or Retailer in their network. Unhold releases it. (This ensures risk control; e.g., if a
+// retailer should not use ₹5000 of their ₹10000 balance, hold ₹5000.)</div>
+// },
 {
   path: "report", element: <div>Reports: Super Distributor can see consolidated reports for their whole downline or
 filtered by each Distributor. This includes transaction statements, commission earned
@@ -453,12 +461,12 @@ easy transaction flows.</p></div> },
           {path: "profile", element: <div>Profile/KYC: Retailer can upload their documents for KYC (if initially not fully verified)
 and see verification status. They should update their profile details if needed (address,
 contact).</div>},
-{
-  path: "wallet", element: <div>Wallet Management - • Balance Check: Retailer sees their current balance (this is their prepaid amount with
-which they can do transactions; each transaction deducts relevant amount).
-• Add Money Request: Retailer should request their Distributor to top-up their balance
-when low (maybe by raising a request in system or just offline).</div>
-},
+// {
+//   path: "wallet", element: <div>Wallet Management - • Balance Check: Retailer sees their current balance (this is their prepaid amount with
+// which they can do transactions; each transaction deducts relevant amount).
+// • Add Money Request: Retailer should request their Distributor to top-up their balance
+// when low (maybe by raising a request in system or just offline).</div>
+// },
 {
   path: "transactions", element: <div>Transaction History: Detailed list of all transactions they did, with status (success,
 pending, failed), reference IDs, etc. Should be searchable by date range, type,
@@ -498,15 +506,23 @@ issue, technical issue, etc.), provide description. They can see responses in th
               { path: "edit/:id", element: <RetailerFormPage2 /> },
             ],
           },
+          {
+            path: "wallet",
+            children: [
+              { path: "credit-requests", element: <CreditRequestListPageRetailer /> },
+              { path: "add-fund", element: <CreditRequestFormPageRetailer /> },
+              { path: "ledger", element: <RetailerLedger /> },
+            ],
+          },
           {path: "profile", element: <div>KYC: Ensure their Retailers have submitted KYC, perhaps do initial verification or
 simply remind and track status.</div>},
-{
-  path: "wallet", element: <div>Wallet Management:<br/> • View and manage their wallet balance: they get balance from Super Distributor, then
-allocate to their Retailers.<br/>
-• Credit/Debit to Retailers: Increase a retailer’s balance (which decreases distributor’s
-own), etc. or withdraw back if retailer pays them back offline.<br/>
-• Hold/Unhold Retailer funds: as a risk mechanism at their level.</div>
-},
+// {
+//   path: "wallet", element: <div>Wallet Management:<br/> • View and manage their wallet balance: they get balance from Super Distributor, then
+// allocate to their Retailers.<br/>
+// • Credit/Debit to Retailers: Increase a retailer’s balance (which decreases distributor’s
+// own), etc. or withdraw back if retailer pays them back offline.<br/>
+// • Hold/Unhold Retailer funds: as a risk mechanism at their level.</div>
+// },
 {
   path: "report", element: <div>Reports: See all transactions done by their retailers and by themselves, commissions
 earned on each.</div>

@@ -51,12 +51,36 @@ export const sdNavItems = [
       },
     ],
   },
-  {
+        {
     label: 'Wallet Management',
-    link: 'wallet',
     icon: IconWallet,
-    allowedRoles: ['SD'],
-  }, 
+    links: [
+      {
+        label: 'Ledger',
+        link: 'wallet/ledger',
+        allowedRoles: ['SD'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Add Fund',
+        link: 'wallet/add-fund',
+        allowedRoles: ['SD'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Credit Requests',
+        link: 'wallet/credit-requests',
+        allowedRoles: ['SD'],
+        permission: 'MEMBERS_READ',
+      },
+    ],
+  },
+  // {
+  //   label: 'Wallet Management',
+  //   link: 'wallet',
+  //   icon: IconWallet,
+  //   allowedRoles: ['SD'],
+  // }, 
   {
     label: 'Reports',
     link: 'report',

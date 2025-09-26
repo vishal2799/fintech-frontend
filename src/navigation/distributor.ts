@@ -25,12 +25,36 @@ export const distributorNavItems = [
       },
     ],
   },
-    {
+      {
     label: 'Wallet Management',
-    link: 'wallet',
     icon: IconWallet,
-    allowedRoles: ['D'],
-  }, 
+    links: [
+      {
+        label: 'Ledger',
+        link: 'wallet/ledger',
+        allowedRoles: ['D'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Add Fund',
+        link: 'wallet/add-fund',
+        allowedRoles: ['D'],
+        permission: 'MEMBERS_READ',
+      },
+      {
+        label: 'Credit Requests',
+        link: 'wallet/credit-requests',
+        allowedRoles: ['D'],
+        permission: 'MEMBERS_READ',
+      },
+    ],
+  },
+  //   {
+  //   label: 'Wallet Management',
+  //   link: 'wallet',
+  //   icon: IconWallet,
+  //   allowedRoles: ['D'],
+  // }, 
   {
     label: 'Reports',
     link: 'report',
