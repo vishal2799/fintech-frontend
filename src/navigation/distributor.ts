@@ -47,6 +47,11 @@ export const distributorNavItems = [
         allowedRoles: ['D'],
         permission: 'MEMBERS_READ',
       },
+      {
+        label: 'Retailer List',
+        link: 'wallet/user-list',
+        allowedRoles: ['D']
+      },
     ],
   },
   //   {

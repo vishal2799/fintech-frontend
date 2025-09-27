@@ -73,6 +73,11 @@ export const sdNavItems = [
         allowedRoles: ['SD'],
         permission: 'MEMBERS_READ',
       },
+      {
+        label: 'User List',
+        link: 'wallet/user-list',
+        allowedRoles: ['SD']
+      },
     ],
   },
   // {

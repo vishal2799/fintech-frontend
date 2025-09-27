@@ -376,6 +376,7 @@ tickets.</p></div> },
               { path: "credit-requests", element: <CreditRequestListPageRetailer /> },
               { path: "add-fund", element: <CreditRequestFormPageRetailer /> },
               { path: "ledger", element: <RetailerLedger /> },
+              { path: "user-list", element: <UserWalletListPage /> },
             ],
           },
            {path: "profile", element: <div> KYC: They can see which of their Distributors or Retailers need KYC approval. Perhaps
@@ -514,6 +515,7 @@ issue, technical issue, etc.), provide description. They can see responses in th
               { path: "credit-requests", element: <CreditRequestListPageRetailer /> },
               { path: "add-fund", element: <CreditRequestFormPageRetailer /> },
               { path: "ledger", element: <RetailerLedger /> },
+              { path: "user-list", element: <UserWalletListPage /> },
             ],
           },
           {path: "profile", element: <div>KYC: Ensure their Retailers have submitted KYC, perhaps do initial verification or
