@@ -1,6 +1,7 @@
 export interface UserWalletSummary {
   id: string;
   tenantId: string;
+  userId: string;
   userName: string;
   balance: string;
   heldAmount: string;

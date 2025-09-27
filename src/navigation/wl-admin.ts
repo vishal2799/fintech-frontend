@@ -110,6 +110,11 @@ export const wlAdminNavItems = [
     icon: IconMoneybag,
     links: [
       {
+        label: 'User List',
+        link: 'internal-wallet/user-list',
+        allowedRoles: ['WL_ADMIN']
+      },
+      {
         label: 'Credit requests',
         link: 'internal-wallet/credit-requests',
         allowedRoles: ['WL_ADMIN']

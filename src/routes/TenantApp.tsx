@@ -34,6 +34,7 @@ import CreditRequestListPageRetailer from "../portals/retailer/pages/CreditReque
 import RetailerLedger from "../portals/retailer/pages/RetailerLedger";
 import CreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLCreditRequestsPage";
 import InternalPendingCreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLPendingCreditRequests";
+import UserWalletListPage from "../portals/wl-admin/pages/UserWalletList";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -206,6 +207,7 @@ export const TenantApp = () => {
           {
             path: "internal-wallet",
             children: [
+              { path: "user-list", element: <UserWalletListPage /> },
               { path: "pending-credit-requests", element: <InternalPendingCreditRequestListPageWL /> },
               { path: "credit-requests", element: <CreditRequestListPageWL /> },
             ]
