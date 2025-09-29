@@ -56,7 +56,7 @@ export default function ServiceActionForm({ mode, initialValues }: Props) {
         });
         showSuccess(res);
       }
-      navigate('/service-actions');
+      navigate('/service-actions/list');
     } catch (err: any) {
       showError(err);
     }

@@ -97,7 +97,7 @@ export const SuperAdminApp = () => {
       ]},
       {
         path: '/service-actions', children: [
-{index: true, element: <ServiceActionsListPage /> },
+{path: 'list', element: <ServiceActionsListPage /> },
            { path: "create", element: <ServiceActionFormPage /> },
             { path: "edit/:id", element: <ServiceActionFormPage /> },
         ]
