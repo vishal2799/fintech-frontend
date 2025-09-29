@@ -104,6 +104,14 @@ export const superAdminNavItems = [
         allowedRoles: ['SUPER_ADMIN'], },
     ],
   },
+    {
+    label: 'Service Actions',
+    icon: IconUsersGroup,
+    links: [
+      { label: 'Service Actions List', link: '/service-actions', allowedRoles: ['SUPER_ADMIN'] },
+      { label: 'Add Service Action', link: '/service-actions/create', allowedRoles: ['SUPER_ADMIN'] },
+    ],
+  },
   {
     label: 'Commission',
     icon: IconDiscount2,

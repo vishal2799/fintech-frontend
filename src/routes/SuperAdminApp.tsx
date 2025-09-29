@@ -27,6 +27,8 @@ import ServiceListPage from "../portals/super-admin/pages/ServicesListPage";
 import { TenantServicesListPage } from "../portals/super-admin/pages/TenantServicesListPage";
 import PermissionListPage from "../portals/super-admin/pages/PermissionListPage";
 import ServiceOperatorListPage from "../portals/super-admin/pages/ServiceOperatorsList";
+import ServiceActionsListPage from "../portals/super-admin/pages/ServiceActionsListPage";
+import ServiceActionFormPage from "../portals/super-admin/pages/ServiceActionFormPage";
 
 
 
@@ -93,6 +95,13 @@ export const SuperAdminApp = () => {
       {path: '/commission', children: [
         {path: 'service-operators', element: <ServiceOperatorListPage />},
       ]},
+      {
+        path: '/service-actions', children: [
+{index: true, element: <ServiceActionsListPage /> },
+           { path: "create", element: <ServiceActionFormPage /> },
+            { path: "edit/:id", element: <ServiceActionFormPage /> },
+        ]
+      },
       { path: "/logs" , element: <ClientAuditLogsPage />},
       { path: "/auth-logs" , element: <AuthLoginsPage />},
       // { path: "/auth-logs" , element: <AuthLoginsPage />},
