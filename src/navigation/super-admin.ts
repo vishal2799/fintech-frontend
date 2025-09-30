@@ -112,15 +112,23 @@ export const superAdminNavItems = [
       { label: 'Add Service Action', link: '/service-actions/create', allowedRoles: ['SUPER_ADMIN'] },
     ],
   },
-  {
+   {
     label: 'Commission',
     icon: IconDiscount2,
     links: [
-      {label: 'Service Operators', link: '/commission/service-operators', permission: PERMISSIONS.TENANTS_READ,
-        allowedRoles: ['SUPER_ADMIN']
-      }
-    ]
+      { label: 'Templates List', link: '/commission-templates/list', allowedRoles: ['SUPER_ADMIN'] },
+      { label: 'Add Commission Templates', link: '/commission-templates/create', allowedRoles: ['SUPER_ADMIN'] },
+    ],
   },
+  // {
+  //   label: 'Commission',
+  //   icon: IconDiscount2,
+  //   links: [
+  //     {label: 'Service Operators', link: '/commission/service-operators', permission: PERMISSIONS.TENANTS_READ,
+  //       allowedRoles: ['SUPER_ADMIN']
+  //     }
+  //   ]
+  // },
   {
     label: 'Logs',
     icon: IconPresentationAnalytics,

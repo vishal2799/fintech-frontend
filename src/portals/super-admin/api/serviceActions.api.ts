@@ -14,10 +14,10 @@ export const serviceActionsApi = {
     axiosInstance.get("/service-actions", { params }),
   
   getById: (id: string) => 
-    axiosInstance.get<ServiceAction>(`/service-actions/${id}`),
+    axiosInstance.get(`/service-actions/${id}`),
   
   getByCode: (code: string) => 
-    axiosInstance.get<ServiceAction>(`/service-actions/code/${code}`),
+    axiosInstance.get(`/service-actions/code/${code}`),
   
   create: (data: CreateServiceActionInput) => 
     axiosInstance.post<ServiceAction>("/service-actions", data),

@@ -29,6 +29,8 @@ import PermissionListPage from "../portals/super-admin/pages/PermissionListPage"
 import ServiceOperatorListPage from "../portals/super-admin/pages/ServiceOperatorsList";
 import ServiceActionsListPage from "../portals/super-admin/pages/ServiceActionsListPage";
 import ServiceActionFormPage from "../portals/super-admin/pages/ServiceActionFormPage";
+import CommissionTemplatesListPage from "../portals/super-admin/pages/CommissionTemplatesListPage";
+import CommissionTemplateFormPage from "../portals/super-admin/pages/CommissionTemplateFormPage";
 
 
 
@@ -100,6 +102,13 @@ export const SuperAdminApp = () => {
 {path: 'list', element: <ServiceActionsListPage /> },
            { path: "create", element: <ServiceActionFormPage /> },
             { path: "edit/:id", element: <ServiceActionFormPage /> },
+        ]
+      },
+      {
+        path: '/commission-templates', children: [
+{path: 'list', element: <CommissionTemplatesListPage /> },
+           { path: "create", element: <CommissionTemplateFormPage /> },
+            { path: "edit/:id", element: <CommissionTemplateFormPage /> },
         ]
       },
       { path: "/logs" , element: <ClientAuditLogsPage />},
