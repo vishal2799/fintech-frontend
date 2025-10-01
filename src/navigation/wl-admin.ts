@@ -12,6 +12,7 @@ import {
   IconPercentage,
   IconAdjustments,
   IconMoneybag,
+  IconDiscount2,
 } from "@tabler/icons-react";
 import { PERMISSIONS } from "../constants/permissions";
 
@@ -134,6 +135,14 @@ export const wlAdminNavItems = [
         allowedRoles: ['WL_ADMIN']
       }
     ]
+  },
+   {
+    label: 'Commission',
+    icon: IconDiscount2,
+    links: [
+      { label: 'Templates List', link: 'commission-templates/list', allowedRoles: ['WL_ADMIN'] },
+      // { label: 'Add Commission Templates', link: '/commission-templates/create', allowedRoles: ['SUPER_ADMIN'] },
+    ],
   },
   {
       label: 'Settings',

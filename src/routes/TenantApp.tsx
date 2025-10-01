@@ -35,6 +35,8 @@ import RetailerLedger from "../portals/retailer/pages/RetailerLedger";
 import CreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLCreditRequestsPage";
 import InternalPendingCreditRequestListPageWL from "../portals/wl-admin/pages/InternalWLPendingCreditRequests";
 import UserWalletListPage from "../portals/wl-admin/pages/UserWalletList";
+import TenantCommissionsPage from "../portals/wl-admin/pages/TenantCommissionsPage";
+import ServiceTemplatesListPage from "../portals/wl-admin/pages/ServiceTemplatesListPage";
 // import TicketListPage from "../portals/retailer/pages/TicketListPage";
 // import CreateTicketPage from "../portals/retailer/pages/CreateTicketPage";
 // import TicketDetailPage from "../portals/retailer/pages/TicketDetailsPage";
@@ -212,6 +214,12 @@ export const TenantApp = () => {
               { path: "credit-requests", element: <CreditRequestListPageWL /> },
             ]
           },
+          {
+                  path: 'commission-templates', children: [
+                              {path: 'list', element: <ServiceTemplatesListPage /> },
+          {path: 'edit/:serviceTemplateId', element: <TenantCommissionsPage /> },
+                  ]
+                },
           {
             path: "services",
             children: [
