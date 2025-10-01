@@ -14,6 +14,13 @@ export const useServiceTemplates = () => {
   });
 };
 
+export const useDefaultServiceTemplates = () => {
+  return useQuery({
+    queryKey: ["serviceTemplates"],
+    queryFn: () => serviceTemplatesApi.getDefault().then(res => res.data.data),
+  });
+};
+
 export const useServiceTemplates2 = (params?: { serviceActionId?: string; templateId?: string; isActive?: boolean; page?: number; limit?: number }) => {
   return useQuery({
     queryKey: ["serviceTemplates", params],

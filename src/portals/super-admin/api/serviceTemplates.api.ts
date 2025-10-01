@@ -9,6 +9,9 @@ import { type CreateServiceTemplateInput, type UpdateServiceTemplateInput } from
 export const serviceTemplatesApi = {
   getAll: () => 
     axiosInstance.get("/service-templates"),
+
+  getDefault: () => 
+    axiosInstance.get("/service-templates/default"),
   
   getAll2: (params?: { serviceActionId?: string; templateId?: string; isActive?: boolean; page?: number; limit?: number }) => 
     axiosInstance.get("/service-templates", { params }),

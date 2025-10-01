@@ -8,12 +8,12 @@ import { useNavigate } from 'react-router';
 import { ClientTable } from '../../../components/ClientTable';
 import { showError, showSuccess } from '../../../utils/notifications';
 import { Badge, Button, Group, Text } from '@mantine/core';
-import { useDeleteServiceTemplate, useServiceTemplates } from '../../super-admin/hooks/serviceTemplates.hooks';
+import { useDefaultServiceTemplates, useDeleteServiceTemplate } from '../../super-admin/hooks/serviceTemplates.hooks';
 import type { ServiceTemplate } from '../../super-admin/schema/serviceTemplate.schema';
 
 export default function ServiceTemplatesListPage() {
   const navigate = useNavigate();
-  const { data = [] } = useServiceTemplates();
+  const { data = [] } = useDefaultServiceTemplates();
   const deleteServiceTemplate = useDeleteServiceTemplate();
 
   const handleDelete = async (id: string) => {
