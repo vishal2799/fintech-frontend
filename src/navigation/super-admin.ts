@@ -120,6 +120,14 @@ export const superAdminNavItems = [
       { label: 'Add Commission Templates', link: '/commission-templates/create', allowedRoles: ['SUPER_ADMIN'] },
     ],
   },
+    {
+    label: 'Service Template',
+    icon: IconUsersGroup,
+    links: [
+      { label: 'Service Templates List', link: '/service-templates/list', allowedRoles: ['SUPER_ADMIN'] },
+      { label: 'Add Service Template', link: '/service-templates/create', allowedRoles: ['SUPER_ADMIN'] },
+    ],
+  },
   // {
   //   label: 'Commission',
   //   icon: IconDiscount2,
